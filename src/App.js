@@ -1,24 +1,51 @@
-import logo from "./logo.svg";
 import "./App.scss";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Frontpage from "./pages/Frontpage";
+import Webshop from "./pages/Webshop";
+import Blog from "./pages/Blog";
+import About from "./pages/About";
+import Basket from "./pages/Basket";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
+  const [siteData, setSiteData] = useState({
+    title: "Ulven og Uglen",
+  });
+
+  // useEffect(() => {
+  //   fetch("https://foobar-vas.herokuapp.com/")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setTaps(data.taps);
+  //     });
+  // }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router
+    // basename="/kea/ulvenoguglen"
+    >
+      <div className="App">
+        {/* Generel content set up: HEADER + MAIN CONTENT pr ROUTE + FOOTER */}
+        <Header title={siteData.title}></Header>
+        <main>
+          <Switch>
+            {/* Frontpage */}
+            <Route path="/" exact render={() => <Frontpage />} />
+            {/* Webshop */}
+            <Route path="/webshop" render={() => <Webshop />} />
+            {/* Blog */}
+            <Route path="/blog" render={() => <Blog />} />
+            {/* About */}
+            <Route path="/about" render={() => <About />} />
+            {/* Basket */}
+            <Route path="/basket" render={() => <Basket />} />
+          </Switch>
+        </main>
+        <Footer></Footer>
+      </div>
+    </Router>
   );
 }
 
