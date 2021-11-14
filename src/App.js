@@ -14,13 +14,22 @@ function App() {
     title: "Ulven og Uglen",
   });
 
-  // useEffect(() => {
-  //   fetch("https://foobar-vas.herokuapp.com/")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setTaps(data.taps);
-  //     });
-  // }, []);
+  useEffect(() => {
+    const podsToFetch = ["bog"];
+    podsToFetch.map((podName) => {
+      fetch(
+        `http://sarahfrederiksen.dk/kea/ulvenoguglen/wordpress/wp-json/wp/v2/${podName}`
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          setSiteData((prev) => {
+            prev[podName] = res;
+            return { ...prev };
+          });
+        });
+    });
+  }, []);
+  console.log(siteData);
 
   return (
     <Router
@@ -34,7 +43,12 @@ function App() {
             {/* Frontpage */}
             <Route path="/" exact render={() => <Frontpage />} />
             {/* Webshop */}
-            <Route path="/webshop" render={() => <Webshop />} />
+            <Route
+              path="/webshop"
+              render={() => (
+                <Webshop bog={siteData.bog !== undefined ? siteData.bog : {}} />
+              )}
+            />
             {/* Blog */}
             <Route path="/blog" render={() => <Blog />} />
             {/* About */}
