@@ -1,10 +1,9 @@
 import Navigation from "./Navigation";
 
-export default function Header({ title }) {
+export default function Header({ props, setSiteData }) {
   return (
-    <div>
-      <h1>{title}</h1>
-      <Navigation title={title} />
-    </div>
+    <header>
+      <Navigation props={props} setSiteData={setSiteData} />
+    </header>
   );
 }

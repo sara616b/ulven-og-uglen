@@ -8,14 +8,22 @@ import About from "./pages/About";
 import Basket from "./pages/Basket";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import AboutSubPage from "./pages/AboutSubPage";
 
 function App() {
   const [siteData, setSiteData] = useState({
     title: "Ulven og Uglen",
+    navigationIsOpen: false,
   });
 
   useEffect(() => {
-    const podsToFetch = ["bog"];
+    const podsToFetch = [
+      "bog",
+      "blogindlg",
+      "forfatter",
+      "social_medie",
+      "om_forlag_underside",
+    ];
     podsToFetch.map((podName) => {
       fetch(
         `http://sarahfrederiksen.dk/kea/ulvenoguglen/wordpress/wp-json/wp/v2/${podName}`
@@ -37,7 +45,7 @@ function App() {
     >
       <div className="App">
         {/* Generel content set up: HEADER + MAIN CONTENT pr ROUTE + FOOTER */}
-        <Header title={siteData.title}></Header>
+        <Header props={siteData} setSiteData={setSiteData}></Header>
         <main>
           <Switch>
             {/* Frontpage */}
@@ -45,16 +53,34 @@ function App() {
             {/* Webshop */}
             <Route
               path="/webshop"
+              exact
               render={() => (
                 <Webshop bog={siteData.bog !== undefined ? siteData.bog : {}} />
               )}
             />
             {/* Blog */}
-            <Route path="/blog" render={() => <Blog />} />
+            <Route
+              path="/blog"
+              exact
+              render={() => <Blog props={siteData} />}
+            />
             {/* About */}
-            <Route path="/about" render={() => <About />} />
+            <Route path="/about" exact render={() => <About />} />
+            {siteData.om_forlag_underside !== undefined
+              ? siteData.om_forlag_underside.map((underside) => {
+                  console.log(underside);
+                  return (
+                    <Route
+                      key={underside.id}
+                      path={`/about/${underside.slug}`}
+                      exact
+                      render={() => <AboutSubPage props={siteData} />}
+                    />
+                  );
+                })
+              : null}
             {/* Basket */}
-            <Route path="/basket" render={() => <Basket />} />
+            <Route path="/basket" exact render={() => <Basket />} />
           </Switch>
         </main>
         <Footer></Footer>
