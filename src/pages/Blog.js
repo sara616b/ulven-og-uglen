@@ -1,4 +1,5 @@
 import BlogDisplay from "../components/BlogDisplay";
+
 export default function Blog({ props }) {
   return (
     <div>
@@ -16,13 +17,6 @@ export default function Blog({ props }) {
           )}
         </div>
       ) : (
-        // props.blogindlg.length > 0 ? (
-        //   props.blogindlg.map(() => {
-        //     return <BlogDisplay key={props.blogindlg.id} props={props} />;
-        //   })
-        // ) : (
-        //   <p>Blogindlæg loades...</p>
-        // )
         <p>Blogindlæg loades...</p>
       )}
     </div>

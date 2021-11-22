@@ -4,6 +4,9 @@ $nav-height: 80px;
 $sub-nav: #a4c2b0;
 $sub-nav-text: #000;
 $max-width: 1200px;
+$splash-overlay: #1c3326e7;
+$background-green: #1c3326;
+$cta-color: #f9ea9d;
 
 .App {
   text-align: center;
@@ -12,8 +15,21 @@ $max-width: 1200px;
     opacity: 0.8;
     cursor: pointer;
   }
+
+  .cta-contrast {
+    background-color: $cta-color;
+    color: black;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.76) 2px 4px 8px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  // NAVIGATION
   .navigation-line {
     background-color: $nav-and-footer;
+    z-index: 10;
     &.nav-closed {
       height: $nav-height;
     }
@@ -28,7 +44,7 @@ $max-width: 1200px;
         position: absolute;
         left: 0;
         top: 0;
-        padding: 10px;
+        padding: 20px 10px;
       }
       .nav-mobile {
         display: flex;
@@ -103,7 +119,7 @@ $max-width: 1200px;
         position: absolute;
         right: 0;
         top: 0;
-        padding: 10px;
+        margin: 20px 10px;
       }
       button,
       div button {
@@ -123,9 +139,110 @@ $max-width: 1200px;
   }
 
   main {
-    margin-top: $nav-height;
+    // FRONTPAGE
+    .frontpage {
+      .splash {
+        height: 100vh;
+        width: 100%;
+        .image {
+          height: 100%;
+          width: 100%;
+          z-index: 1;
+          position: relative;
+          top: 0;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: 50% 50%;
+        }
+        .overlay {
+          background-color: $splash-overlay;
+          height: 100%;
+          width: 100%;
+          position: relative;
+          top: -100%;
+          z-index: 2;
+        }
+        .content {
+          position: relative;
+          text-align: center;
+          top: -200%;
+          color: white;
+          z-index: 3;
+          .books-in-splash {
+            width: 100px;
+            padding: 10px;
+          }
+        }
+      }
+      .newest-books {
+        padding: 40px;
+        div {
+          display: flex;
+          flex-direction: row;
+          .bog-element {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+      }
+      .book-cta {
+        display: grid;
+        background-color: $background-green;
+        color: white;
+        padding: 20px 0;
+        grid-template-columns: repeat(auto-fit, 100%);
+        @media screen and (min-width: 500px) {
+          grid-template-columns: repeat(auto-fit, 50%);
+        }
+        .book-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, 50%);
+        }
+      }
+      .blog-cta {
+        display: grid;
+        background-color: white;
+        color: black;
+        padding: 20px 0;
+        grid-template-columns: repeat(auto-fit, 100%);
+        @media screen and (min-width: 500px) {
+          grid-template-columns: repeat(auto-fit, 50%);
+        }
+      }
+      .newsletter-cta {
+        background-color: $background-green;
+        color: white;
+        padding: 40px 0;
+        .holder {
+          width: clamp(300px, 60%, 600px);
+          margin: auto;
+          padding: 40px;
+          background-color: rgba(0, 0, 0, 0.3);
+        }
+        form label {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+      .socials {
+        .holder {
+          div {
+            display: flex;
+            flex-direction: row;
+            margin: auto;
+            justify-content: center;
+            .social-media-icon {
+              width: 50px;
+              height: 50px;
+              margin: 20px;
+            }
+          }
+        }
+      }
+    }
   }
 
+  // FOOTER
   footer {
     background-color: $nav-and-footer;
     height: 100px;

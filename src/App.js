@@ -23,6 +23,7 @@ function App() {
       "forfatter",
       "social_medie",
       "om_forlag_underside",
+      "global_side",
     ];
     podsToFetch.map((podName) => {
       fetch(
@@ -49,7 +50,29 @@ function App() {
         <main>
           <Switch>
             {/* Frontpage */}
-            <Route path="/" exact render={() => <Frontpage />} />
+            <Route
+              path="/"
+              exact
+              render={() => (
+                <Frontpage
+                  frontpage={
+                    siteData.global_side !== undefined
+                      ? siteData.global_side.map((side) => {
+                          if (side.title.rendered === "Forside") {
+                            return side;
+                          }
+                        })
+                      : null
+                  }
+                  books={siteData.bog !== undefined ? siteData.bog : null}
+                  social_medie={
+                    siteData.social_medie !== undefined
+                      ? siteData.social_medie
+                      : null
+                  }
+                />
+              )}
+            />
             {/* Webshop */}
             <Route
               path="/webshop"
@@ -68,7 +91,6 @@ function App() {
             <Route path="/about" exact render={() => <About />} />
             {siteData.om_forlag_underside !== undefined
               ? siteData.om_forlag_underside.map((underside) => {
-                  console.log(underside);
                   return (
                     <Route
                       key={underside.id}
