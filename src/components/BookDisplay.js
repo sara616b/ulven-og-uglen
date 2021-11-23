@@ -17,7 +17,7 @@ export default function BookDisplay({ book: bog }) {
             </p>
           </div>
         </div>
-        <button className="cta-contrast">Læs mere her</button>
+        <button className="cta-contrast">Læg i kurv</button>
       </div>
     </div>
   );

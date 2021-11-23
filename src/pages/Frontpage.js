@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import BookDisplay from "../components/BookDisplay";
+import parse from "html-react-parser";
 
 export default function Frontpage({ frontpage, books, social_medie }) {
   console.log(frontpage);
@@ -32,7 +33,7 @@ export default function Frontpage({ frontpage, books, social_medie }) {
                       if (isbn === bog.isbn && index < 5) {
                         return (
                           <img
-                            className="books-in-splash"
+                            className={`books-in-splash book${index}`}
                             src={bog.forsidebillede.guid}
                             alt="forsidebillede"
                           />
@@ -43,6 +44,9 @@ export default function Frontpage({ frontpage, books, social_medie }) {
                   })
                 : "loading"}
             </div>
+            <Link to="/webshop">
+              <button className="cta-contrast">Gå til webshop</button>
+            </Link>
           </div>
         </div>
       </section>
@@ -133,7 +137,7 @@ export default function Frontpage({ frontpage, books, social_medie }) {
               <form>
                 <Input
                   id="email"
-                  label="E-mail"
+                  label="E-mail:"
                   type="text"
                   isRequired="true"
                   pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
@@ -153,12 +157,11 @@ export default function Frontpage({ frontpage, books, social_medie }) {
             <div>
               {social_medie !== null
                 ? social_medie.map((some) => {
+                    console.log(some);
                     return (
-                      <div
-                        key={some.navn}
-                        style={{ backgroundImage: `url(${some.ikon.guid})` }}
-                        className="social-media-icon"
-                      ></div>
+                      <div key={some.navn} className="social-media-icon">
+                        {parse(some.svg_ikon)}
+                      </div>
                     );
                   })
                 : null}

@@ -113,7 +113,7 @@ export default function Navigation({ props, setSiteData }) {
                 ) : null}
               </div>
               <Link to="/basket">
-                <button>Kurv</button>
+                <button className="cta-contrast">Kurv</button>
               </Link>
               <div className="search">
                 <Input id="search" label="" type="text" placeholder="Søg..." />
