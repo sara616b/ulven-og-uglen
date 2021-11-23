@@ -1,8 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Input from "./Input";
 
 export default function Navigation({ props, setSiteData }) {
-  const whenToChangeBurgerMenu = 400;
+  const whenToChangeBurgerMenu = 630;
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [urlDisplayed, setUrlDisplay] = useState();
   const [subNavOpen, setSubNavOpen] = useState({
@@ -114,6 +115,16 @@ export default function Navigation({ props, setSiteData }) {
               <Link to="/basket">
                 <button>Kurv</button>
               </Link>
+              <div className="search">
+                <Input id="search" label="" type="text" placeholder="Søg..." />
+                <button
+                  onClick={() => {
+                    console.log("Trying to search");
+                  }}
+                >
+                  Søg
+                </button>
+              </div>
             </div>
           )}
           {windowWidth < whenToChangeBurgerMenu && (

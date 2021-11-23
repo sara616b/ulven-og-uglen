@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function InputComponent({
+export default function Input({
   id,
   label,
   type,
@@ -26,8 +26,7 @@ export default function InputComponent({
         id={id}
         placeholder={placeholder}
         pattern={pattern}
-        onFocus={(e) => {
-          setInputEl(e.target);
+        onFocus={() => {
           setHasBeenInteractedWith(true);
         }}
         required={isRequired ? true : false}

@@ -1,14 +1,22 @@
-$nav-and-footer: #1c3326;
+$nav-and-footer: linear-gradient(#2e5446, #1d312a);
 $nav-text: #fff;
 $nav-height: 80px;
 $sub-nav: #a4c2b0;
 $sub-nav-text: #000;
 $max-width: 1200px;
 $splash-overlay: #1c3326e7;
-$background-green: #1c3326;
+$background-green: #2e5446;
 $cta-color: #f9ea9d;
+$price-color: rgb(52, 117, 52);
+$dropshadow: rgba(0, 0, 0, 0.5) 2px 4px 8px;
 
+body {
+  overflow-x: hidden;
+}
 .App {
+  * {
+    transition: 0.2s all;
+  }
   text-align: center;
   a:hover,
   button:hover {
@@ -20,7 +28,7 @@ $cta-color: #f9ea9d;
     background-color: $cta-color;
     color: black;
     border: none;
-    box-shadow: rgba(0, 0, 0, 0.76) 2px 4px 8px;
+    box-shadow: $dropshadow;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 14px;
@@ -28,7 +36,7 @@ $cta-color: #f9ea9d;
 
   // NAVIGATION
   .navigation-line {
-    background-color: $nav-and-footer;
+    background-image: $nav-and-footer;
     z-index: 10;
     &.nav-closed {
       height: $nav-height;
@@ -70,6 +78,11 @@ $cta-color: #f9ea9d;
             color: $sub-nav-text;
           }
         }
+        .search {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+        }
       }
       .nav-web {
         height: $nav-height;
@@ -84,6 +97,10 @@ $cta-color: #f9ea9d;
         div {
           align-content: center;
           display: flex;
+          label {
+            align-items: center;
+            display: flex;
+          }
         }
         .nav-subpages {
           position: absolute;
@@ -113,6 +130,13 @@ $cta-color: #f9ea9d;
           }
         }
       }
+      #search {
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 5px 7px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: inset rgba(0, 0, 0, 0.418) 2px 2px 5px;
+      }
       .burger-menu-icon {
         width: 30px;
         height: 30px;
@@ -141,8 +165,14 @@ $cta-color: #f9ea9d;
   main {
     // FRONTPAGE
     .frontpage {
+      .max-width {
+        width: 100%;
+        max-width: $max-width;
+        margin: auto;
+        height: 100%;
+      }
       .splash {
-        height: 100vh;
+        height: 90vh;
         width: 100%;
         .image {
           height: 100%;
@@ -176,27 +206,48 @@ $cta-color: #f9ea9d;
       }
       .newest-books {
         padding: 40px;
-        div {
-          display: flex;
-          flex-direction: row;
-          .bog-element {
+        .max-width {
+          overflow: scroll;
+          .books {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            width: fit-content;
+            .bog-element {
+              width: 250px;
+              flex-grow: 1;
+            }
           }
         }
       }
       .book-cta {
-        display: grid;
         background-color: $background-green;
-        color: white;
-        padding: 20px 0;
-        grid-template-columns: repeat(auto-fit, 100%);
-        @media screen and (min-width: 500px) {
-          grid-template-columns: repeat(auto-fit, 50%);
+        padding: 60px 0;
+        div {
+          display: flex;
+          flex-direction: column;
+          color: white;
+          padding: 20px 0;
+          @media screen and (min-width: 1080px) {
+            flex-direction: row;
+            section {
+              width: 50%;
+            }
+          }
         }
         .book-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, 50%);
+          gap: 40px 15px;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+        .text {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin: 40px;
+          h2 {
+            font-size: 30px;
+            font-size: clamp(25px, 5vw, 50px);
+          }
         }
       }
       .blog-cta {
@@ -214,7 +265,7 @@ $cta-color: #f9ea9d;
         color: white;
         padding: 40px 0;
         .holder {
-          width: clamp(300px, 60%, 600px);
+          width: clamp(100px, 60%, 600px);
           margin: auto;
           padding: 40px;
           background-color: rgba(0, 0, 0, 0.3);
@@ -248,12 +299,58 @@ $cta-color: #f9ea9d;
     height: 100px;
   }
 
-  .bog-element {
-    .forsidebillede {
-      width: 150px;
-    }
-    .pris {
-      font-weight: bold;
+  .frontpage .book-cta div.bog-element,
+  .newest-books .bog-element {
+    display: flex;
+    .background {
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      border-radius: 5px;
+      justify-content: space-between;
+      box-shadow: $dropshadow;
+      .content {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        margin-top: -30px;
+        .info {
+          display: flex;
+          flex-direction: column;
+          color: black;
+          width: 60%;
+          padding: 20px 0 0 5px;
+          text-align: left;
+          .titel {
+            margin: 0;
+            font-size: 16px;
+          }
+          .forfatter {
+            margin: 0;
+            font-size: 12px;
+          }
+          .pris {
+            margin: 0;
+            background-color: $price-color;
+            width: fit-content;
+            padding: 5px;
+            margin-top: 5px;
+            color: white;
+          }
+          .beskrivelse {
+            font-size: 10px;
+          }
+        }
+        .forsidebillede {
+          width: 40%;
+          border-radius: 5px;
+          object-fit: contain;
+          object-position: top;
+          height: fit-content;
+          box-shadow: $dropshadow;
+        }
+      }
     }
   }
 }

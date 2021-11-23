@@ -14,6 +14,7 @@ function App() {
   const [siteData, setSiteData] = useState({
     title: "Ulven og Uglen",
     navigationIsOpen: false,
+    bog: [],
   });
 
   useEffect(() => {
@@ -61,6 +62,7 @@ function App() {
                           if (side.title.rendered === "Forside") {
                             return side;
                           }
+                          return null;
                         })
                       : null
                   }
