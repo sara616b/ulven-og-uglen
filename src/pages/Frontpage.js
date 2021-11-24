@@ -17,6 +17,7 @@ export default function Frontpage({ frontpage, books, social_medie }) {
           }}
         ></div>
         <div className="overlay"></div>
+        <div className="white-wave"></div>
         <div className="max-width">
           <div className="content">
             <div className="text">
@@ -159,9 +160,13 @@ export default function Frontpage({ frontpage, books, social_medie }) {
                 ? social_medie.map((some) => {
                     console.log(some);
                     return (
-                      <div key={some.navn} className="social-media-icon">
+                      <a
+                        key={some.navn}
+                        className="social-media-icon"
+                        href={some.link}
+                      >
                         {parse(some.svg_ikon)}
-                      </div>
+                      </a>
                     );
                   })
                 : null}

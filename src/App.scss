@@ -34,141 +34,165 @@ body {
     font-size: 14px;
   }
 
-  // NAVIGATION
-  .navigation-line {
-    background-image: $nav-and-footer;
+  header {
     z-index: 10;
-    &.nav-closed {
-      height: $nav-height;
-    }
-    .content {
-      max-width: $max-width;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      color: $nav-text;
-      margin: auto;
-      .nav-logo {
-        position: absolute;
-        left: 0;
-        top: 0;
-        padding: 20px 10px;
-      }
-      a {
-        text-decoration: none;
-      }
-      .cta-contrast {
-        height: 40px;
-        padding: 0 20px;
-        align-self: center;
-      }
-      .nav-mobile {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        justify-content: center;
-        color: $nav-text;
-        padding-top: $nav-height;
-        a,
-        div a {
-          padding: 5px 0;
-        }
-        .nav-sub-arrow {
-          &.closed {
-            rotate: 180deg;
-          }
-        }
-        .nav-subpages .content {
-          display: flex;
-          flex-direction: column;
-          background-color: $sub-nav;
-          a button {
-            color: $sub-nav-text;
-          }
-        }
-        .search {
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-        }
-      }
-      .nav-web {
-        height: $nav-height;
+    // NAVIGATION
+    .some-nav {
+      background-color: black;
+      height: 20px;
+      padding: 5px;
+      .max-width {
+        max-width: $max-width;
+        height: 100%;
+        margin: auto;
         display: flex;
         flex-direction: row;
-        a,
-        div div a {
-          padding: 10px;
-          align-content: center;
-          display: flex;
-        }
-        div {
-          align-content: center;
-          display: flex;
-          label {
-            align-items: center;
-            display: flex;
+        justify-content: flex-end;
+        .social-media-icon {
+          height: 20px;
+          svg,
+          svg g path {
+            height: inherit;
+            fill: white;
           }
         }
-        .nav-subpages {
-          position: absolute;
-          width: 100%;
-          left: 0;
-          right: 0;
-          height: $nav-height;
-          padding: 0;
-          top: $nav-height;
-          background-color: $sub-nav;
-          .content {
-            display: flex;
-            flex-direction: row;
-            max-width: $max-width;
-          }
-          a button {
-            color: $sub-nav-text;
-          }
-          .nav-arrow {
-            width: 15px;
-            height: 15px;
-            position: relative;
-            left: clamp(235px, 52vw, 620px);
-            top: -27px;
-            rotate: 45deg;
-            background-color: $sub-nav;
-          }
-        }
-      }
-      #search {
-        background-color: rgba(255, 255, 255, 0.7);
-        padding: 5px 7px;
-        border-radius: 5px;
-        border: none;
-        box-shadow: inset rgba(0, 0, 0, 0.418) 2px 2px 5px;
-        &:focus {
-          background-color: white;
-        }
-      }
-      .burger-menu-icon {
-        width: 30px;
-        height: 30px;
-        position: absolute;
-        right: 0;
-        top: 0;
-        margin: 20px 10px;
-      }
-      button,
-      div button {
-        color: $nav-text;
-        background-color: rgba(255, 255, 255, 0);
-        border: none;
-        cursor: pointer;
       }
     }
-    .content-web {
-      .nav-logo {
-        position: relative;
-        align-items: center;
+    .navigation-line {
+      background-image: $nav-and-footer;
+      z-index: 10;
+      &.nav-closed {
+        height: $nav-height;
+      }
+      .content {
+        max-width: $max-width;
         display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        color: $nav-text;
+        margin: auto;
+        .nav-logo {
+          position: absolute;
+          left: 0;
+          top: 0;
+          padding: 20px 10px;
+        }
+        a {
+          text-decoration: none;
+        }
+        .cta-contrast {
+          height: 40px;
+          padding: 0 20px;
+          align-self: center;
+        }
+        .nav-mobile {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          justify-content: center;
+          color: $nav-text;
+          padding-top: $nav-height;
+          a,
+          div a {
+            padding: 5px 0;
+          }
+          .nav-sub-arrow {
+            &.closed {
+              rotate: 180deg;
+            }
+          }
+          .nav-subpages .content {
+            display: flex;
+            flex-direction: column;
+            background-color: $sub-nav;
+            a button {
+              color: $sub-nav-text;
+            }
+          }
+          .search {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+          }
+        }
+        .nav-web {
+          height: $nav-height;
+          display: flex;
+          flex-direction: row;
+          a,
+          div div a {
+            padding: 10px;
+            align-content: center;
+            display: flex;
+          }
+          div {
+            align-content: center;
+            display: flex;
+            label {
+              align-items: center;
+              display: flex;
+            }
+          }
+          .nav-subpages {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            right: 0;
+            height: $nav-height;
+            padding: 0;
+            top: $nav-height + 30px;
+            background-color: $sub-nav;
+            .content {
+              display: flex;
+              flex-direction: row;
+              max-width: $max-width;
+            }
+            a button {
+              color: $sub-nav-text;
+            }
+            .nav-arrow {
+              width: 15px;
+              height: 15px;
+              position: relative;
+              left: clamp(134px, 29vw, 398px);
+              top: -27px;
+              rotate: 45deg;
+              background-color: $sub-nav;
+            }
+          }
+        }
+        #search {
+          background-color: rgba(255, 255, 255, 0.7);
+          padding: 5px 7px;
+          border-radius: 5px;
+          border: none;
+          box-shadow: inset rgba(0, 0, 0, 0.418) 2px 2px 5px;
+          &:focus {
+            background-color: white;
+          }
+        }
+        .burger-menu-icon {
+          width: 30px;
+          height: 30px;
+          position: absolute;
+          right: 0;
+          top: 0;
+          margin: 20px 10px;
+        }
+        button,
+        div button {
+          color: $nav-text;
+          background-color: rgba(255, 255, 255, 0);
+          border: none;
+          cursor: pointer;
+        }
+      }
+      .content-web {
+        .nav-logo {
+          position: relative;
+          align-items: center;
+          display: flex;
+        }
       }
     }
   }
@@ -183,7 +207,7 @@ body {
     // FRONTPAGE
     .frontpage {
       .splash {
-        height: 90vh;
+        height: 80vh;
         width: 100%;
         .image {
           height: 100%;
@@ -196,19 +220,34 @@ body {
           background-position: 50% 50%;
         }
         .overlay {
-          background-color: $splash-overlay;
+          background-image: linear-gradient(
+            rgba(0, 0, 0, 0.9) 0,
+            $splash-overlay 10%
+          );
           height: 100%;
           width: 100%;
           position: relative;
           top: -100%;
           z-index: 2;
         }
+        .white-wave {
+          background-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="1288.006" height="150" viewBox="0 0 1288.006 150"><path id="Path_57" fill="white" data-name="Path 57" class="cls-1" d="M-8241-10906.741h1288.006v-81.99s-97.034-99.546-327.593-110.035-290.152,105.348-562.449,110.035S-8241-11037.61-8241-11037.61Z" transform="translate(8241 11099.438)"/></svg>');
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          z-index: 3;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position-y: bottom;
+          pointer-events: none;
+        }
         .content {
           position: relative;
           text-align: center;
           top: -200%;
           color: white;
-          z-index: 3;
+          z-index: 4;
           h1 {
             font-size: 40px;
             margin: 0;
