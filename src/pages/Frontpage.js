@@ -4,7 +4,7 @@ import BookDisplay from "../components/BookDisplay";
 import parse from "html-react-parser";
 
 export default function Frontpage({ frontpage, books, social_medie }) {
-  console.log(frontpage);
+  console.log("forside", frontpage);
   console.log(social_medie);
 
   return frontpage !== null ? (
@@ -13,7 +13,7 @@ export default function Frontpage({ frontpage, books, social_medie }) {
         <div
           className="image"
           style={{
-            backgroundImage: `url(${frontpage[0].splash_billede.guid})`,
+            backgroundImage: `url(${frontpage.splash_billede.guid})`,
           }}
         ></div>
         <div className="overlay"></div>
@@ -39,22 +39,25 @@ export default function Frontpage({ frontpage, books, social_medie }) {
                   </g>
                 </svg>
               </div>
-              <h1>{frontpage[0].titel}</h1>
-              <p>{frontpage[0].slogan}</p>
+              <h1>{frontpage.titel}</h1>
+              <p>{frontpage.slogan}</p>
             </div>
             <div className="books">
               {books !== null
                 ? books.map((bog) => {
-                    const booksToShow =
-                      frontpage[0].boger_til_splash.split(",");
+                    const booksToShow = frontpage.boger_til_splash.split(",");
                     return booksToShow.map((isbn, index) => {
                       if (isbn === bog.isbn && index < 5) {
                         return (
-                          <img
+                          <Link
+                            to={`/webshop/${bog.slug}`}
                             className={`books-in-splash book${index}`}
-                            src={bog.forsidebillede.guid}
-                            alt="forsidebillede"
-                          />
+                          >
+                            <img
+                              src={bog.forsidebillede.guid}
+                              alt="forsidebillede"
+                            />
+                          </Link>
                         );
                       }
                       return null;
@@ -73,8 +76,7 @@ export default function Frontpage({ frontpage, books, social_medie }) {
           <div className="books">
             {books !== null
               ? books.map((bog) => {
-                  const booksToShow =
-                    frontpage[0].ids_pa_nyeste_boger.split(",");
+                  const booksToShow = frontpage.ids_pa_nyeste_boger.split(",");
                   return booksToShow.map((isbn, index) => {
                     if (isbn === bog.isbn) {
                       return (
@@ -96,7 +98,7 @@ export default function Frontpage({ frontpage, books, social_medie }) {
           <section className="book-grid">
             {books !== null
               ? books.map((bog) => {
-                  const booksToShow = frontpage[0].fremhaevede_boger.split(",");
+                  const booksToShow = frontpage.fremhaevede_boger.split(",");
                   return booksToShow.map((isbn, index) => {
                     if (isbn === bog.isbn && index < 4) {
                       return (
@@ -112,7 +114,7 @@ export default function Frontpage({ frontpage, books, social_medie }) {
               : "loading"}
           </section>
           <section className="text">
-            <h2>{frontpage[0].tekst_om_boger}</h2>
+            <h2>{frontpage.tekst_om_boger}</h2>
             <Link to="/webshop">
               <button className="cta-contrast">Gå til webshop</button>
             </Link>
@@ -122,7 +124,7 @@ export default function Frontpage({ frontpage, books, social_medie }) {
       <section className="blog-cta">
         <div className="max-width">
           <section>
-            <h2>{frontpage[0].tekst_om_blog}</h2>
+            <h2>{frontpage.tekst_om_blog}</h2>
             <Link to="/blog">
               <button className="cta-contrast">Gå til bloggen</button>
             </Link>
@@ -151,7 +153,7 @@ export default function Frontpage({ frontpage, books, social_medie }) {
         <div className="max-width">
           <div className="holder">
             <div className="content">
-              <h2>{frontpage[0].nyhedsbrev_tekst}</h2>
+              <h2>{frontpage.nyhedsbrev_tekst}</h2>
               <form>
                 <Input
                   id="email"

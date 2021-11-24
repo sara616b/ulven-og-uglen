@@ -14,7 +14,7 @@ export default function Webshop({ bog, setSiteData }) {
               setSortBy(e.target.selectedOptions[0].value);
             }}
           >
-            {["Udgivelsesdato", "Forfatter", "Titel"].map((sorting) => {
+            {["Udgivelsesdato", "Forfatter", "Titel", "Pris"].map((sorting) => {
               return (
                 <option key={sorting} value={sorting.toLowerCase()}>
                   {sorting}

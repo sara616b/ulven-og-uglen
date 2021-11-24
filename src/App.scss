@@ -1,4 +1,4 @@
-$nav-and-footer: linear-gradient(#2e5446, #1d312a);
+$nav-and-footer: linear-gradient(#2e5446, #39705c);
 $nav-text: #fff;
 $nav-height: 80px;
 $sub-nav: #a4c2b0;
@@ -56,6 +56,17 @@ body {
             height: inherit;
             fill: white;
           }
+          #Mail_sort {
+            .cls-1 {
+              fill: black;
+              stroke: white;
+              stroke-width: 5px;
+            }
+            line {
+              stroke: white;
+              stroke-width: 5px;
+            }
+          }
         }
       }
     }
@@ -88,6 +99,16 @@ body {
         }
         a {
           text-decoration: none;
+          align-self: center;
+        }
+        .kurv-cta {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          #kurv-svg {
+            width: 30px;
+            margin-left: -10px;
+          }
         }
         .cta-contrast {
           height: 40px;
@@ -123,6 +144,10 @@ body {
             flex-direction: row;
             justify-content: center;
           }
+        }
+        #search-svg {
+          width: 25px;
+          fill: white;
         }
         .nav-web {
           height: $nav-height;
@@ -279,8 +304,11 @@ body {
               width: 100px;
               margin: 15px;
               height: fit-content;
-              box-shadow: $dropshadow;
               display: none;
+              img {
+                width: 100%;
+                box-shadow: $dropshadow;
+              }
               &.book0 {
                 opacity: 0.8;
                 order: 1;
@@ -443,6 +471,9 @@ body {
         gap: 40px 20px;
         .bog-element {
           display: flex;
+          a {
+            text-decoration: none;
+          }
           .background {
             background-color: rgb(255, 255, 255);
             display: flex;
@@ -467,6 +498,7 @@ body {
                 .titel {
                   margin: 0;
                   font-size: 16px;
+                  text-decoration: underline;
                 }
                 .forfatter {
                   margin: 0;
@@ -542,6 +574,9 @@ body {
       border-radius: 5px;
       justify-content: space-between;
       box-shadow: $dropshadow;
+      a {
+        text-decoration: none;
+      }
       .content {
         display: flex;
         flex-direction: row;

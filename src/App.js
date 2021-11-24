@@ -41,6 +41,17 @@ function App() {
   }, []);
   console.log(siteData);
 
+  function findPageInfo(page) {
+    let info;
+    siteData.global_side.map((side) => {
+      if (side.title.rendered === page) {
+        info = { ...side };
+      }
+      return null;
+    });
+    return info;
+  }
+
   return (
     <Router
     // basename="/kea/ulvenoguglen"
@@ -58,12 +69,7 @@ function App() {
                 <Frontpage
                   frontpage={
                     siteData.global_side !== undefined
-                      ? siteData.global_side.map((side) => {
-                          if (side.title.rendered === "Forside") {
-                            return side;
-                          }
-                          return null;
-                        })
+                      ? findPageInfo("Forside")
                       : null
                   }
                   books={siteData.bog !== undefined ? siteData.bog : null}

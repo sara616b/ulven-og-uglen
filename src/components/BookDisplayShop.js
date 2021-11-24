@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function BookDisplayShop({ book: bog }) {
   const authors =
     bog.forfatter.length > 50
@@ -6,20 +8,22 @@ export default function BookDisplayShop({ book: bog }) {
   return (
     <div className="bog-element">
       <div className="background">
-        <div className="content">
-          <div className="image-holder">
-            <img
-              className="forsidebillede"
-              src={bog.forsidebillede.guid}
-              alt={`Forside på ${bog.titel}`}
-            />
+        <Link to={`/webshop/${bog.slug}`}>
+          <div className="content">
+            <div className="image-holder">
+              <img
+                className="forsidebillede"
+                src={bog.forsidebillede.guid}
+                alt={`Forside på ${bog.titel}`}
+              />
+            </div>
+            <div className="info">
+              <h3 className="titel">{bog.titel}</h3>
+              <p className="forfatter">af {authors}</p>
+              <p className="pris">{bog.pris},- kr</p>
+            </div>
           </div>
-          <div className="info">
-            <h3 className="titel">{bog.titel}</h3>
-            <p className="forfatter">{authors}</p>
-            <p className="pris">{bog.pris},- kr</p>
-          </div>
-        </div>
+        </Link>
         <button className="cta-contrast">Læg i kurv</button>
       </div>
     </div>

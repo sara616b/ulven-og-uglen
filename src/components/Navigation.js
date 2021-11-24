@@ -1,10 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import parse from "html-react-parser";
 import Input from "./Input";
 
 export default function Navigation({ props, setSiteData }) {
-  const whenToChangeBurgerMenu = 630;
+  const whenToChangeBurgerMenu = 715;
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [urlDisplayed, setUrlDisplay] = useState();
   const [subNavOpen, setSubNavOpen] = useState({
@@ -130,7 +129,20 @@ export default function Navigation({ props, setSiteData }) {
                 ) : null}
               </div>
               <Link to="/basket">
-                <button className="cta-contrast">Kurv</button>
+                <button className="cta-contrast kurv-cta">
+                  <svg
+                    id="kurv-svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 100 100"
+                  >
+                    <g id="Shop_kurv_sort" data-name="Shop kurv sort">
+                      <polygon points="31.5 35.5 37.36 35.5 45.5 22.5 40.5 21.5 31.5 35.5" />
+                      <polygon points="70.5 35.5 64.64 35.5 56.5 22.5 61.5 21.5 70.5 35.5" />
+                      <path d="M51,40.34H17.43V52.07h6.75L29.5,76.5H71.62l5.15-24.43h7.68V40.34ZM40.73,72.2H36.5V55.5h4.23Zm8,0H44.5V55.5h4.23Zm8,0H52.5V55.5h4.23Zm8,0H60.5V55.5h4.23Z" />
+                    </g>
+                  </svg>
+                  Gå til kurv
+                </button>
               </Link>
               <div className="search">
                 <Input id="search" label="" type="text" placeholder="Søg..." />
@@ -139,7 +151,15 @@ export default function Navigation({ props, setSiteData }) {
                     console.log("Trying to search");
                   }}
                 >
-                  Søg
+                  <svg
+                    id="search-svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 100 100"
+                  >
+                    <g id="search-icon" data-name="Søg ikon sort">
+                      <path d="M59.5,54.5a25,25,0,1,0-6.14,5.81L77.61,84.56l6-6Zm-20,3a18,18,0,1,1,18-18A18,18,0,0,1,39.5,57.5Z" />
+                    </g>
+                  </svg>
                 </button>
               </div>
             </div>
