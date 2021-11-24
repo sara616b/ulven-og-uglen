@@ -28,7 +28,7 @@ function App() {
     ];
     podsToFetch.map((podName) => {
       fetch(
-        `http://sarahfrederiksen.dk/kea/ulvenoguglen/wordpress/wp-json/wp/v2/${podName}`
+        `http://sarahfrederiksen.dk/kea/ulvenoguglen/wordpress/wp-json/wp/v2/${podName}?per_page=100`
       )
         .then((res) => res.json())
         .then((res) => {
@@ -80,7 +80,10 @@ function App() {
               path="/webshop"
               exact
               render={() => (
-                <Webshop bog={siteData.bog !== undefined ? siteData.bog : {}} />
+                <Webshop
+                  bog={siteData.bog !== undefined ? siteData.bog : {}}
+                  setSiteData={setSiteData}
+                />
               )}
             />
             {/* Blog */}

@@ -8,7 +8,7 @@ $splash-overlay: #1c3326e7;
 $background-green: #2e5446;
 $cta-color: #f9ea9d;
 $price-color: rgb(52, 117, 52);
-$dropshadow: rgba(0, 0, 0, 0.5) 2px 4px 8px;
+$dropshadow: rgba(0, 0, 0, 0.3) 2px 4px 8px;
 
 body {
   overflow-x: hidden;
@@ -50,6 +50,7 @@ body {
         justify-content: flex-end;
         .social-media-icon {
           height: 20px;
+          padding: 0 5px;
           svg,
           svg g path {
             height: inherit;
@@ -74,8 +75,16 @@ body {
         .nav-logo {
           position: absolute;
           left: 0;
-          top: 0;
+          top: 30px;
           padding: 20px 10px;
+          a {
+            display: flex;
+            justify-content: center;
+          }
+          #logo-svg {
+            height: 35px;
+            fill: white;
+          }
         }
         a {
           text-decoration: none;
@@ -176,7 +185,7 @@ body {
           height: 30px;
           position: absolute;
           right: 0;
-          top: 0;
+          top: 30px;
           margin: 20px 10px;
         }
         button,
@@ -192,6 +201,7 @@ body {
           position: relative;
           align-items: center;
           display: flex;
+          top: 0;
         }
       }
     }
@@ -220,10 +230,7 @@ body {
           background-position: 50% 50%;
         }
         .overlay {
-          background-image: linear-gradient(
-            rgba(0, 0, 0, 0.9) 0,
-            $splash-overlay 10%
-          );
+          background-image: linear-gradient(#15221a, $splash-overlay 10%);
           height: 100%;
           width: 100%;
           position: relative;
@@ -233,9 +240,10 @@ body {
         .white-wave {
           background-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="1288.006" height="150" viewBox="0 0 1288.006 150"><path id="Path_57" fill="white" data-name="Path 57" class="cls-1" d="M-8241-10906.741h1288.006v-81.99s-97.034-99.546-327.593-110.035-290.152,105.348-562.449,110.035S-8241-11037.61-8241-11037.61Z" transform="translate(8241 11099.438)"/></svg>');
           position: absolute;
-          width: 100%;
-          height: 100%;
+          width: 102%;
+          height: calc(80vh + 120px);
           top: 0;
+          left: -1%;
           z-index: 3;
           background-repeat: no-repeat;
           background-size: contain;
@@ -248,6 +256,13 @@ body {
           top: -200%;
           color: white;
           z-index: 4;
+          .logo {
+            svg {
+              height: 100px;
+              fill: white;
+              padding-top: 40px;
+            }
+          }
           h1 {
             font-size: 40px;
             margin: 0;
@@ -265,25 +280,39 @@ body {
               margin: 15px;
               height: fit-content;
               box-shadow: $dropshadow;
+              display: none;
               &.book0 {
                 opacity: 0.8;
                 order: 1;
+                @media screen and (min-width: 800px) {
+                  display: block;
+                }
               }
               &.book4 {
                 opacity: 0.8;
                 order: 5;
+                @media screen and (min-width: 800px) {
+                  display: block;
+                }
               }
               &.book1 {
                 width: 150px;
                 order: 2;
+                @media screen and (min-width: 600px) {
+                  display: block;
+                }
               }
               &.book3 {
                 width: 150px;
                 order: 4;
+                @media screen and (min-width: 600px) {
+                  display: block;
+                }
               }
               &.book2 {
                 width: 175px;
                 order: 3;
+                display: block;
               }
             }
           }
@@ -385,6 +414,7 @@ body {
         }
       }
       .socials {
+        padding: 40px;
         .holder {
           h2 {
             font-size: 30px;
@@ -396,9 +426,9 @@ body {
             margin: auto;
             justify-content: center;
             .social-media-icon {
-              width: 50px;
-              height: 50px;
-              margin: 20px;
+              width: 70px;
+              height: 70px;
+              margin: 10px;
             }
           }
         }
@@ -408,10 +438,87 @@ body {
     .webshop {
       .books {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         margin: 40px 0;
+        gap: 40px 20px;
         .bog-element {
-          margin: 20px;
+          display: flex;
+          .background {
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            flex-direction: column;
+            border-radius: 5px;
+            justify-content: space-between;
+            padding: 5px;
+            box-shadow: $dropshadow;
+            .content {
+              display: flex;
+              flex-direction: column;
+              padding: 0;
+              justify-content: space-between;
+              margin-top: -30px;
+              height: 100%;
+              .info {
+                display: flex;
+                flex-direction: column;
+                color: black;
+                padding: 20px;
+                text-align: left;
+                .titel {
+                  margin: 0;
+                  font-size: 16px;
+                }
+                .forfatter {
+                  margin: 0;
+                  font-size: 12px;
+                }
+                .pris {
+                  margin: 0;
+                  background-color: $price-color;
+                  width: fit-content;
+                  padding: 5px;
+                  margin-top: 10px;
+                  color: white;
+                  border-radius: 5px;
+                  font-weight: bold;
+                }
+              }
+              .forsidebillede {
+                width: 60%;
+                border-radius: 5px;
+                object-fit: contain;
+                object-position: top;
+                height: fit-content;
+                box-shadow: $dropshadow;
+              }
+            }
+            button {
+              margin: 0 20px 20px 20px;
+            }
+          }
+        }
+      }
+      .sorting {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        border-bottom: solid rgba(0, 0, 0, 0.247) 1px;
+        padding: 10px;
+        box-sizing: border-box;
+        align-items: center;
+        p {
+          margin: 0 10px 0 0;
+          font-size: 12px;
+        }
+        select {
+          background-color: white;
+          padding: 5px 7px;
+          border-radius: 5px;
+          border: none;
+          box-shadow: inset rgba(0, 0, 0, 0.2) 2px 2px 7px;
+          option {
+            text-transform: capitalize;
+          }
         }
       }
     }
@@ -425,8 +532,7 @@ body {
 
   // BOOK DISPLAYS
   .frontpage .book-cta div.bog-element,
-  .newest-books .bog-element,
-  .webshop .bog-element {
+  .newest-books .bog-element {
     display: flex;
     .background {
       background-color: white;

@@ -1,15 +1,36 @@
-import BookDisplay from "../components/BookDisplay";
+import { useState } from "react";
+import BookDisplayShop from "../components/BookDisplayShop";
 
-export default function Webshop({ bog }) {
+export default function Webshop({ bog, setSiteData }) {
+  const [sortBy, setSortBy] = useState("udgivelsesdato");
+
   return (
     <div className="webshop">
       <div className="max-width">
-        <div>Webshop</div>
+        <div className="sorting">
+          <p>Sorter efter: </p>
+          <select
+            onChange={(e) => {
+              setSortBy(e.target.selectedOptions[0].value);
+            }}
+          >
+            {["Udgivelsesdato", "Forfatter", "Titel"].map((sorting) => {
+              return (
+                <option key={sorting} value={sorting.toLowerCase()}>
+                  {sorting}
+                </option>
+              );
+            })}
+          </select>
+        </div>
         <div className="books">
           {bog.length > 0 ? (
-            bog.map((bog) => {
-              return <BookDisplay key={bog.id} book={bog} />;
-            })
+            []
+              .concat(bog)
+              .sort((a, b) => (a[sortBy] > b[sortBy] ? 1 : -1))
+              .map((bog) => {
+                return <BookDisplayShop key={bog.id} book={bog} />;
+              })
           ) : (
             <p>Bøger loades...</p>
           )}

@@ -2,14 +2,12 @@ import Navigation from "./Navigation";
 import parse from "html-react-parser";
 
 export default function Header({ props, setSiteData }) {
-  console.log("props", props);
   return (
     <header>
       <div className="some-nav">
         <div className="max-width">
           {props.social_medie !== undefined
             ? props.social_medie.map((some) => {
-                console.log(some);
                 return (
                   <a
                     key={some.navn}
