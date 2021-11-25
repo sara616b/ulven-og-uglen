@@ -9,10 +9,12 @@ import Basket from "./pages/Basket";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AboutSubPage from "./pages/AboutSubPage";
+import BookDetails from "./pages/BookDetails";
 
 function App() {
   const [siteData, setSiteData] = useState({
     title: "Ulven og Uglen",
+    basketContent: [],
     navigationIsOpen: false,
     bog: [],
   });
@@ -37,9 +39,9 @@ function App() {
             return { ...prev };
           });
         });
+      return null;
     });
   }, []);
-  console.log(siteData);
 
   function findPageInfo(page) {
     let info;
@@ -50,6 +52,35 @@ function App() {
       return null;
     });
     return info;
+  }
+
+  function addToBasket(bog) {
+    // copy basket, if it isn't empty
+    let newBasket = [];
+    if (siteData.basketContent !== []) {
+      newBasket = [...siteData.basketContent];
+    }
+    const isInBasket = siteData.basketContent.findIndex(
+      (bookToCheck) => bookToCheck.isbn === bog.isbn
+    );
+    console.log(isInBasket);
+    if (isInBasket === -1) {
+      //if the book isn't already in the basket, add it
+      newBasket.push({ titel: bog.titel, isbn: bog.isbn, amount: 1 });
+    } else {
+      newBasket.map((bookToCheck) => {
+        if (bookToCheck.isbn === bog.isbn) {
+          bookToCheck.amount += 1;
+        }
+        return bookToCheck;
+      });
+    }
+    console.log("newBasket", newBasket);
+
+    setSiteData((prev) => {
+      prev.basketContent = newBasket;
+      return { ...prev };
+    });
   }
 
   return (
@@ -88,8 +119,18 @@ function App() {
               render={() => (
                 <Webshop
                   bog={siteData.bog !== undefined ? siteData.bog : {}}
-                  setSiteData={setSiteData}
+                  siteData={siteData}
+                  addToBasket={addToBasket}
                 />
+              )}
+            />
+
+            {/* Book Details */}
+            <Route
+              path="/webshop/details"
+              exact
+              render={() => (
+                <BookDetails siteData={siteData} addToBasket={addToBasket} />
               )}
             />
             {/* Blog */}

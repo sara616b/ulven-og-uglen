@@ -4,7 +4,7 @@ export default function BookDisplay({ book: bog }) {
   return (
     <div className="bog-element">
       <div className="background">
-        <Link to={`/webshop/${bog.slug}`}>
+        <Link to={`/webshop/details?titel=${bog.slug}`}>
           <div className="content">
             <img
               className="forsidebillede"
