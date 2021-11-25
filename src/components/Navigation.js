@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Input from "./Input";
 
 export default function Navigation({ props, setSiteData }) {
@@ -9,13 +9,30 @@ export default function Navigation({ props, setSiteData }) {
   const [subNavOpen, setSubNavOpen] = useState({
     omForlag: false,
   });
+  const aboutNav = useRef();
+  const [aboutNavLocation, setAboutNavLocation] = useState();
+  console.log(aboutNavLocation);
 
   function handleResize() {
     setWindowWidth(window.innerWidth);
+    if (aboutNav !== null) {
+      if (aboutNav.current !== undefined && aboutNav.current !== null) {
+        setAboutNavLocation(
+          aboutNav.current.offsetLeft + aboutNav.current.clientWidth / 2 - 7
+        );
+      }
+    }
   }
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
+    if (aboutNav !== null) {
+      if (aboutNav.current !== undefined && aboutNav.current !== null) {
+        setAboutNavLocation(
+          aboutNav.current.offsetLeft + aboutNav.current.clientWidth / 2 - 7
+        );
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -79,15 +96,34 @@ export default function Navigation({ props, setSiteData }) {
                   : "nav-web"
               }
             >
-              <Link to="/webshop">
+              <Link
+                to="/webshop"
+                className={
+                  window.location.href.includes("/webshop") ? "chosen" : ""
+                }
+              >
                 <button>Webshop</button>
               </Link>
-              <Link to="/blog">
+              <Link
+                to="/blog"
+                className={
+                  window.location.href.includes("/blog") ? "chosen" : ""
+                }
+              >
                 <button>Blog</button>
               </Link>
               <div>
                 <div>
-                  <Link to="/about">
+                  <Link
+                    to="/about"
+                    className={
+                      window.location.href.includes("/about") ? "chosen" : ""
+                    }
+                    onClick={(e) => {
+                      console.log(e.clientX);
+                    }}
+                    ref={aboutNav}
+                  >
                     <button>Om Forlaget</button>
                   </Link>
                   {windowWidth < whenToChangeBurgerMenu ? (
@@ -110,7 +146,12 @@ export default function Navigation({ props, setSiteData }) {
                   <div className="nav-subpages">
                     <div className="content">
                       {windowWidth > whenToChangeBurgerMenu ? (
-                        <div className="nav-arrow"></div>
+                        <div
+                          className="nav-arrow"
+                          style={{
+                            left: `${aboutNavLocation}px`,
+                          }}
+                        ></div>
                       ) : null}
                       {props.om_forlag_underside !== undefined
                         ? props.om_forlag_underside.map((underside) => {
@@ -118,6 +159,11 @@ export default function Navigation({ props, setSiteData }) {
                               <Link
                                 key={underside.id}
                                 to={`/about/${underside.slug}`}
+                                className={
+                                  window.location.href.includes(underside.slug)
+                                    ? "chosen"
+                                    : ""
+                                }
                               >
                                 <button>{underside.title.rendered}</button>
                               </Link>
@@ -128,7 +174,12 @@ export default function Navigation({ props, setSiteData }) {
                   </div>
                 ) : null}
               </div>
-              <Link to="/basket">
+              <Link
+                to="/basket"
+                className={
+                  window.location.href.includes("/basket") ? "chosen" : ""
+                }
+              >
                 <button className="cta-contrast kurv-cta">
                   <svg
                     id="kurv-svg"

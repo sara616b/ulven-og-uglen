@@ -8,7 +8,7 @@ $splash-overlay: #1c3326e7;
 $background-green: #2e5446;
 $cta-color: #f9ea9d;
 $price-color: rgb(52, 117, 52);
-$dropshadow: rgba(0, 0, 0, 0.3) 2px 4px 8px;
+$dropshadow: rgba(0, 0, 0, 0.2) 2px 4px 8px;
 
 body {
   overflow-x: hidden;
@@ -100,6 +100,10 @@ body {
         a {
           text-decoration: none;
           align-self: center;
+          &.chosen {
+            border: solid rgba(255, 255, 255, 0.5) 1px;
+            border-radius: 5px;
+          }
         }
         .kurv-cta {
           display: flex;
@@ -187,9 +191,8 @@ body {
             .nav-arrow {
               width: 15px;
               height: 15px;
-              position: relative;
-              left: clamp(134px, 29vw, 398px);
-              top: -27px;
+              position: absolute;
+              top: -8px;
               rotate: 45deg;
               background-color: $sub-nav;
             }
@@ -349,7 +352,8 @@ body {
       .newest-books {
         padding: 40px;
         .max-width {
-          overflow: scroll;
+          overflow-x: scroll;
+          overflow-y: hidden;
           .books {
             display: flex;
             flex-direction: row;
@@ -482,6 +486,8 @@ body {
             justify-content: space-between;
             padding: 5px;
             box-shadow: $dropshadow;
+            width: 100%;
+            padding: 0 20px;
             .content {
               display: flex;
               flex-direction: column;
@@ -489,12 +495,13 @@ body {
               justify-content: space-between;
               margin-top: -30px;
               height: 100%;
+              width: 100%;
               .info {
                 display: flex;
                 flex-direction: column;
                 color: black;
-                padding: 20px;
                 text-align: left;
+                padding: 20px 0;
                 .titel {
                   margin: 0;
                   font-size: 16px;
@@ -515,13 +522,21 @@ body {
                   font-weight: bold;
                 }
               }
-              .forsidebillede {
-                width: 60%;
+              .image-holder {
+                height: 200px;
+                width: 100%;
+                background-color: rgb(241, 241, 241);
+                padding: 10px;
+                box-sizing: border-box;
                 border-radius: 5px;
-                object-fit: contain;
-                object-position: top;
-                height: fit-content;
                 box-shadow: $dropshadow;
+                .forsidebillede {
+                  height: 100%;
+                  border-radius: 5px;
+                  object-fit: contain;
+                  object-position: top;
+                  box-shadow: $dropshadow;
+                }
               }
             }
             button {

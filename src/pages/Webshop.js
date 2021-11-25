@@ -27,8 +27,15 @@ export default function Webshop({ bog, setSiteData }) {
           {bog.length > 0 ? (
             []
               .concat(bog)
-              .sort((a, b) => (a[sortBy] > b[sortBy] ? 1 : -1))
+              .sort((a, b) => {
+                if (sortBy === "pris") {
+                  console.log("pris");
+                  return a[sortBy] - b[sortBy];
+                }
+                return a[sortBy] > b[sortBy] ? 1 : -1;
+              })
               .map((bog) => {
+                console.log(bog[sortBy]);
                 return <BookDisplayShop key={bog.id} book={bog} />;
               })
           ) : (
