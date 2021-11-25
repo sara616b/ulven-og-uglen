@@ -17,7 +17,7 @@ export default function Blog({ props }) {
           )}
         </div>
       ) : (
-        <p>Blogindlæg loades...</p>
+        <p>Blogindlæg indlæses...</p>
       )}
     </div>
   );
