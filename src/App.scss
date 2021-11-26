@@ -162,7 +162,7 @@ body {
           }
         }
         .search-button {
-          margin-left: -35px;
+          margin-left: -45px;
         }
         #search-svg {
           width: 32px;
@@ -329,6 +329,7 @@ body {
               img {
                 width: 100%;
                 box-shadow: $dropshadow;
+                border-radius: 5px;
               }
               &.book0 {
                 opacity: 0.8;

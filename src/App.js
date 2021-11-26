@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AboutSubPage from "./pages/AboutSubPage";
 import BookDetails from "./pages/BookDetails";
+import Search from "./pages/Search";
 
 function App() {
   const [siteData, setSiteData] = useState({
@@ -17,6 +18,7 @@ function App() {
     basketContent: [],
     navigationIsOpen: false,
     bog: [],
+    searchString: "",
   });
 
   useEffect(() => {
@@ -54,6 +56,15 @@ function App() {
     return info;
   }
 
+  function loadSearch(searchFor) {
+    setSiteData((prev) => {
+      siteData.searchString = searchFor;
+      return { ...prev };
+    });
+    window.location.assign(`/search?s=${siteData.searchString}`);
+    console.log("searching", searchFor);
+    console.log(siteData.searchString);
+  }
   function addToBasket(bog) {
     // copy basket, if it isn't empty
     let newBasket = [];
@@ -83,13 +94,39 @@ function App() {
     });
   }
 
+  // function removeFromBasket(payload) {
+  //   const itemToRemove = basket.findIndex((item) => item.name === payload.name);
+  //   basket.splice(itemToRemove, 1);
+  //   setBasket((prevState) => [...prevState]);
+  // }
+  // function updateAmountInBasket(payload, action) {
+  //   const nextBasket = basket.map((item) => {
+  //     if (item.name === payload.name) {
+  //       if (action === "+") {
+  //         item.amount += 1;
+  //       } else if (action === "-") {
+  //         item.amount -= 1;
+  //       }
+  //     }
+  //     return item;
+  //   });
+  //   setBasket(nextBasket);
+  // }
+  // function clearBasket() {
+  //   setBasket([]);
+  // }
+
   return (
     <Router
     // basename="/kea/ulvenoguglen"
     >
       <div className="App">
         {/* Generel content set up: HEADER + MAIN CONTENT pr ROUTE + FOOTER */}
-        <Header props={siteData} setSiteData={setSiteData}></Header>
+        <Header
+          props={siteData}
+          setSiteData={setSiteData}
+          loadSearch={loadSearch}
+        ></Header>
         <main>
           <Switch>
             {/* Frontpage */}
@@ -155,6 +192,11 @@ function App() {
               : null}
             {/* Basket */}
             <Route path="/basket" exact render={() => <Basket />} />
+            {/* Search results */}
+            <Route
+              path={`/search`}
+              render={() => <Search siteData={siteData} />}
+            />
           </Switch>
         </main>
         <Footer></Footer>

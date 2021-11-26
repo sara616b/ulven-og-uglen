@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import Input from "./Input";
 
-export default function Navigation({ props, setSiteData }) {
+export default function Navigation({ props, setSiteData, loadSearch }) {
   const whenToChangeBurgerMenu = 750;
   const aboutNav = useRef();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -198,12 +198,24 @@ export default function Navigation({ props, setSiteData }) {
                 </button>
               </Link>
               <div className="search">
-                <Input id="search" label="" type="text" placeholder="Søg..." />
-                <button
-                  className="search-button"
-                  onClick={() => {
-                    console.log("Trying to search");
+                <Input
+                  id="search"
+                  label=""
+                  type="text"
+                  placeholder="Søg..."
+                  value={props.searchString}
+                  onKeyPress={(e) => console.log("hey")}
+                  onChange={(e) => {
+                    console.log(e);
+                    setSiteData((prev) => {
+                      props.searchString = e.target.value;
+                      return { ...prev };
+                    });
                   }}
+                />
+                <Link
+                  className="search-button"
+                  to={`/search?s=${props.searchString}`}
                 >
                   <svg
                     id="search-svg"
@@ -214,7 +226,7 @@ export default function Navigation({ props, setSiteData }) {
                       <path d="M59.5,54.5a25,25,0,1,0-6.14,5.81L77.61,84.56l6-6Zm-20,3a18,18,0,1,1,18-18A18,18,0,0,1,39.5,57.5Z" />
                     </g>
                   </svg>
-                </button>
+                </Link>
               </div>
             </div>
           )}
