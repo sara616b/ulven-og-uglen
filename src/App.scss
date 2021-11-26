@@ -9,6 +9,7 @@ $background-green: #2e5446;
 $cta-color: #f9ea9d;
 $price-color: rgb(52, 117, 52);
 $dropshadow: rgba(0, 0, 0, 0.2) 2px 4px 8px;
+$light-gray: rgb(241, 241, 241);
 
 body {
   overflow-x: hidden;
@@ -88,12 +89,14 @@ body {
           left: 0;
           top: 30px;
           padding: 20px 10px;
+          height: $nav-height;
+          box-sizing: border-box;
           a {
             display: flex;
             justify-content: center;
           }
           #logo-svg {
-            height: 35px;
+            height: 50px;
             fill: white;
           }
         }
@@ -111,8 +114,17 @@ body {
           align-items: center;
           #kurv-svg {
             width: 30px;
-            margin-left: -10px;
+            margin-right: -10px;
           }
+        }
+        .basket-amount {
+          position: absolute;
+          transform: translate(-4px, -12px);
+          background-color: white;
+          padding: 2px 5px;
+          border-radius: 5px;
+          color: $background-green;
+          font-size: 14px;
         }
         .cta-contrast {
           height: 40px;
@@ -149,9 +161,13 @@ body {
             justify-content: center;
           }
         }
+        .search-button {
+          margin-left: -45px;
+        }
         #search-svg {
-          width: 25px;
-          fill: white;
+          width: 32px;
+          fill: rgb(0, 0, 0);
+          opacity: 0.7;
         }
         .nav-web {
           height: $nav-height;
@@ -204,12 +220,14 @@ body {
           border-radius: 5px;
           border: none;
           box-shadow: inset rgba(0, 0, 0, 0.418) 2px 2px 5px;
+          height: 30px;
           &:focus {
             background-color: white;
           }
         }
         .burger-menu-icon {
           width: 30px;
+          font-size: 25px;
           height: 30px;
           position: absolute;
           right: 0;
@@ -245,7 +263,7 @@ body {
     // FRONTPAGE
     .frontpage {
       .splash {
-        height: 80vh;
+        height: 600px;
         width: 100%;
         .image {
           height: 100%;
@@ -269,14 +287,14 @@ body {
           background-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="1288.006" height="150" viewBox="0 0 1288.006 150"><path id="Path_57" fill="white" data-name="Path 57" class="cls-1" d="M-8241-10906.741h1288.006v-81.99s-97.034-99.546-327.593-110.035-290.152,105.348-562.449,110.035S-8241-11037.61-8241-11037.61Z" transform="translate(8241 11099.438)"/></svg>');
           position: absolute;
           width: 102%;
-          height: calc(80vh + 120px);
-          top: 0;
+          height: 300px;
           left: -1%;
           z-index: 3;
           background-repeat: no-repeat;
           background-size: contain;
           background-position-y: bottom;
           pointer-events: none;
+          transform: translateY(-890px);
         }
         .content {
           position: relative;
@@ -311,6 +329,7 @@ body {
               img {
                 width: 100%;
                 box-shadow: $dropshadow;
+                border-radius: 5px;
               }
               &.book0 {
                 opacity: 0.8;
@@ -525,7 +544,7 @@ body {
               .image-holder {
                 height: 200px;
                 width: 100%;
-                background-color: rgb(241, 241, 241);
+                background-color: $light-gray;
                 padding: 10px;
                 box-sizing: border-box;
                 border-radius: 5px;
@@ -540,7 +559,7 @@ body {
               }
             }
             button {
-              margin: 0 20px 20px 20px;
+              margin-bottom: 20px;
             }
           }
         }
@@ -563,8 +582,66 @@ body {
           border-radius: 5px;
           border: none;
           box-shadow: inset rgba(0, 0, 0, 0.2) 2px 2px 7px;
+          cursor: pointer;
           option {
             text-transform: capitalize;
+          }
+        }
+      }
+    }
+    // BOOK DETAILS
+    .book-details-holder {
+      padding: 5px;
+      max-width: 700px;
+      margin: auto;
+      .content {
+        text-align: left;
+        .image-holder {
+          width: 100%;
+          height: 200px;
+          background-color: $light-gray;
+          border-radius: 5px;
+          padding: 10px;
+          box-sizing: border-box;
+          text-align: center;
+          img {
+            height: 100%;
+            border-radius: 5px;
+            object-fit: contain;
+            box-shadow: $dropshadow;
+          }
+        }
+        .titel {
+          margin: 10px 0 0 0;
+        }
+        p {
+          margin: 0;
+          padding-bottom: 5px;
+        }
+        .forfatter {
+          font-style: italic;
+        }
+        .pris {
+          font-weight: bold;
+        }
+        .small {
+          font-size: 12px;
+          margin: 10px 0;
+        }
+        .beskrivelse {
+          background-color: $light-gray;
+          border-radius: 5px;
+          padding: 20px 5px;
+          margin-bottom: 20px;
+        }
+        .upper-holder {
+          @media screen and (min-width: 750px) {
+            display: flex;
+            flex-direction: row;
+            .image-holder {
+              max-width: 50%;
+              margin-right: 20px;
+            }
           }
         }
       }

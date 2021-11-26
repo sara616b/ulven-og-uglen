@@ -9,12 +9,16 @@ import Basket from "./pages/Basket";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AboutSubPage from "./pages/AboutSubPage";
+import BookDetails from "./pages/BookDetails";
+import Search from "./pages/Search";
 
 function App() {
   const [siteData, setSiteData] = useState({
     title: "Ulven og Uglen",
+    basketContent: [],
     navigationIsOpen: false,
     bog: [],
+    searchString: "",
   });
 
   useEffect(() => {
@@ -37,9 +41,9 @@ function App() {
             return { ...prev };
           });
         });
+      return null;
     });
   }, []);
-  console.log(siteData);
 
   function findPageInfo(page) {
     let info;
@@ -52,13 +56,77 @@ function App() {
     return info;
   }
 
+  function loadSearch(searchFor) {
+    setSiteData((prev) => {
+      siteData.searchString = searchFor;
+      return { ...prev };
+    });
+    window.location.assign(`/search?s=${siteData.searchString}`);
+    console.log("searching", searchFor);
+    console.log(siteData.searchString);
+  }
+  function addToBasket(bog) {
+    // copy basket, if it isn't empty
+    let newBasket = [];
+    if (siteData.basketContent !== []) {
+      newBasket = [...siteData.basketContent];
+    }
+    const isInBasket = siteData.basketContent.findIndex(
+      (bookToCheck) => bookToCheck.isbn === bog.isbn
+    );
+    console.log(isInBasket);
+    if (isInBasket === -1) {
+      //if the book isn't already in the basket, add it
+      newBasket.push({ titel: bog.titel, isbn: bog.isbn, amount: 1 });
+    } else {
+      newBasket.map((bookToCheck) => {
+        if (bookToCheck.isbn === bog.isbn) {
+          bookToCheck.amount += 1;
+        }
+        return bookToCheck;
+      });
+    }
+    console.log("newBasket", newBasket);
+
+    setSiteData((prev) => {
+      prev.basketContent = newBasket;
+      return { ...prev };
+    });
+  }
+
+  // function removeFromBasket(payload) {
+  //   const itemToRemove = basket.findIndex((item) => item.name === payload.name);
+  //   basket.splice(itemToRemove, 1);
+  //   setBasket((prevState) => [...prevState]);
+  // }
+  // function updateAmountInBasket(payload, action) {
+  //   const nextBasket = basket.map((item) => {
+  //     if (item.name === payload.name) {
+  //       if (action === "+") {
+  //         item.amount += 1;
+  //       } else if (action === "-") {
+  //         item.amount -= 1;
+  //       }
+  //     }
+  //     return item;
+  //   });
+  //   setBasket(nextBasket);
+  // }
+  // function clearBasket() {
+  //   setBasket([]);
+  // }
+
   return (
     <Router
     // basename="/kea/ulvenoguglen"
     >
       <div className="App">
         {/* Generel content set up: HEADER + MAIN CONTENT pr ROUTE + FOOTER */}
-        <Header props={siteData} setSiteData={setSiteData}></Header>
+        <Header
+          props={siteData}
+          setSiteData={setSiteData}
+          loadSearch={loadSearch}
+        ></Header>
         <main>
           <Switch>
             {/* Frontpage */}
@@ -88,8 +156,18 @@ function App() {
               render={() => (
                 <Webshop
                   bog={siteData.bog !== undefined ? siteData.bog : {}}
-                  setSiteData={setSiteData}
+                  siteData={siteData}
+                  addToBasket={addToBasket}
                 />
+              )}
+            />
+
+            {/* Book Details */}
+            <Route
+              path="/webshop/details"
+              exact
+              render={() => (
+                <BookDetails siteData={siteData} addToBasket={addToBasket} />
               )}
             />
             {/* Blog */}
@@ -114,6 +192,11 @@ function App() {
               : null}
             {/* Basket */}
             <Route path="/basket" exact render={() => <Basket />} />
+            {/* Search results */}
+            <Route
+              path={`/search`}
+              render={() => <Search siteData={siteData} />}
+            />
           </Switch>
         </main>
         <Footer></Footer>

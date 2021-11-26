@@ -1,7 +1,7 @@
 import { useState } from "react";
 import BookDisplayShop from "../components/BookDisplayShop";
 
-export default function Webshop({ bog, setSiteData }) {
+export default function Webshop({ bog, addToBasket, siteData }) {
   const [sortBy, setSortBy] = useState("udgivelsesdato");
 
   return (
@@ -29,14 +29,18 @@ export default function Webshop({ bog, setSiteData }) {
               .concat(bog)
               .sort((a, b) => {
                 if (sortBy === "pris") {
-                  console.log("pris");
                   return a[sortBy] - b[sortBy];
                 }
                 return a[sortBy] > b[sortBy] ? 1 : -1;
               })
               .map((bog) => {
-                console.log(bog[sortBy]);
-                return <BookDisplayShop key={bog.id} book={bog} />;
+                return (
+                  <BookDisplayShop
+                    key={bog.id}
+                    book={bog}
+                    addToBasket={addToBasket}
+                  />
+                );
               })
           ) : (
             <p>Bøger loades...</p>

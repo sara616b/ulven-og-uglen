@@ -2,27 +2,25 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import Input from "./Input";
 
-export default function Navigation({ props, setSiteData }) {
-  const whenToChangeBurgerMenu = 715;
+export default function Navigation({ props, setSiteData, loadSearch }) {
+  const whenToChangeBurgerMenu = 750;
+  const aboutNav = useRef();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [urlDisplayed, setUrlDisplay] = useState();
   const [subNavOpen, setSubNavOpen] = useState({
     omForlag: false,
   });
-  const aboutNav = useRef();
   const [aboutNavLocation, setAboutNavLocation] = useState();
-  console.log(aboutNavLocation);
+  const [amountInBasket, setAmountInBasket] = useState(0);
 
-  function handleResize() {
-    setWindowWidth(window.innerWidth);
-    if (aboutNav !== null) {
-      if (aboutNav.current !== undefined && aboutNav.current !== null) {
-        setAboutNavLocation(
-          aboutNav.current.offsetLeft + aboutNav.current.clientWidth / 2 - 7
-        );
-      }
-    }
-  }
+  useEffect(() => {
+    let amountInBasketUpdated = 0;
+    props.basketContent.map((bog) => {
+      amountInBasketUpdated += bog.amount;
+      return null;
+    });
+    setAmountInBasket(amountInBasketUpdated);
+  }, [props.basketContent]);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -51,6 +49,17 @@ export default function Navigation({ props, setSiteData }) {
       prev[navName] = !isOpen;
       return { ...prev };
     });
+  }
+
+  function handleResize() {
+    setWindowWidth(window.innerWidth);
+    if (aboutNav !== null) {
+      if (aboutNav.current !== undefined && aboutNav.current !== null) {
+        setAboutNavLocation(
+          aboutNav.current.offsetLeft + aboutNav.current.clientWidth / 2 - 7
+        );
+      }
+    }
   }
 
   return (
@@ -119,9 +128,6 @@ export default function Navigation({ props, setSiteData }) {
                     className={
                       window.location.href.includes("/about") ? "chosen" : ""
                     }
-                    onClick={(e) => {
-                      console.log(e.clientX);
-                    }}
                     ref={aboutNav}
                   >
                     <button>Om Forlaget</button>
@@ -174,13 +180,10 @@ export default function Navigation({ props, setSiteData }) {
                   </div>
                 ) : null}
               </div>
-              <Link
-                to="/basket"
-                className={
-                  window.location.href.includes("/basket") ? "chosen" : ""
-                }
-              >
+              <Link to="/basket">
                 <button className="cta-contrast kurv-cta">
+                  Gå til kurv{" "}
+                  {amountInBasket !== 0 ? `(${amountInBasket})` : ""}
                   <svg
                     id="kurv-svg"
                     xmlns="http://www.w3.org/2000/svg"
@@ -192,15 +195,27 @@ export default function Navigation({ props, setSiteData }) {
                       <path d="M51,40.34H17.43V52.07h6.75L29.5,76.5H71.62l5.15-24.43h7.68V40.34ZM40.73,72.2H36.5V55.5h4.23Zm8,0H44.5V55.5h4.23Zm8,0H52.5V55.5h4.23Zm8,0H60.5V55.5h4.23Z" />
                     </g>
                   </svg>
-                  Gå til kurv
                 </button>
               </Link>
               <div className="search">
-                <Input id="search" label="" type="text" placeholder="Søg..." />
-                <button
-                  onClick={() => {
-                    console.log("Trying to search");
+                <Input
+                  id="search"
+                  label=""
+                  type="text"
+                  placeholder="Søg..."
+                  value={props.searchString}
+                  onKeyPress={(e) => console.log("hey")}
+                  onChange={(e) => {
+                    console.log(e);
+                    setSiteData((prev) => {
+                      props.searchString = e.target.value;
+                      return { ...prev };
+                    });
                   }}
+                />
+                <Link
+                  className="search-button"
+                  to={`/search?s=${props.searchString}`}
                 >
                   <svg
                     id="search-svg"
@@ -211,7 +226,7 @@ export default function Navigation({ props, setSiteData }) {
                       <path d="M59.5,54.5a25,25,0,1,0-6.14,5.81L77.61,84.56l6-6Zm-20,3a18,18,0,1,1,18-18A18,18,0,0,1,39.5,57.5Z" />
                     </g>
                   </svg>
-                </button>
+                </Link>
               </div>
             </div>
           )}

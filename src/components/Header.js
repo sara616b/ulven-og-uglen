@@ -1,7 +1,7 @@
 import Navigation from "./Navigation";
 import parse from "html-react-parser";
 
-export default function Header({ props, setSiteData }) {
+export default function Header({ props, setSiteData, loadSearch }) {
   return (
     <header>
       <div className="some-nav">
@@ -21,7 +21,11 @@ export default function Header({ props, setSiteData }) {
             : null}
         </div>
       </div>
-      <Navigation props={props} setSiteData={setSiteData} />
+      <Navigation
+        props={props}
+        setSiteData={setSiteData}
+        loadSearch={loadSearch}
+      />
     </header>
   );
 }

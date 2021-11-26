@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function BookDisplayShop({ book: bog }) {
+export default function BookDisplayShop({ book: bog, addToBasket }) {
   const authors =
     bog.forfatter.length > 50
       ? `${bog.forfatter.substring(0, 40)}...`
@@ -8,7 +8,7 @@ export default function BookDisplayShop({ book: bog }) {
   return (
     <div className="bog-element">
       <div className="background">
-        <Link to={`/webshop/${bog.slug}`}>
+        <Link to={`/webshop/details?titel=${bog.slug}`}>
           <div className="content">
             <div className="image-holder">
               <img
@@ -24,7 +24,14 @@ export default function BookDisplayShop({ book: bog }) {
             </div>
           </div>
         </Link>
-        <button className="cta-contrast">Læg i kurv</button>
+        <button
+          onClick={() => {
+            addToBasket(bog);
+          }}
+          className="cta-contrast"
+        >
+          Læg i kurv
+        </button>
       </div>
     </div>
   );

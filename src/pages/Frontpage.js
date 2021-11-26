@@ -4,9 +4,6 @@ import BookDisplay from "../components/BookDisplay";
 import parse from "html-react-parser";
 
 export default function Frontpage({ frontpage, books, social_medie }) {
-  console.log("forside", frontpage);
-  console.log(social_medie);
-
   return frontpage !== null ? (
     <section className="frontpage">
       <section className="splash">
@@ -50,8 +47,9 @@ export default function Frontpage({ frontpage, books, social_medie }) {
                       if (isbn === bog.isbn && index < 5) {
                         return (
                           <Link
-                            to={`/webshop/${bog.slug}`}
+                            to={`/webshop/details?titel=${bog.slug}`}
                             className={`books-in-splash book${index}`}
+                            key={`book${index}`}
                           >
                             <img
                               src={bog.forsidebillede.guid}
@@ -177,7 +175,6 @@ export default function Frontpage({ frontpage, books, social_medie }) {
             <div>
               {social_medie !== null
                 ? social_medie.map((some) => {
-                    console.log(some);
                     return (
                       <a
                         key={some.navn}
