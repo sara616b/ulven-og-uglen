@@ -717,9 +717,9 @@ body {
   // BLOG DISPLAY
   .Blogs {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    margin: 40px 40px 40px 60px;
-    gap: 40px 0px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    margin: 40px;
+    gap: 40px;
   }
 
   .blog-titel {
@@ -734,26 +734,81 @@ body {
       flex-direction: column;
       padding: 20px;
       border-radius: 5px;
-      width: 70%;
       box-shadow: $dropshadow;
       .blog-content {
         display: flex;
         flex-direction: column;
         padding: 0;
         margin-top: -30px;
-        .blog-info {
-          display: flex;
-          flex-direction: column;
-          color: black;
-          width: 100%;
-          padding: 20px 0 0 5px;
-          text-align: left;
-        }
         .blogBillede {
           width: 50%;
           border-radius: 5px;
-          margin-left: 60px;
+          align-self: center;
           box-shadow: $dropshadow;
+        }
+      }
+      .blog-info {
+        display: flex;
+        flex-direction: column;
+        color: black;
+        width: 100%;
+        padding: 30px 0 0 0;
+        a {
+          color: black;
+          margin: 0;
+        }
+        p {
+          opacity: 40%;
+          margin: 0;
+        }
+        .AF {
+          margin: 5px 0 0 0;
+        }
+      }
+    }
+  }
+
+  // BLOG DETAILS
+  .blog-details-holder {
+    margin: auto;
+    .blog-details-content {
+      text-align: left;
+    }
+    .blog-details-info {
+      display: flex;
+      flex-direction: column;
+      p {
+        width: 70%;
+        align-self: center;
+      }
+      figure {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        img {
+          width: 50%;
+          height: 100%;
+          align-self: center;
+        }
+        figcaption {
+          opacity: 50%;
+          text-align: center;
+          width: 50%;
+          align-self: center;
+        }
+      }
+    }
+    .blog-details-titel {
+      margin: 20px 0 0 0;
+      text-align: center;
+    }
+    .upper-holder {
+      @media screen and (min-width: 750px) {
+        display: flex;
+        flex-direction: row;
+        .image-holder {
+          max-width: 50%;
+          margin-right: 20px;
         }
       }
     }

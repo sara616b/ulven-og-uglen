@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AboutSubPage from "./pages/AboutSubPage";
 import BookDetails from "./pages/BookDetails";
+import BlogDetails from "./pages/BlogDetails";
 import Search from "./pages/Search";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
     navigationIsOpen: false,
     bog: [],
     searchString: "",
+    blogindlg: [],
   });
 
   useEffect(() => {
@@ -176,6 +178,16 @@ function App() {
               exact
               render={() => <Blog props={siteData} />}
             />
+
+            {/* Blog Details */}
+            <Route
+              path="/blog/details"
+              exact
+              render={() => (
+                <BlogDetails siteData={siteData} />
+              )}
+            />
+
             {/* About */}
             <Route path="/about" exact render={() => <About />} />
             {siteData.om_forlag_underside !== undefined
