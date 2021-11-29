@@ -47,6 +47,8 @@ function App() {
     });
   }, []);
 
+  console.log(siteData);
+
   function findPageInfo(page) {
     let info;
     siteData.global_side.map((side) => {
@@ -186,9 +188,7 @@ function App() {
             <Route
               path="/blog/details"
               exact
-              render={() => (
-                <BlogDetails siteData={siteData} />
-              )}
+              render={() => <BlogDetails siteData={siteData} />}
             />
 
             {/* About */}
@@ -200,7 +200,9 @@ function App() {
                       key={underside.id}
                       path={`/about/${underside.slug}`}
                       exact
-                      render={() => <AboutSubPage props={siteData} />}
+                      render={() => (
+                        <AboutSubPage props={siteData.om_forlag_underside} />
+                      )}
                     />
                   );
                 })
