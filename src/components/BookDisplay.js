@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function BookDisplay({ book: bog }) {
+export default function BookDisplay({ book: bog, addToBasket }) {
   return (
     <div className="bog-element">
       <div className="background">
@@ -21,7 +21,14 @@ export default function BookDisplay({ book: bog }) {
             </div>
           </div>
         </Link>
-        <button className="cta-contrast">Læg i kurv</button>
+        <button
+          onClick={() => {
+            addToBasket(bog);
+          }}
+          className="cta-contrast"
+        >
+          Læg i kurv
+        </button>
       </div>
     </div>
   );

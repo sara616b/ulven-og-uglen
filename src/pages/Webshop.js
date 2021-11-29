@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BookDisplayShop from "../components/BookDisplayShop";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 export default function Webshop({ bog, addToBasket, siteData }) {
   const [sortBy, setSortBy] = useState("udgivelsesdato");
@@ -7,6 +8,12 @@ export default function Webshop({ bog, addToBasket, siteData }) {
   return (
     <div className="webshop">
       <div className="max-width">
+        <Breadcrumbs
+          links={[
+            { link: "/", text: "Forside" },
+            { link: "/webshop", text: "Webshop" },
+          ]}
+        />
         <div className="sorting">
           <p>Sorter efter: </p>
           <select
@@ -43,7 +50,7 @@ export default function Webshop({ bog, addToBasket, siteData }) {
                 );
               })
           ) : (
-            <p>Bøger loades...</p>
+            <p>Bøger indlæses...</p>
           )}
         </div>
       </div>

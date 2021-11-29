@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 export default function BookDetails({ siteData, addToBasket }) {
   const [bog, setBog] = useState({});
@@ -13,9 +14,15 @@ export default function BookDetails({ siteData, addToBasket }) {
       return null;
     });
   }, [siteData.bog]);
-  console.log(bog);
   return (
     <div className="max-width">
+      <Breadcrumbs
+        links={[
+          { link: "/", text: "Forside" },
+          { link: "/webshop", text: "Webshop" },
+          { link: `/webshop/details?titel=${bog.slug}`, text: bog.titel },
+        ]}
+      />
       {bog !== {} ? (
         <div className="book-details-holder">
           <div className="content">
@@ -70,7 +77,7 @@ export default function BookDetails({ siteData, addToBasket }) {
           </div>
         </div>
       ) : (
-        "Bog loades..."
+        "Bog indlæses..."
       )}
     </div>
   );
