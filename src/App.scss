@@ -47,6 +47,12 @@ body {
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 14px;
+    border: $cta-color 2px solid;
+    &.adding {
+      color: $cta-color !important;
+      background-color: black !important;
+      border: $cta-color 2px solid;
+    }
   }
 
   header {
@@ -622,6 +628,14 @@ body {
             text-transform: capitalize;
           }
         }
+        .sort-direction {
+          font-size: 20px;
+          padding-left: 10px;
+          &:hover {
+            cursor: pointer;
+            opacity: 0.8;
+          }
+        }
       }
     }
     // BOOK DETAILS
@@ -927,7 +941,37 @@ body {
   // FOOTER
   footer {
     background-image: $nav-and-footer;
-    height: 100px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    color: white;
+    justify-content: center;
+    div {
+      display: flex;
+      flex-direction: row;
+      margin: 0 auto;
+    }
+    div div:first-of-type {
+      text-align: right;
+    }
+    div div {
+      max-width: $max-width / 2;
+      text-align: left;
+      flex-grow: 1;
+      flex-basis: 200px;
+      padding: 20px;
+      p {
+        line-height: 150%;
+        width: 100%;
+      }
+    }
+    div:last-of-type {
+      flex-direction: column;
+      padding-bottom: 20px;
+      a {
+        color: white;
+      }
+    }
   }
 
   // BOOK DISPLAYS

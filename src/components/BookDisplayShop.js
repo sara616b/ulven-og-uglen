@@ -25,8 +25,8 @@ export default function BookDisplayShop({ book: bog, addToBasket }) {
           </div>
         </Link>
         <button
-          onClick={() => {
-            addToBasket(bog);
+          onClick={(e) => {
+            addToBasket(e, bog);
           }}
           className="cta-contrast"
         >

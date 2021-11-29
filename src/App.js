@@ -47,8 +47,6 @@ function App() {
     });
   }, []);
 
-  console.log(siteData);
-
   function findPageInfo(page) {
     let info;
     siteData.global_side.map((side) => {
@@ -67,7 +65,14 @@ function App() {
     });
     window.location.assign(`/search?s=${siteData.searchString}`);
   }
-  function addToBasket(bog) {
+  function addToBasket(e, bog) {
+    console.log(e);
+    e.target.classList.add("adding");
+    e.target.innerText = "Lagt i kurv 🗸";
+    setTimeout(() => {
+      e.target.classList.remove("adding");
+      e.target.innerText = "Læg i kurv";
+    }, 1000);
     // copy basket, if it isn't empty
     let newBasket = [];
     if (siteData.basketContent !== []) {

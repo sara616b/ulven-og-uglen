@@ -1,4 +1,5 @@
 import BookDisplayShop from "../components/BookDisplayShop";
+import BlogDisplay from "../components/BlogDisplay";
 
 export default function Search({ siteData, addToBasket }) {
   const searchStringFromURL = new URLSearchParams(window.location.search).get(
@@ -138,7 +139,7 @@ export default function Search({ siteData, addToBasket }) {
             <div className="search-grid">
               {blogsFoundThroughResults.map((blog, index) => {
                 return (
-                  <p key={blog.title.rendered + index}>{blog.title.rendered}</p>
+                  <BlogDisplay blog={blog} key={blog.title.rendered + index} />
                 );
               })}
             </div>

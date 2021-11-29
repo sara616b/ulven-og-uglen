@@ -34,6 +34,7 @@ export default function Input({
         className={hasBeenInteractedWith === true ? "interacted" : ""}
         onChange={onChange}
         value={value}
+        onKeyPress={onkeypress}
       />
       {hasBeenInteractedWith === true ? (
         <span className="error" id="err-name" aria-live="assertive">
