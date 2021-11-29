@@ -5,6 +5,7 @@ import Input from "./Input";
 export default function Navigation({ props, setSiteData, loadSearch }) {
   const whenToChangeBurgerMenu = 750;
   const aboutNav = useRef();
+  const searchNow = useRef();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [urlDisplayed, setUrlDisplay] = useState();
   const [subNavOpen, setSubNavOpen] = useState({
@@ -12,15 +13,6 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
   });
   const [aboutNavLocation, setAboutNavLocation] = useState();
   const [amountInBasket, setAmountInBasket] = useState(0);
-
-  useEffect(() => {
-    let amountInBasketUpdated = 0;
-    props.basketContent.map((bog) => {
-      amountInBasketUpdated += bog.amount;
-      return null;
-    });
-    setAmountInBasket(amountInBasketUpdated);
-  }, [props.basketContent]);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -32,6 +24,15 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
       }
     }
   }, []);
+
+  useEffect(() => {
+    let amountInBasketUpdated = 0;
+    props.basketContent.map((bog) => {
+      amountInBasketUpdated += bog.amount;
+      return null;
+    });
+    setAmountInBasket(amountInBasketUpdated);
+  }, [props]);
 
   useEffect(() => {
     setUrlDisplay(window.location.href.indexOf("about"));
@@ -204,9 +205,7 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
                   type="text"
                   placeholder="Søg..."
                   value={props.searchString}
-                  onKeyPress={(e) => console.log("hey")}
                   onChange={(e) => {
-                    console.log(e);
                     setSiteData((prev) => {
                       props.searchString = e.target.value;
                       return { ...prev };

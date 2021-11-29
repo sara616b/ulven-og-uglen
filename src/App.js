@@ -64,8 +64,6 @@ function App() {
       return { ...prev };
     });
     window.location.assign(`/search?s=${siteData.searchString}`);
-    console.log("searching", searchFor);
-    console.log(siteData.searchString);
   }
   function addToBasket(bog) {
     // copy basket, if it isn't empty
@@ -76,10 +74,9 @@ function App() {
     const isInBasket = siteData.basketContent.findIndex(
       (bookToCheck) => bookToCheck.isbn === bog.isbn
     );
-    console.log(isInBasket);
     if (isInBasket === -1) {
       //if the book isn't already in the basket, add it
-      newBasket.push({ titel: bog.titel, isbn: bog.isbn, amount: 1 });
+      newBasket.push({ ...bog, amount: 1 });
     } else {
       newBasket.map((bookToCheck) => {
         if (bookToCheck.isbn === bog.isbn) {
@@ -88,35 +85,40 @@ function App() {
         return bookToCheck;
       });
     }
-    console.log("newBasket", newBasket);
-
     setSiteData((prev) => {
       prev.basketContent = newBasket;
       return { ...prev };
     });
   }
 
-  // function removeFromBasket(payload) {
-  //   const itemToRemove = basket.findIndex((item) => item.name === payload.name);
-  //   basket.splice(itemToRemove, 1);
-  //   setBasket((prevState) => [...prevState]);
-  // }
-  // function updateAmountInBasket(payload, action) {
-  //   const nextBasket = basket.map((item) => {
-  //     if (item.name === payload.name) {
-  //       if (action === "+") {
-  //         item.amount += 1;
-  //       } else if (action === "-") {
-  //         item.amount -= 1;
-  //       }
-  //     }
-  //     return item;
-  //   });
-  //   setBasket(nextBasket);
-  // }
-  // function clearBasket() {
-  //   setBasket([]);
-  // }
+  function removeFromBasket(bog) {
+    const itemToRemove = siteData.basketContent.findIndex(
+      (bookToCheck) => bookToCheck.isbn === bog.isbn
+    );
+    siteData.basketContent.splice(itemToRemove, 1);
+    setSiteData((prev) => {
+      return { ...prev };
+    });
+  }
+  function updateAmountInBasket(bog, action) {
+    const nextBasket = siteData.basketContent.map((book) => {
+      if (book.id === bog.id) {
+        if (action === "+") {
+          book.amount += 1;
+        } else if (action === "-") {
+          book.amount -= 1;
+        }
+      }
+      return book;
+    });
+    setSiteData((prev) => {
+      prev.basketContent = nextBasket;
+      return { ...prev };
+    });
+  }
+  function clearBasket() {
+    //   setBasket([]);
+  }
 
   return (
     <Router
@@ -148,6 +150,7 @@ function App() {
                       ? siteData.social_medie
                       : null
                   }
+                  addToBasket={addToBasket}
                 />
               )}
             />
@@ -203,11 +206,24 @@ function App() {
                 })
               : null}
             {/* Basket */}
-            <Route path="/basket" exact render={() => <Basket />} />
+            <Route
+              path="/basket"
+              exact
+              render={() => (
+                <Basket
+                  siteData={siteData}
+                  removeFromBasket={removeFromBasket}
+                  updateAmountInBasket={updateAmountInBasket}
+                  clearBasket={clearBasket}
+                />
+              )}
+            />
             {/* Search results */}
             <Route
               path={`/search`}
-              render={() => <Search siteData={siteData} />}
+              render={() => (
+                <Search siteData={siteData} addToBasket={addToBasket} />
+              )}
             />
           </Switch>
         </main>

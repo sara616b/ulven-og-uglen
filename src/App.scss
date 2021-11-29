@@ -14,9 +14,23 @@ $light-gray: rgb(241, 241, 241);
 body {
   overflow-x: hidden;
 }
+
+@keyframes move-up {
+  0% {
+    transform: translateY(20px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .App {
   * {
     transition: 0.2s all;
+    font-family: "Source Sans Pro", sans-serif;
+    box-sizing: border-box;
   }
   text-align: center;
   a:hover,
@@ -40,7 +54,6 @@ body {
     // NAVIGATION
     .some-nav {
       background-color: black;
-      height: 20px;
       padding: 5px;
       .max-width {
         max-width: $max-width;
@@ -94,6 +107,10 @@ body {
           a {
             display: flex;
             justify-content: center;
+            button {
+              font-family: "Gentium Book Basic", serif;
+              font-size: 120%;
+            }
           }
           #logo-svg {
             height: 50px;
@@ -220,7 +237,7 @@ body {
           border-radius: 5px;
           border: none;
           box-shadow: inset rgba(0, 0, 0, 0.418) 2px 2px 5px;
-          height: 30px;
+          height: 40px;
           &:focus {
             background-color: white;
           }
@@ -259,6 +276,25 @@ body {
       max-width: $max-width;
       margin: auto;
       height: 100%;
+      * {
+        animation: move-up 0.8s;
+      }
+    }
+    .breadcrumbs {
+      display: flex;
+      flex-direction: row;
+      a {
+        color: black;
+        padding: 0 5px;
+        &:after {
+          content: ">";
+          padding-left: 5px;
+          color: black;
+        }
+        &:last-of-type:after {
+          content: "";
+        }
+      }
     }
     // FRONTPAGE
     .frontpage {
@@ -312,6 +348,7 @@ body {
           h1 {
             font-size: 40px;
             margin: 0;
+            font-family: "Gentium Book Basic", serif;
           }
           p {
             font-size: 20px;
@@ -332,14 +369,12 @@ body {
                 border-radius: 5px;
               }
               &.book0 {
-                opacity: 0.8;
                 order: 1;
                 @media screen and (min-width: 800px) {
                   display: block;
                 }
               }
               &.book4 {
-                opacity: 0.8;
                 order: 5;
                 @media screen and (min-width: 800px) {
                   display: block;
@@ -622,6 +657,13 @@ body {
           font-style: italic;
         }
         .pris {
+          margin: 0;
+          background-color: $price-color;
+          width: fit-content;
+          padding: 5px;
+          margin-bottom: 10px;
+          color: white;
+          border-radius: 5px;
           font-weight: bold;
         }
         .small {
@@ -641,6 +683,240 @@ body {
             .image-holder {
               max-width: 50%;
               margin-right: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    // BASKET
+    .basket {
+      text-align: left;
+      padding: 20px;
+    }
+    .bookdisplaybasket {
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      .content {
+        display: flex;
+        flex-direction: row;
+        padding: 10px 5px;
+        text-decoration: none;
+        background-color: $light-gray;
+        margin: 5px 0;
+        border-radius: 5px;
+        .image-holder {
+          width: 100px;
+          img {
+            width: 100%;
+            border-radius: 5px;
+            box-shadow: $dropshadow;
+          }
+        }
+        .info {
+          margin: 0 10px;
+          text-align: left;
+          display: flex;
+          flex-direction: column;
+          .remove-button {
+            background-color: rgba(255, 255, 255, 0);
+            border: none;
+            padding: 10px 0 0 0;
+            margin: 0;
+            text-align: left;
+            text-decoration: underline;
+          }
+          p,
+          h3 {
+            margin: 0;
+            padding-bottom: 5px;
+          }
+          .amount-control {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            p {
+              padding: 0 20px;
+              text-decoration: none;
+            }
+            button {
+              padding: 10px 15px;
+              text-decoration: none;
+              &:disabled {
+                opacity: 0.5;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // SEARCH PAGE
+    .search-page {
+      .seperators {
+        text-align: left;
+        border-bottom: solid 1px rgb(185, 185, 185);
+        padding: 5px 0;
+      }
+      h2 {
+        font-weight: normal;
+        strong {
+          font-weight: bold;
+          font-style: italic;
+        }
+      }
+      .search-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        margin: 40px 0;
+        gap: 40px 20px;
+        .bog-element {
+          display: flex;
+          a {
+            text-decoration: none;
+          }
+          .background {
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            flex-direction: column;
+            border-radius: 5px;
+            justify-content: space-between;
+            padding: 5px;
+            box-shadow: $dropshadow;
+            width: 100%;
+            padding: 0 20px;
+            .content {
+              display: flex;
+              flex-direction: column;
+              padding: 0;
+              justify-content: space-between;
+              margin-top: -30px;
+              height: 100%;
+              width: 100%;
+              .info {
+                display: flex;
+                flex-direction: column;
+                color: black;
+                text-align: left;
+                padding: 20px 0;
+                .titel {
+                  margin: 0;
+                  font-size: 16px;
+                  text-decoration: underline;
+                }
+                .forfatter {
+                  margin: 0;
+                  font-size: 12px;
+                }
+                .pris {
+                  margin: 0;
+                  background-color: $price-color;
+                  width: fit-content;
+                  padding: 5px;
+                  margin-top: 10px;
+                  color: white;
+                  border-radius: 5px;
+                  font-weight: bold;
+                }
+              }
+              .image-holder {
+                height: 200px;
+                width: 100%;
+                background-color: $light-gray;
+                padding: 10px;
+                box-sizing: border-box;
+                border-radius: 5px;
+                box-shadow: $dropshadow;
+                .forsidebillede {
+                  height: 100%;
+                  border-radius: 5px;
+                  object-fit: contain;
+                  object-position: top;
+                  box-shadow: $dropshadow;
+                }
+              }
+            }
+            button {
+              margin-bottom: 20px;
+            }
+          }
+        }
+      }
+      .books {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        margin: 40px 0;
+        gap: 40px 20px;
+        .bog-element {
+          display: flex;
+          a {
+            text-decoration: none;
+          }
+          .background {
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            flex-direction: column;
+            border-radius: 5px;
+            justify-content: space-between;
+            padding: 5px;
+            box-shadow: $dropshadow;
+            width: 100%;
+            padding: 0 20px;
+            .content {
+              display: flex;
+              flex-direction: column;
+              padding: 0;
+              justify-content: space-between;
+              margin-top: -30px;
+              height: 100%;
+              width: 100%;
+              .info {
+                display: flex;
+                flex-direction: column;
+                color: black;
+                text-align: left;
+                padding: 20px 0;
+                .titel {
+                  margin: 0;
+                  font-size: 16px;
+                  text-decoration: underline;
+                }
+                .forfatter {
+                  margin: 0;
+                  font-size: 12px;
+                }
+                .pris {
+                  margin: 0;
+                  background-color: $price-color;
+                  width: fit-content;
+                  padding: 5px;
+                  margin-top: 10px;
+                  color: white;
+                  border-radius: 5px;
+                  font-weight: bold;
+                }
+              }
+              .image-holder {
+                height: 200px;
+                width: 100%;
+                background-color: $light-gray;
+                padding: 10px;
+                box-sizing: border-box;
+                border-radius: 5px;
+                box-shadow: $dropshadow;
+                .forsidebillede {
+                  height: 100%;
+                  border-radius: 5px;
+                  object-fit: contain;
+                  object-position: top;
+                  box-shadow: $dropshadow;
+                }
+              }
+            }
+            button {
+              margin-bottom: 20px;
             }
           }
         }

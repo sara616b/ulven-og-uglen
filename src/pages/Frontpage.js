@@ -3,7 +3,12 @@ import Input from "../components/Input";
 import BookDisplay from "../components/BookDisplay";
 import parse from "html-react-parser";
 
-export default function Frontpage({ frontpage, books, social_medie }) {
+export default function Frontpage({
+  frontpage,
+  books,
+  social_medie,
+  addToBasket,
+}) {
   return frontpage !== null ? (
     <section className="frontpage">
       <section className="splash">
@@ -61,7 +66,7 @@ export default function Frontpage({ frontpage, books, social_medie }) {
                       return null;
                     });
                   })
-                : "loading"}
+                : "Bøger indlæses..."}
             </div>
             <Link to="/webshop">
               <button className="cta-contrast">Gå til webshop</button>
@@ -81,13 +86,14 @@ export default function Frontpage({ frontpage, books, social_medie }) {
                         <BookDisplay
                           key={bog.id + index}
                           book={bog}
+                          addToBasket={addToBasket}
                         ></BookDisplay>
                       );
                     }
                     return null;
                   });
                 })
-              : "loading"}
+              : "Bøger indlæses..."}
           </div>
         </div>
       </section>
@@ -103,13 +109,14 @@ export default function Frontpage({ frontpage, books, social_medie }) {
                         <BookDisplay
                           key={bog.id + index}
                           book={bog}
+                          addToBasket={addToBasket}
                         ></BookDisplay>
                       );
                     }
                     return null;
                   });
                 })
-              : "loading"}
+              : "Bøger indlæses..."}
           </section>
           <section className="text">
             <h2>{frontpage.tekst_om_boger}</h2>
@@ -192,6 +199,6 @@ export default function Frontpage({ frontpage, books, social_medie }) {
       </section>
     </section>
   ) : (
-    "loading"
+    "Bøger indlæses..."
   );
 }
