@@ -12,6 +12,7 @@ import AboutSubPage from "./pages/AboutSubPage";
 import BookDetails from "./pages/BookDetails";
 import BlogDetails from "./pages/BlogDetails";
 import Search from "./pages/Search";
+import Order from "./pages/Order";
 
 function App() {
   const [siteData, setSiteData] = useState({
@@ -225,6 +226,20 @@ function App() {
                 />
               )}
             />
+
+            {/* Order */}
+            <Route
+              path="/bestil"
+              exact
+              render={() => (
+                <Order
+                  siteData={siteData}
+                  removeFromBasket={removeFromBasket}
+                  updateAmountInBasket={updateAmountInBasket}
+                  clearBasket={clearBasket}
+                />
+              )}
+            />
             {/* Search results */}
             <Route
               path={`/search`}
@@ -234,7 +249,7 @@ function App() {
             />
           </Switch>
         </main>
-        <Footer></Footer>
+        <Footer siteData={siteData}></Footer>
       </div>
     </Router>
   );

@@ -22,6 +22,7 @@ export default function Basket({
         links={[
           { link: "/", text: "Forside" },
           { link: "/basket", text: "Kurv" },
+          { link: "/bestil", text: "Betaling" },
         ]}
       />
       {siteData.basketContent.length !== 0 ? (
@@ -42,6 +43,9 @@ export default function Basket({
           <div>
             <p>I alt: {calculatePrice()},- kr.</p>
           </div>
+          <Link to="/bestil">
+            <button className="cta-contrast">Gå til betaling</button>
+          </Link>
         </div>
       ) : (
         <div className="empty-basket">

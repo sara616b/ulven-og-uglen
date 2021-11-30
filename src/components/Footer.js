@@ -1,4 +1,6 @@
-export default function Footer() {
+import parse from "html-react-parser";
+
+export default function Footer({ siteData }) {
   return (
     <footer>
       <div>
@@ -21,6 +23,21 @@ export default function Footer() {
         </div>
       </div>
       <div>
+        <div className="some">
+          {siteData.social_medie !== undefined
+            ? siteData.social_medie.map((some) => {
+                return (
+                  <a
+                    key={some.navn}
+                    className="social-media-icon"
+                    href={some.link}
+                  >
+                    {parse(some.svg_ikon)}
+                  </a>
+                );
+              })
+            : null}
+        </div>
         <a href="https://www.ulvenoguglen.dk/handelsbetingelser/">
           Handelsbetingelser
         </a>
