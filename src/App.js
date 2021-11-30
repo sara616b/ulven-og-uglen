@@ -35,7 +35,7 @@ function App() {
     ];
     podsToFetch.map((podName) => {
       fetch(
-        `http://sarahfrederiksen.dk/kea/ulvenoguglen/wordpress/wp-json/wp/v2/${podName}?per_page=100`
+        `https://sarahfrederiksen.dk/kea/ulvenoguglen/wordpress/wp-json/wp/v2/${podName}?per_page=100`
       )
         .then((res) => res.json())
         .then((res) => {
