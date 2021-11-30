@@ -49,8 +49,8 @@ export default function BookDetails({ siteData, addToBasket }) {
                   {bog.pris !== undefined ? bog.pris : ""},- kr
                 </p>
                 <button
-                  onClick={() => {
-                    addToBasket(bog);
+                  onClick={(e) => {
+                    addToBasket(e, bog);
                   }}
                   className="cta-contrast"
                 >

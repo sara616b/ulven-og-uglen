@@ -2,8 +2,9 @@ import { useState } from "react";
 import BookDisplayShop from "../components/BookDisplayShop";
 import Breadcrumbs from "../components/Breadcrumbs";
 
-export default function Webshop({ bog, addToBasket, siteData }) {
+export default function Webshop({ bog, addToBasket }) {
   const [sortBy, setSortBy] = useState("udgivelsesdato");
+  const [sortDirection, setSortDirection] = useState(true);
 
   return (
     <div className="webshop">
@@ -29,6 +30,14 @@ export default function Webshop({ bog, addToBasket, siteData }) {
               );
             })}
           </select>
+          <p
+            onClick={() => {
+              setSortDirection(!sortDirection);
+            }}
+            className="sort-direction"
+          >
+            ⇅
+          </p>
         </div>
         <div className="books">
           {bog.length > 0 ? (
@@ -36,7 +45,13 @@ export default function Webshop({ bog, addToBasket, siteData }) {
               .concat(bog)
               .sort((a, b) => {
                 if (sortBy === "pris") {
-                  return a[sortBy] - b[sortBy];
+                  if (sortDirection) {
+                    return a[sortBy] - b[sortBy];
+                  }
+                  return b[sortBy] - a[sortBy];
+                }
+                if (sortDirection) {
+                  return b[sortBy] > a[sortBy] ? 1 : -1;
                 }
                 return a[sortBy] > b[sortBy] ? 1 : -1;
               })

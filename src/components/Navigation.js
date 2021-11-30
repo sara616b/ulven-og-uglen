@@ -5,7 +5,6 @@ import Input from "./Input";
 export default function Navigation({ props, setSiteData, loadSearch }) {
   const whenToChangeBurgerMenu = 750;
   const aboutNav = useRef();
-  const searchNow = useRef();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [urlDisplayed, setUrlDisplay] = useState();
   const [subNavOpen, setSubNavOpen] = useState({
@@ -205,6 +204,11 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
                   type="text"
                   placeholder="Søg..."
                   value={props.searchString}
+                  onkeypress={(e) => {
+                    if (e.code === "Enter") {
+                      window.location.assign(`/search?s=${props.searchString}`);
+                    }
+                  }}
                   onChange={(e) => {
                     setSiteData((prev) => {
                       props.searchString = e.target.value;

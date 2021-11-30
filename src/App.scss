@@ -47,6 +47,12 @@ body {
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 14px;
+    border: $cta-color 2px solid;
+    &.adding {
+      color: $cta-color !important;
+      background-color: black !important;
+      border: $cta-color 2px solid;
+    }
   }
 
   header {
@@ -286,9 +292,10 @@ body {
       a {
         color: black;
         padding: 0 5px;
+        text-decoration: none;
         &:after {
           content: ">";
-          padding-left: 5px;
+          padding-left: 10px;
           color: black;
         }
         &:last-of-type:after {
@@ -622,6 +629,14 @@ body {
             text-transform: capitalize;
           }
         }
+        .sort-direction {
+          font-size: 20px;
+          padding-left: 10px;
+          &:hover {
+            cursor: pointer;
+            opacity: 0.8;
+          }
+        }
       }
     }
     // BOOK DETAILS
@@ -924,16 +939,158 @@ body {
     }
   }
 
+  // ORDER / PAYMENT
+  .order {
+    text-align: left;
+    .overview {
+      div div {
+        display: flex;
+        flex-direction: row;
+        div {
+          flex-direction: column;
+          p {
+            padding: 0;
+            margin: 0;
+          }
+        }
+      }
+      img {
+        width: 30px;
+      }
+    }
+    section {
+      background-color: rgb(243, 243, 243);
+      border-radius: 5px;
+      padding: 10px 20px;
+      margin: 10px;
+    }
+    .payment {
+      form {
+        display: flex;
+        flex-direction: column;
+        // inputs
+        .methode {
+          display: flex;
+        }
+        label {
+          display: grid;
+          gap: 5px;
+        }
+        input[type="text"],
+        input[type="number"] {
+          padding: 10px;
+          width: 100%;
+          height: 40px;
+          border: 2px solid #d7b191;
+          border-radius: 5px;
+          max-width: 300px;
+        }
+        input[name="cardNumber"] {
+          letter-spacing: 1px;
+        }
+        input[name="cvv"] {
+          width: 150px;
+          letter-spacing: 1px;
+        }
+        input[name="expirationDate"] {
+          width: 150px;
+        }
+
+        // errors
+        input[type="text"]:not(:placeholder-shown):valid,
+        input[type="number"]:not(:placeholder-shown):valid {
+          border-color: greenyellow;
+          background-position: right 16px center;
+          background-size: 20px 20px;
+          background-repeat: no-repeat;
+          background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><g fill='none' fill-rule='evenodd'><circle cx='10' cy='10' r='10' fill='greenyellow'/><path stroke='%23ffffff' stroke-width='2' stroke-miterlimit='10' fill='none'  d='M 16.5 5  l -8 10  l -5 -6'></path></g></svg>");
+        }
+        input[type="text"].interacted:invalid,
+        input[type="number"].interacted:invalid {
+          border-color: red;
+          background-position: right 16px center;
+          background-size: 20px 20px;
+          background-repeat: no-repeat;
+          background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><g fill='none' fill-rule='evenodd'><circle cx='10' cy='10' r='10' fill='red'/><path fill='%23FFFFFF' d='M9,6.84848485 C9,5.93939394 9.4,5.33333333 10,5.33333333 C10.6,5.33333333 11,5.93939394 11,6.84848485 L11,10.4848485 C11,11.3939394 10.6,12 10,12 C9.4,12 9,11.3939394 9,10.4848485 L9,6.84848485 Z M10,14.6666667 C9.41666667,14.6666667 9,14.25 9,13.6666667 C9,13.0833333 9.41666667,12.6666667 10,12.6666667 C10.5833333,12.6666667 11,13.0833333 11,13.6666667 C11,14.25 10.5833333,14.6666667 10,14.6666667 L10,14.6666667 Z'/></g></svg>");
+        }
+        input[type="text"]:invalid + .error,
+        input[type="number"]:invalid + .error {
+          max-height: 100%;
+        }
+        .error {
+          color: red;
+          max-height: 0;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+
   // FOOTER
   footer {
     background-image: $nav-and-footer;
-    height: 100px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    color: white;
+    justify-content: center;
+    div {
+      display: flex;
+      flex-direction: row;
+      margin: 0 auto;
+    }
+    div div:first-of-type {
+      text-align: right;
+    }
+    div div {
+      max-width: $max-width / 2;
+      text-align: left;
+      flex-grow: 1;
+      flex-basis: 200px;
+      padding: 20px;
+      p {
+        line-height: 150%;
+        width: 100%;
+      }
+    }
+    div:last-of-type {
+      flex-direction: column;
+      padding-bottom: 20px;
+      .some {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        max-height: 30px;
+        svg {
+          width: 25px;
+          fill: white;
+          stroke: white;
+          line {
+            fill: white;
+            stroke: white;
+          }
+          path {
+            stroke: white;
+            stroke-width: 2px;
+          }
+        }
+      }
+      a {
+        color: white;
+        font-size: 12px;
+        &:last-of-type {
+          padding-bottom: 30px;
+        }
+      }
+    }
   }
 
   // BOOK DISPLAYS
   .frontpage .book-cta div.bog-element,
   .newest-books .bog-element {
     display: flex;
+    justify-content: stretch;
+    flex-direction: row;
     .background {
       background-color: white;
       display: flex;

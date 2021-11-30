@@ -12,6 +12,7 @@ import AboutSubPage from "./pages/AboutSubPage";
 import BookDetails from "./pages/BookDetails";
 import BlogDetails from "./pages/BlogDetails";
 import Search from "./pages/Search";
+import Order from "./pages/Order";
 
 function App() {
   const [siteData, setSiteData] = useState({
@@ -47,8 +48,6 @@ function App() {
     });
   }, []);
 
-  console.log(siteData);
-
   function findPageInfo(page) {
     let info;
     siteData.global_side.map((side) => {
@@ -67,7 +66,14 @@ function App() {
     });
     window.location.assign(`/search?s=${siteData.searchString}`);
   }
-  function addToBasket(bog) {
+  function addToBasket(e, bog) {
+    console.log(e);
+    e.target.classList.add("adding");
+    e.target.innerText = "Lagt i kurv 🗸";
+    setTimeout(() => {
+      e.target.classList.remove("adding");
+      e.target.innerText = "Læg i kurv";
+    }, 1000);
     // copy basket, if it isn't empty
     let newBasket = [];
     if (siteData.basketContent !== []) {
@@ -220,6 +226,20 @@ function App() {
                 />
               )}
             />
+
+            {/* Order */}
+            <Route
+              path="/bestil"
+              exact
+              render={() => (
+                <Order
+                  siteData={siteData}
+                  removeFromBasket={removeFromBasket}
+                  updateAmountInBasket={updateAmountInBasket}
+                  clearBasket={clearBasket}
+                />
+              )}
+            />
             {/* Search results */}
             <Route
               path={`/search`}
@@ -229,7 +249,7 @@ function App() {
             />
           </Switch>
         </main>
-        <Footer></Footer>
+        <Footer siteData={siteData}></Footer>
       </div>
     </Router>
   );
