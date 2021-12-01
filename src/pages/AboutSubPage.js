@@ -1,4 +1,5 @@
 import parse from "html-react-parser";
+import { Link } from "react-router-dom";
 
 export default function AboutSubPage({ props, siteData }) {
   console.log(siteData.forfatter);
@@ -12,16 +13,20 @@ export default function AboutSubPage({ props, siteData }) {
       )}
       {window.location.href.includes("vores-forfattere") ? (
         <div>
-          {/* {parse(props[1].content.rendered)}  */}
+          {parse(props[1].content.rendered)} 
         <div>{siteData.forfatter.map((forfatter) => {
-          return ( <div>
-            <img
-              className="forsidebillede"
-              src={forfatter.portraetbillede.guid}
-              alt=""
-            />
-            <h3>{forfatter.navn}</h3>
-          </div> );
+          return ( 
+          <div>
+            <Link to={`/Forfatter?navn=${forfatter.slug}`}>
+              <img
+                className="forsidebillede"
+                src={forfatter.portraetbillede.guid}
+                alt=""
+              />
+              <h3>{forfatter.navn}</h3>
+            </Link>
+          </div>
+          );
         })}</div> 
         </div>
       ) : (

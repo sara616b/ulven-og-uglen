@@ -13,6 +13,7 @@ import BookDetails from "./pages/BookDetails";
 import BlogDetails from "./pages/BlogDetails";
 import Search from "./pages/Search";
 import Order from "./pages/Order";
+import Forfatter from "./pages/Forfatter";
 
 function App() {
   const [siteData, setSiteData] = useState({
@@ -215,6 +216,14 @@ function App() {
                   );
                 })
               : null}
+
+                {/* Forfatter */}
+                <Route
+                  path="/forfatter"
+                  exact
+                  render={() => <Forfatter siteData={siteData} />}
+                />
+
             {/* Basket */}
             <Route
               path="/basket"
