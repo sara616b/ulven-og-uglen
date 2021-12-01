@@ -14,9 +14,9 @@ export default function BlogDetails({ siteData }) {
         return null;
       });
     }, [siteData.blogindlg]);
-    console.log(blog);
+    //console.log(blog);
 
-    console.log(siteData)
+    //console.log(siteData)
 
   return (
     <div className="max-width">

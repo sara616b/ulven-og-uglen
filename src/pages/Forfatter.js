@@ -15,11 +15,11 @@ export default function Forfatter({ siteData }) {
       });
     }, [siteData.forfatter]);
 
-    console.log(forfatter)
+    //console.log(forfatter)
 
     return (
         <div className="max-width">
-            {forfatter !== {} ? (
+            {(forfatter !== {} && forfatter.portraetbillede !== undefined) ? (
             <div>
                 <div>
                     <h2>{forfatter.navn}</h2>
@@ -27,7 +27,7 @@ export default function Forfatter({ siteData }) {
                 <div>
                     <img
                         className="forsidebillede"
-                        //src={forfatter.portraetbillede.guid}
+                        src={forfatter.portraetbillede.guid}
                         alt={`billede af ${forfatter.navn}`}
                     />
                     <p>{forfatter.bio}</p>
