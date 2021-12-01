@@ -22,6 +22,7 @@ function App() {
     bog: [],
     searchString: "",
     blogindlg: [],
+    forfatter: [],
   });
 
   useEffect(() => {
@@ -207,7 +208,7 @@ function App() {
                       path={`/about/${underside.slug}`}
                       exact
                       render={() => (
-                        <AboutSubPage props={siteData.om_forlag_underside} />
+                        <AboutSubPage props={siteData.om_forlag_underside} siteData={siteData} />
                       )}
                     />
                   );

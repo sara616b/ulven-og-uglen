@@ -1,7 +1,7 @@
 import parse from "html-react-parser";
 
-export default function AboutSubPage({ props }) {
-  console.log(props[0].content.rendered);
+export default function AboutSubPage({ props, siteData }) {
+  console.log(siteData.forfatter);
 
   return (
     <div className="aboutS">
@@ -11,7 +11,19 @@ export default function AboutSubPage({ props }) {
         ""
       )}
       {window.location.href.includes("vores-forfattere") ? (
-        <div>{parse(props[1].content.rendered)}</div>
+        <div>
+          {/* {parse(props[1].content.rendered)}  */}
+        <div>{siteData.forfatter.map((forfatter) => {
+          return ( <div>
+            <img
+              className="forsidebillede"
+              src={forfatter.portraetbillede.guid}
+              alt=""
+            />
+            <h3>{forfatter.navn}</h3>
+          </div> );
+        })}</div> 
+        </div>
       ) : (
         ""
       )}
