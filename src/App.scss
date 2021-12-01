@@ -1252,4 +1252,41 @@ body {
     margin: 100px 200px 50px 200px;
     text-align: start;
   }
+
+  .H1textForfatter {
+    div {
+      margin: 0 40px 40px 40px;
+    }
+    .vForfattereP {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      margin: 0 40px 40px 40px;
+      gap: 40px;
+      .vForfattereC {
+        align-self: center;
+        a {
+          color: $sub-nav-text;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  // Forfatter details
+  .ForfatterInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    p {
+      margin: 0px 80px;
+      text-align: start;
+    }
+  }
+
+  .ForfatterWidth {
+    margin: 0 100px 40px 100px;
+    h2 {
+      margin: 40px 0 40px 0;
+    }
+  }
 }

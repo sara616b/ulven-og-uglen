@@ -12,11 +12,11 @@ export default function AboutSubPage({ props, siteData }) {
         ""
       )}
       {window.location.href.includes("vores-forfattere") ? (
-        <div>
+        <div className="H1textForfatter">
           {parse(props[1].content.rendered)} 
-        <div>{siteData.forfatter.map((forfatter) => {
+        <div className="vForfattereP">{siteData.forfatter.map((forfatter) => {
           return ( 
-          <div>
+          <div className="vForfattereC">
             <Link to={`/Forfatter?navn=${forfatter.slug}`}>
               <img
                 className="forsidebillede"

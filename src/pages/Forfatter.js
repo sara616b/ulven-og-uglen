@@ -20,11 +20,11 @@ export default function Forfatter({ siteData }) {
     return (
         <div className="max-width">
             {(forfatter !== {} && forfatter.portraetbillede !== undefined) ? (
-            <div>
+            <div className="ForfatterWidth">
                 <div>
                     <h2>{forfatter.navn}</h2>
                 </div>
-                <div>
+                <div className="ForfatterInfo">
                     <img
                         className="forsidebillede"
                         src={forfatter.portraetbillede.guid}
