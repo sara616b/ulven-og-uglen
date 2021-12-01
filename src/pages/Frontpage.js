@@ -132,32 +132,46 @@ export default function Frontpage({
         </div>
       </section>
       <section className="blog-cta">
-        <div className="max-width">
-          <section>
-            <h2>{frontpage.tekst_om_blog}</h2>
-            <Link to="/blog">
-              <button className="cta-contrast">Gå til bloggen</button>
-            </Link>
-          </section>
-          <section className="book-grid">
-            {blog !== null
-              ? blog.map((blog) => {
-                  const booksToShow = frontpage.fremhaevede_blogindlaeg.split(",");
-                  return booksToShow.map((slug, index) => {
-                    if (slug === blog.slug && index < 4) {
-                      return (
-                        <BlogDisplay
-                          key={blog.id} 
-                          blog={blog}
-                        ></BlogDisplay>
-                      );
-                    }
-                    return null;
-                  });
-                })
-              : "Bøger indlæses..."}
-          </section>
-        </div>
+            <section className="text">
+              <h2>{frontpage.tekst_om_blog}</h2>
+              <Link to="/blog">
+                <button className="cta-contrast">Gå til bloggen</button>
+              </Link>
+            </section>
+            <div className="max-width">
+            <section className="blog-grid">
+              {blog !== null
+                ? blog.map((blog) => {
+                    const booksToShow = frontpage.fremhaevede_blogindlaeg.split(",");
+                    return booksToShow.map((slug, index) => {
+                      if (slug === blog.slug && index < 4) {
+                        return (
+                          <div className="blog-element">
+                            <div className="blog-background">
+                              <Link to={`/blog/details?titel=${blog.slug}`}>
+                                <div className="blog-content">
+                                  <img 
+                                  className="blogBillede" 
+                                  src={blog.topbillede.guid} 
+                                  alt="image" />
+                                </div>  
+                              </Link>
+                              <div className="blog-info">
+                                <p>{blog.dato}</p>
+                                  <Link to={`/blog/details?titel=${blog.slug}`}>
+                                    <h2>{blog.title.rendered}</h2>
+                                  </Link>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      }
+                      return null;
+                    });
+                  })
+                : "Blogs indlæses..."}
+            </section>
+          </div>
       </section>
       <section className="newsletter-cta">
         <div className="max-width">
