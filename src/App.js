@@ -154,6 +154,7 @@ function App() {
                       : null
                   }
                   books={siteData.bog !== undefined ? siteData.bog : null}
+                  blog = {siteData.blogindlg !== undefined ? siteData.blogindlg : null}
                   social_medie={
                     siteData.social_medie !== undefined
                       ? siteData.social_medie

@@ -2,13 +2,18 @@ import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import BookDisplay from "../components/BookDisplay";
 import parse from "html-react-parser";
+import BlogDisplay from "../components/BlogDisplay";
 
 export default function Frontpage({
   frontpage,
   books,
   social_medie,
   addToBasket,
+  blog,
 }) {
+
+  console.log(frontpage)
+
   return frontpage !== null ? (
     <section className="frontpage">
       <section className="splash">
@@ -134,23 +139,23 @@ export default function Frontpage({
               <button className="cta-contrast">Gå til bloggen</button>
             </Link>
           </section>
-          <section>
-            {/* {books !== null
-            ? books.map((bog) => {
-                const booksToShow = frontpage[0].ids_pa_nyeste_boger.split(",");
-                return booksToShow.map((isbn) => {
-                  if (isbn === bog.isbn) {
-                    return (
-                      <img
-                        className="bookdisplay"
-                        src={bog.forsidebillede.guid}
-                      />
-                    );
-                  }
-                });
-                return null;
-              })
-            : "loading"} */}
+          <section className="book-grid">
+            {blog !== null
+              ? blog.map((blog) => {
+                  const booksToShow = frontpage.fremhaevede_blogindlaeg.split(",");
+                  return booksToShow.map((slug, index) => {
+                    if (slug === blog.slug && index < 4) {
+                      return (
+                        <BlogDisplay
+                          key={blog.id} 
+                          blog={blog}
+                        ></BlogDisplay>
+                      );
+                    }
+                    return null;
+                  });
+                })
+              : "Bøger indlæses..."}
           </section>
         </div>
       </section>
