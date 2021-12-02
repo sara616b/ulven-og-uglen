@@ -60,7 +60,7 @@ export default function BookDetails({ siteData, addToBasket }) {
                   <p className="format">
                     Format: {bog.format !== undefined ? bog.format : ""}
                   </p>
-                  {bog.serie !== undefined && (
+                  {bog.serie !== undefined && bog.serie !== "" && (
                     <p className="serie">Serie: {bog.serie}</p>
                   )}
                   <p className="sider">

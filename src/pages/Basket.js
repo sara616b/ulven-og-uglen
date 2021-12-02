@@ -17,7 +17,7 @@ export default function Basket({
     return totalPrice;
   }
   return (
-    <div className="max-width basket">
+    <div className="max-width">
       <Breadcrumbs
         links={[
           { link: "/", text: "Forside" },
@@ -26,8 +26,8 @@ export default function Basket({
         ]}
       />
       {siteData.basketContent.length !== 0 ? (
-        <div>
-          <h2>Din kurv:</h2>
+        <div className="basket">
+          <h2>Din kurv</h2>
           <div>
             {siteData.basketContent.map((bog) => {
               return (
@@ -48,7 +48,7 @@ export default function Basket({
           </Link>
         </div>
       ) : (
-        <div className="empty-basket">
+        <div className="empty-basket basket">
           <p>Din kurv er tom. Besøg webshoppen og tilføj bøger her:</p>
           <Link to="/webshop">
             <button className="cta-contrast">Gå til webshop</button>

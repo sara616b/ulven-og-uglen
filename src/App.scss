@@ -41,17 +41,20 @@ body {
 
   .cta-contrast {
     background-color: $cta-color !important;
+    // background: linear-gradient(#fff8d4 0%, #f9ea9d 20%, #f9ea9d 80%, #d6c984 99%);
     color: black !important;
-    border: none;
-    box-shadow: $dropshadow;
+    box-shadow: $dropshadow, inset #fff 1px 4px 4px,
+      inset #fab92e80 -1px -4px 4px;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 14px;
-    border: $cta-color 2px solid;
+    border: $cta-color 2px solid !important;
     &.adding {
       color: $cta-color !important;
       background-color: black !important;
       border: $cta-color 2px solid;
+      box-shadow: $dropshadow, inset rgba(68, 68, 68, 0.315) 1px 4px 4px,
+        inset #fff6e380 -1px -4px 4px;
     }
   }
 
@@ -289,6 +292,8 @@ body {
     .breadcrumbs {
       display: flex;
       flex-direction: row;
+      background-color: white;
+      padding: 10px 0;
       a {
         color: black;
         padding: 0 5px;
@@ -704,7 +709,7 @@ body {
         .beskrivelse {
           background-color: $light-gray;
           border-radius: 5px;
-          padding: 20px 5px;
+          padding: 20px;
           margin-bottom: 20px;
         }
         .upper-holder {
@@ -723,60 +728,78 @@ body {
     // BASKET
     .basket {
       text-align: left;
+      background-color: $light-gray;
+      border-radius: 5px;
+      margin: 10px auto;
       padding: 20px;
-    }
-    .bookdisplaybasket {
-      a {
-        text-decoration: none;
-        color: black;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      > * {
+        max-width: 300px;
+        width: 100%;
       }
-      .content {
-        display: flex;
-        flex-direction: row;
-        padding: 10px 5px;
-        text-decoration: none;
-        background-color: $light-gray;
-        margin: 5px 0;
-        border-radius: 5px;
-        .image-holder {
-          width: 100px;
-          img {
-            width: 100%;
-            border-radius: 5px;
-            box-shadow: $dropshadow;
-          }
+      h2 {
+        margin: 0;
+      }
+      &.empty-basket {
+        p {
+          margin: 0 0 20px 0;
         }
-        .info {
-          margin: 0 10px;
-          text-align: left;
+      }
+      .bookdisplaybasket {
+        a {
+          text-decoration: none;
+          color: black;
+        }
+        .content {
           display: flex;
-          flex-direction: column;
-          .remove-button {
-            background-color: rgba(255, 255, 255, 0);
-            border: none;
-            padding: 10px 0 0 0;
-            margin: 0;
-            text-align: left;
-            text-decoration: underline;
-          }
-          p,
-          h3 {
-            margin: 0;
-            padding-bottom: 5px;
-          }
-          .amount-control {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            p {
-              padding: 0 20px;
-              text-decoration: none;
+          flex-direction: row;
+          padding: 10px;
+          text-decoration: none;
+          background-color: white;
+          margin: 5px 0;
+          border-radius: 5px;
+          .image-holder {
+            width: 100px;
+            img {
+              width: 100%;
+              border-radius: 5px;
+              box-shadow: $dropshadow;
             }
-            button {
-              padding: 10px 15px;
-              text-decoration: none;
-              &:disabled {
-                opacity: 0.5;
+          }
+          .info {
+            margin: 0 10px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            .remove-button {
+              background-color: rgba(255, 255, 255, 0);
+              border: none;
+              padding: 10px 0 0 0;
+              margin: 0;
+              text-align: left;
+              text-decoration: underline;
+            }
+            p,
+            h3 {
+              margin: 0;
+              padding-bottom: 5px;
+            }
+            .amount-control {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              p {
+                padding: 0 20px;
+                text-decoration: none;
+              }
+              button {
+                padding: 10px 15px;
+                text-decoration: none;
+                &:disabled {
+                  opacity: 0.5;
+                }
               }
             }
           }
@@ -959,27 +982,72 @@ body {
   .order {
     text-align: left;
     .overview {
-      div div {
-        display: flex;
-        flex-direction: row;
+      div {
         div {
-          flex-direction: column;
-          p {
-            padding: 0;
+          display: flex;
+          flex-direction: row;
+          padding: 10px;
+          background-color: white;
+          border-radius: 5px;
+          margin: 10px 0;
+          align-items: center;
+          box-shadow: $dropshadow;
+          div {
+            flex-direction: column;
+            padding: 0 10px;
             margin: 0;
+            border-bottom: none;
+            align-items: flex-start;
+            box-shadow: none;
+            p {
+              padding: 0;
+              margin: 0;
+            }
           }
         }
       }
       img {
         width: 30px;
+        height: 100%;
       }
     }
     section {
       background-color: rgb(243, 243, 243);
       border-radius: 5px;
-      padding: 10px 20px;
-      margin: 10px;
+      padding: 20px 20px;
+      margin: 10px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      h2,
+      p {
+        margin: 0;
+      }
+      > * {
+        max-width: 300px;
+        width: 100%;
+      }
     }
+    .thanks {
+      position: fixed;
+      top: 0;
+      height: 100%;
+      width: 100vw;
+      left: 0;
+      background-color: rgba(128, 128, 128, 0.589);
+      overflow: hidden;
+      section {
+        width: 300px;
+        top: 20vh;
+        left: 50%;
+        position: fixed;
+        transform: translateX(-50%);
+        p {
+          padding: 20px 0;
+        }
+      }
+    }
+    .delivery,
     .payment {
       form {
         display: flex;
@@ -1000,6 +1068,7 @@ body {
           border: 2px solid #d7b191;
           border-radius: 5px;
           max-width: 300px;
+          box-shadow: $dropshadow;
         }
         input[name="cardNumber"] {
           letter-spacing: 1px;

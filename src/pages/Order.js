@@ -2,14 +2,11 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import { useEffect, useState } from "react/cjs/react.development";
 import Input from "../components/Input";
 
-export default function Basket({
-  siteData,
-  removeFromBasket,
-  updateAmountInBasket,
-  clearBasket,
-}) {
+export default function Basket({ siteData }) {
   const [paymentMethode, setPaymentMethode] = useState();
+  const [deliveryMethode, setDeliveryMethode] = useState();
   const [inputEl, setInputEl] = useState();
+  const [orderPlaced, setOrderPlaced] = useState(false);
 
   useEffect(() => {
     if (inputEl !== undefined) {
@@ -29,45 +26,42 @@ export default function Basket({
 
   function paymentSwitch(methode) {
     switch (methode) {
-      case "VISA":
+      case "VISA/Dankort":
         return (
           <div>
             <form>
               <Input
                 id="cardNumber"
-                label="Card Number"
+                label="Kortnummer"
                 mask="0000-0000-0000-0000"
                 type="text"
                 isRequired="true"
                 pattern="([0-9]{4}[-]){3}([0-9]{4})"
-                error="Please enter a cardnumber that's 16 ciphers long"
+                error="Venligst indtast et kortnummer på 16 cifre"
                 setInputEl={setInputEl}
                 autoFocus={true}
               />
-
               <Input
                 id="nameOnCard"
-                label="Name on card"
+                label="Navn på kort"
                 type="text"
                 isRequired="true"
                 pattern="[a-zA-Z ]+"
-                error="Please enter the name on your card. More than two letters. No numbers."
-                placeholder="Full name on card"
+                error="Venligt indtast navnet på dit kort - mere end to bogstaver og ingen numre."
+                placeholder="Fuldt navn på kort"
                 setInputEl={setInputEl}
               />
-
               <Input
                 id="expirationDate"
-                label="Expiration date"
+                label="Udløbsdato"
                 maskString="MM/YY"
                 mask="00/00"
                 type="text"
                 isRequired="true"
                 pattern="(?:([0][1-9]|([1][0-2]))[/]?)([2-9][0-9])"
                 setInputEl={setInputEl}
-                error="Please type in the expiration date from your card with the pattern MM/YY. The month needs to be between 01-12 and the year after '20"
+                error="Venligst indtast udløbsdatoen på dit kort på formen MM/ÅÅ. Måneden skal være mellem 01-12 og året efter '20."
               />
-
               <Input
                 id="cvv"
                 label="CVV"
@@ -76,25 +70,17 @@ export default function Basket({
                 isRequired="true"
                 setInputEl={setInputEl}
                 pattern="[0-9]{3}"
-                error="Please enter the 3 numbers from the back of your card"
+                error="Venligst indtast de 3 numre fra bagsiden af dit kort."
               />
-
-              <button type="submit" className="cta-contrast">
-                Place order
-              </button>
             </form>
-          </div>
-        );
-      case "DANKORT":
-        return (
-          <div>
-            <h2>Dankort</h2>
           </div>
         );
       case "MobilePay":
         return (
           <div>
-            <h2>MobilePay</h2>
+            <h2>
+              Dette er en prototype: MobilePay-betalings UI er ikke sat op
+            </h2>
           </div>
         );
       default:
@@ -114,7 +100,7 @@ export default function Basket({
       {siteData.basketContent.length !== 0 ? (
         <div className="order">
           <section className="overview">
-            <h2>Din bestilling:</h2>
+            <h2>Din bestilling</h2>
             <div>
               {siteData.basketContent.map((bog) => {
                 return (
@@ -132,13 +118,29 @@ export default function Basket({
               <p>Total: {calculatePrice()},- kr.</p>
             </div>
           </section>
-          <section>
+          <section className="delivery">
             <h2>Leveringsmetode</h2>
+            <form>
+              {["Post Nord", "GLS"].map((methode) => {
+                return (
+                  <label htmlFor={methode} key={methode} className="methode">
+                    <input
+                      type="radio"
+                      value={methode}
+                      id={methode}
+                      name="delivery"
+                      onChange={(e) => setDeliveryMethode(e.target.value)}
+                    />
+                    {methode}
+                  </label>
+                );
+              })}
+            </form>
           </section>
           <section className="payment">
-            <h2>Vælg betalingsmetode:</h2>
+            <h2>Vælg betalingsmetode</h2>
             <form>
-              {["VISA", "DANKORT", "MobilePay"].map((methode) => {
+              {["VISA/Dankort", "MobilePay"].map((methode) => {
                 return (
                   <label htmlFor={methode} key={methode} className="methode">
                     <input
@@ -157,9 +159,35 @@ export default function Basket({
               <div>
                 <h3>Betal med {paymentMethode}</h3>
                 {paymentSwitch(paymentMethode)}
+                <button
+                  type="submit"
+                  className="cta-contrast"
+                  onClick={() => setOrderPlaced(true)}
+                >
+                  Placér ordre på {calculatePrice()},- kr. med levering fra{" "}
+                  {deliveryMethode}
+                </button>
               </div>
             )}
           </section>
+          {orderPlaced && (
+            <div className="thanks">
+              <section>
+                <h2>Tak!</h2>
+                <p>
+                  Dette er en prototype og ingen af orderinformationerne er
+                  sendt videre eller bliver husket.
+                </p>
+                <button
+                  type="submit"
+                  className="cta-contrast"
+                  onClick={() => window.location.assign("/")}
+                >
+                  Tilbage til forsiden
+                </button>
+              </section>
+            </div>
+          )}
         </div>
       ) : (
         window.location.assign("/")

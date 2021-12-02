@@ -4,7 +4,7 @@ import Breadcrumbs from "../components/Breadcrumbs";
 
 export default function Webshop({ bog, addToBasket }) {
   const [sortBy, setSortBy] = useState("udgivelsesdato");
-  const [sortDirection, setSortDirection] = useState(true);
+  const [sortDirection, setSortDirection] = useState(false);
 
   return (
     <div className="webshop">

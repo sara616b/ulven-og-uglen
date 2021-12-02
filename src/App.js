@@ -69,7 +69,7 @@ function App() {
     window.location.assign(`/search?s=${siteData.searchString}`);
   }
   function addToBasket(e, bog) {
-    console.log(e);
+    // Adding and removing class for animation
     e.target.classList.add("adding");
     e.target.innerText = "Lagt i kurv 🗸";
     setTimeout(() => {
@@ -100,7 +100,6 @@ function App() {
       return { ...prev };
     });
   }
-
   function removeFromBasket(bog) {
     const itemToRemove = siteData.basketContent.findIndex(
       (bookToCheck) => bookToCheck.isbn === bog.isbn
@@ -155,7 +154,9 @@ function App() {
                       : null
                   }
                   books={siteData.bog !== undefined ? siteData.bog : null}
-                  blog = {siteData.blogindlg !== undefined ? siteData.blogindlg : null}
+                  blog={
+                    siteData.blogindlg !== undefined ? siteData.blogindlg : null
+                  }
                   social_medie={
                     siteData.social_medie !== undefined
                       ? siteData.social_medie
@@ -210,19 +211,22 @@ function App() {
                       path={`/about/${underside.slug}`}
                       exact
                       render={() => (
-                        <AboutSubPage props={siteData.om_forlag_underside} siteData={siteData} />
+                        <AboutSubPage
+                          props={siteData.om_forlag_underside}
+                          siteData={siteData}
+                        />
                       )}
                     />
                   );
                 })
               : null}
 
-                {/* Forfatter */}
-                <Route
-                  path="/forfatter"
-                  exact
-                  render={() => <Forfatter siteData={siteData} />}
-                />
+            {/* Forfatter */}
+            <Route
+              path="/forfatter"
+              exact
+              render={() => <Forfatter siteData={siteData} />}
+            />
 
             {/* Basket */}
             <Route
