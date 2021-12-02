@@ -4,19 +4,20 @@ export default function About( {about}) {
   console.log(about)
   return (
 
-    <div className="aboutS">
-        {about !== null ? (
+    <div className="max-width">
+      <div className="aboutS">
+          {about !== null ? (
 
-      <div>
+        <div>
+          
+          <h1>{about.title.rendered}</h1>
+
+          <p>{parse(about.text)}</p>
+
+        </div>
         
-        <h1>{about.title.rendered}</h1>
-
-        <p>{parse(about.text)}</p>
-
+        ) : ("Indlæser tekst")}
       </div>
-      
-      ) : ("Indlæser tekst")}
     </div>
-
   );
 }

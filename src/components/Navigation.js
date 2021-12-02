@@ -66,16 +66,169 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
     <div>
       <div
         className={`${
-          !props.navigationIsOpen ? "nav-closed" : "nav-open"
+          !props.navigationIsOpen ? "nav-closed" : ""
         } navigation-line`}
       >
+ 
         <div
           className={`${
             props.navigationIsOpen && windowWidth < whenToChangeBurgerMenu
               ? "content-mobile"
-              : "content-web"
+              : "content-web contentMobil"
           } content`}
         >
+
+          {(props.navigationIsOpen || windowWidth > whenToChangeBurgerMenu) && (
+            <div
+              className={
+                props.navigationIsOpen && windowWidth < whenToChangeBurgerMenu
+                  ? "nav-mobile Buger"
+                  : "nav-web"
+              }
+            >
+              <Link
+                to="/webshop"
+                className={
+                  window.location.href.includes("/webshop") ? "chosen" : ""
+                }
+              >
+                <button>Webshop</button>
+              </Link>
+
+              <Link
+                to="/blog"
+                className={
+                  window.location.href.includes("/blog") ? "chosen" : ""
+                }
+              >
+                <button>Blog</button>
+              </Link>
+
+              <div>
+                <div>
+                  <Link
+                    to="/about"
+                    className={
+                      window.location.href.includes("/about") ? "chosen" : ""
+                    }
+                    ref={aboutNav}
+                  >
+                    <button>Om Forlaget</button>
+                  </Link>
+
+                  {windowWidth < whenToChangeBurgerMenu ? (
+                    <button
+                      onClick={() =>
+                        toggleSubNavigation("omForlag", subNavOpen.omForlag)
+                      }
+                      className={`${
+                        subNavOpen.omForlag ? "open" : "closed"
+                      } nav-sub-arrow`}
+                    >
+                      ^
+                    </button>
+                  ) : null}
+                </div>
+
+                {(windowWidth < whenToChangeBurgerMenu &&
+                  subNavOpen.omForlag) ||
+                (windowWidth > whenToChangeBurgerMenu &&
+                  urlDisplayed !== -1) ? (
+                  <div className="nav-subpages">
+                    <div className="content">
+                      {windowWidth > whenToChangeBurgerMenu ? (
+                        <div
+                          className="nav-arrow"
+                          style={{
+                            left: `${aboutNavLocation}px`,
+                          }}
+                        ></div>
+                      ) : null}
+
+                      {props.om_forlag_underside !== undefined
+                        ? props.om_forlag_underside.map((underside) => {
+                            return (
+                              <Link
+                                key={underside.id}
+                                to={`/about/${underside.slug}`}
+                                className={
+                                  window.location.href.includes(underside.slug)
+                                    ? "chosen"
+                                    : ""
+                                }
+                              >
+                                <button>{underside.title.rendered}</button>
+                              </Link>
+                            );
+                          })
+                        : null}
+
+                    </div>
+                  </div>
+                ) : null}
+
+              </div>
+              <Link to="/basket">
+                <button className="cta-contrast kurv-cta">
+                  Gå til kurv{" "}
+                  {amountInBasket !== 0 ? `(${amountInBasket})` : ""}
+
+                  <svg
+                    id="kurv-svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 100 100"
+                  >
+                    <g id="Shop_kurv_sort" data-name="Shop kurv sort">
+                      <polygon points="31.5 35.5 37.36 35.5 45.5 22.5 40.5 21.5 31.5 35.5" />
+                      <polygon points="70.5 35.5 64.64 35.5 56.5 22.5 61.5 21.5 70.5 35.5" />
+                      <path d="M51,40.34H17.43V52.07h6.75L29.5,76.5H71.62l5.15-24.43h7.68V40.34ZM40.73,72.2H36.5V55.5h4.23Zm8,0H44.5V55.5h4.23Zm8,0H52.5V55.5h4.23Zm8,0H60.5V55.5h4.23Z" />
+                    </g>
+                  </svg>
+
+                </button>
+              </Link>
+
+              <div className="search">
+                <Input
+                  id="search"
+                  label=""
+                  type="text"
+                  placeholder="Søg..."
+                  value={props.searchString}
+                  onkeypress={(e) => {
+                    if (e.code === "Enter") {
+                      window.location.assign(`/search?s=${props.searchString}`);
+                    }
+                  }}
+
+                  onChange={(e) => {
+                    setSiteData((prev) => {
+                      props.searchString = e.target.value;
+                      return { ...prev };
+                    });
+                  }}
+                />
+
+                <Link
+                  className="search-button"
+                  to={`/search?s=${props.searchString}`}
+                >
+
+                  <svg
+                    id="search-svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 100 100"
+                  >
+                    <g id="search-icon" data-name="Søg ikon sort">
+                      <path d="M59.5,54.5a25,25,0,1,0-6.14,5.81L77.61,84.56l6-6Zm-20,3a18,18,0,1,1,18-18A18,18,0,0,1,39.5,57.5Z" />
+                    </g>
+                  </svg>
+
+                </Link>
+              </div>
+            </div>
+          )}
+
           <div className="nav-logo">
             <Link to="/">
               <svg
@@ -97,142 +250,7 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
               <button>Ulven og Uglen</button>
             </Link>
           </div>
-          {(props.navigationIsOpen || windowWidth > whenToChangeBurgerMenu) && (
-            <div
-              className={
-                props.navigationIsOpen && windowWidth < whenToChangeBurgerMenu
-                  ? "nav-mobile Anime"
-                  : "nav-web"
-              }
-            >
-              <Link
-                to="/webshop"
-                className={
-                  window.location.href.includes("/webshop") ? "chosen" : ""
-                }
-              >
-                <button>Webshop</button>
-              </Link>
-              <Link
-                to="/blog"
-                className={
-                  window.location.href.includes("/blog") ? "chosen" : ""
-                }
-              >
-                <button>Blog</button>
-              </Link>
-              <div>
-                <div>
-                  <Link
-                    to="/about"
-                    className={
-                      window.location.href.includes("/about") ? "chosen" : ""
-                    }
-                    ref={aboutNav}
-                  >
-                    <button>Om Forlaget</button>
-                  </Link>
-                  {windowWidth < whenToChangeBurgerMenu ? (
-                    <button
-                      onClick={() =>
-                        toggleSubNavigation("omForlag", subNavOpen.omForlag)
-                      }
-                      className={`${
-                        subNavOpen.omForlag ? "open" : "closed"
-                      } nav-sub-arrow`}
-                    >
-                      ^
-                    </button>
-                  ) : null}
-                </div>
-                {(windowWidth < whenToChangeBurgerMenu &&
-                  subNavOpen.omForlag) ||
-                (windowWidth > whenToChangeBurgerMenu &&
-                  urlDisplayed !== -1) ? (
-                  <div className="nav-subpages">
-                    <div className="content">
-                      {windowWidth > whenToChangeBurgerMenu ? (
-                        <div
-                          className="nav-arrow"
-                          style={{
-                            left: `${aboutNavLocation}px`,
-                          }}
-                        ></div>
-                      ) : null}
-                      {props.om_forlag_underside !== undefined
-                        ? props.om_forlag_underside.map((underside) => {
-                            return (
-                              <Link
-                                key={underside.id}
-                                to={`/about/${underside.slug}`}
-                                className={
-                                  window.location.href.includes(underside.slug)
-                                    ? "chosen"
-                                    : ""
-                                }
-                              >
-                                <button>{underside.title.rendered}</button>
-                              </Link>
-                            );
-                          })
-                        : null}
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-              <Link to="/basket">
-                <button className="cta-contrast kurv-cta">
-                  Gå til kurv{" "}
-                  {amountInBasket !== 0 ? `(${amountInBasket})` : ""}
-                  <svg
-                    id="kurv-svg"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 100 100"
-                  >
-                    <g id="Shop_kurv_sort" data-name="Shop kurv sort">
-                      <polygon points="31.5 35.5 37.36 35.5 45.5 22.5 40.5 21.5 31.5 35.5" />
-                      <polygon points="70.5 35.5 64.64 35.5 56.5 22.5 61.5 21.5 70.5 35.5" />
-                      <path d="M51,40.34H17.43V52.07h6.75L29.5,76.5H71.62l5.15-24.43h7.68V40.34ZM40.73,72.2H36.5V55.5h4.23Zm8,0H44.5V55.5h4.23Zm8,0H52.5V55.5h4.23Zm8,0H60.5V55.5h4.23Z" />
-                    </g>
-                  </svg>
-                </button>
-              </Link>
-              <div className="search">
-                <Input
-                  id="search"
-                  label=""
-                  type="text"
-                  placeholder="Søg..."
-                  value={props.searchString}
-                  onkeypress={(e) => {
-                    if (e.code === "Enter") {
-                      window.location.assign(`/search?s=${props.searchString}`);
-                    }
-                  }}
-                  onChange={(e) => {
-                    setSiteData((prev) => {
-                      props.searchString = e.target.value;
-                      return { ...prev };
-                    });
-                  }}
-                />
-                <Link
-                  className="search-button"
-                  to={`/search?s=${props.searchString}`}
-                >
-                  <svg
-                    id="search-svg"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 100 100"
-                  >
-                    <g id="search-icon" data-name="Søg ikon sort">
-                      <path d="M59.5,54.5a25,25,0,1,0-6.14,5.81L77.61,84.56l6-6Zm-20,3a18,18,0,1,1,18-18A18,18,0,0,1,39.5,57.5Z" />
-                    </g>
-                  </svg>
-                </Link>
-              </div>
-            </div>
-          )}
+
           {windowWidth < whenToChangeBurgerMenu && (
             <button
               onClick={() => toggleNavigation(props.navigationIsOpen)}
@@ -241,6 +259,7 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
               {props.navigationIsOpen ? "X" : "☰"}
             </button>
           )}
+
         </div>
       </div>
     </div>

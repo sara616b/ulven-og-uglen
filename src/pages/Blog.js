@@ -20,7 +20,7 @@ export default function Blog({ props }) {
               })}
             </div>
           ) : (
-            <div>bye</div>
+            <div>Blogindlæg indlæses...</div>
           )}
         </div>
       ) : (

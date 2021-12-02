@@ -4,6 +4,7 @@ import parse from "html-react-parser";
 export default function Header({ props, setSiteData, loadSearch }) {
   return (
     <header>
+
       <div className="some-nav">
         <div className="max-width">
           {props.social_medie !== undefined
@@ -21,11 +22,13 @@ export default function Header({ props, setSiteData, loadSearch }) {
             : null}
         </div>
       </div>
+      
       <Navigation
         props={props}
         setSiteData={setSiteData}
         loadSearch={loadSearch}
       />
+
     </header>
   );
 }

@@ -15,8 +15,6 @@ export default function Forfatter({ siteData }) {
       });
     }, [siteData.forfatter]);
 
-    //console.log(forfatter)
-
     return (
         <div className="max-width">
             {(forfatter !== {} && forfatter.portraetbillede !== undefined) ? (
