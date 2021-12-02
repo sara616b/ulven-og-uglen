@@ -2,7 +2,6 @@ import parse from "html-react-parser";
 import { Link } from "react-router-dom";
 
 export default function AboutSubPage({ props, siteData }) {
-  console.log(siteData.forfatter);
 
   return (
     <div className="aboutS">

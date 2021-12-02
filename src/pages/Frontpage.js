@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import BookDisplay from "../components/BookDisplay";
 import parse from "html-react-parser";
-import BlogDisplay from "../components/BlogDisplay";
 
 export default function Frontpage({
   frontpage,
@@ -11,7 +10,6 @@ export default function Frontpage({
   addToBasket,
   blog,
 }) {
-  console.log(frontpage);
 
   return frontpage !== null ? (
     <section className="frontpage">

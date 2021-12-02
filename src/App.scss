@@ -92,6 +92,7 @@ body {
     .navigation-line {
       background-image: $nav-and-footer;
       z-index: 10;
+      transition: all 5s;
       &.nav-closed {
         height: $nav-height;
       }
@@ -248,12 +249,12 @@ body {
           }
         }
         .burger-menu-icon {
-          width: 30px;
-          font-size: 25px;
-          height: 30px;
+          width: 40px;
+          font-size: 30px;
+          height: 40px;
           position: absolute;
           right: 0;
-          top: 30px;
+          top: 25px;
           margin: 20px 10px;
         }
         button,
@@ -1335,6 +1336,13 @@ body {
     text-align: start;
   }
 
+  .Fantasy {
+    margin: 0px 200px 50px 200px;
+    p {
+      text-align: start;
+    }
+  }
+
   .H1textForfatter {
     div {
       margin: 0 40px 40px 40px;
@@ -1370,5 +1378,29 @@ body {
     h2 {
       margin: 40px 0 40px 0;
     }
+  }
+
+  .Anime {
+    // transition-timing-function: cubic-bezier(10, 2, 3, 1);
+    // transform: translateY(269px);
+    // transition: 0.5s;
+    animation-name: Anime;
+    animation-duration: 5s;
+    background-color: pink;
+  }
+
+  .nav-open {
+    transition: all 5s;
+  }
+}
+
+@keyframes Anime {
+  0% {
+    transform: translateY(-200px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

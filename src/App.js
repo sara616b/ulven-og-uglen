@@ -34,6 +34,7 @@ function App() {
       "social_medie",
       "om_forlag_underside",
       "global_side",
+      "hvad_er_fantasy",
     ];
     podsToFetch.map((podName) => {
       fetch(
@@ -202,7 +203,12 @@ function App() {
             />
 
             {/* About */}
-            <Route path="/about" exact render={() => <About />} />
+            <Route path="/about" exact render={() => 
+                  <About about={
+                    siteData.global_side !== undefined
+                      ? findPageInfo("Om Forlaget")
+                      : null
+                  }/>} />
             {siteData.om_forlag_underside !== undefined
               ? siteData.om_forlag_underside.map((underside) => {
                   return (

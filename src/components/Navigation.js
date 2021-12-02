@@ -66,7 +66,7 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
     <div>
       <div
         className={`${
-          !props.navigationIsOpen ? "nav-closed" : ""
+          !props.navigationIsOpen ? "nav-closed" : "nav-open"
         } navigation-line`}
       >
         <div
@@ -101,7 +101,7 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
             <div
               className={
                 props.navigationIsOpen && windowWidth < whenToChangeBurgerMenu
-                  ? "nav-mobile"
+                  ? "nav-mobile Anime"
                   : "nav-web"
               }
             >
