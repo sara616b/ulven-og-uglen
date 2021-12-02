@@ -41,10 +41,8 @@ body {
 
   .cta-contrast {
     background-color: $cta-color !important;
-    // background: linear-gradient(#fff8d4 0%, #f9ea9d 20%, #f9ea9d 80%, #d6c984 99%);
     color: black !important;
-    box-shadow: $dropshadow, inset #fff 1px 4px 4px,
-      inset #fab92e80 -1px -4px 4px;
+    box-shadow: $dropshadow;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 14px;
@@ -53,8 +51,6 @@ body {
       color: $cta-color !important;
       background-color: black !important;
       border: $cta-color 2px solid;
-      box-shadow: $dropshadow, inset rgba(68, 68, 68, 0.315) 1px 4px 4px,
-        inset #fff6e380 -1px -4px 4px;
     }
   }
 
@@ -516,8 +512,9 @@ body {
             input {
               border-radius: 5px;
               border: none;
+              height: 40px;
               box-shadow: inset rgba(0, 0, 0, 0.329) 2px 2px 5px;
-              padding: 5px;
+              padding: 10px;
               margin-top: 5px;
             }
             .error {
