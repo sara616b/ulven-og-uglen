@@ -164,8 +164,10 @@ export default function Basket({ siteData }) {
                   className="cta-contrast"
                   onClick={() => setOrderPlaced(true)}
                 >
-                  Placér ordre på {calculatePrice()},- kr. med levering fra{" "}
-                  {deliveryMethode}
+                  Placér ordre på {calculatePrice()},- kr.
+                  {deliveryMethode !== undefined
+                    ? ` med levering fra ${deliveryMethode}`
+                    : ""}
                 </button>
               </div>
             )}

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import BookDisplay from "../components/BookDisplay";
+import BlogDisplay from "../components/BlogDisplay";
 import parse from "html-react-parser";
 
 export default function Frontpage({
@@ -10,7 +11,6 @@ export default function Frontpage({
   addToBasket,
   blog,
 }) {
-
   return frontpage !== null ? (
     <section className="frontpage">
       <section className="splash">
@@ -129,40 +129,26 @@ export default function Frontpage({
         </div>
       </section>
       <section className="blog-cta">
-        <section className="text">
-          <h2>{frontpage.tekst_om_blog}</h2>
-          <Link to="/blog">
-            <button className="cta-contrast">Gå til bloggen</button>
-          </Link>
-        </section>
         <div className="max-width">
+          <section className="text">
+            <h2>{frontpage.tekst_om_blog}</h2>
+            <Link to="/blog">
+              <button className="cta-contrast">Gå til bloggen</button>
+            </Link>
+          </section>
           <section className="blog-grid">
             {blog !== null
               ? blog.map((blog) => {
-                  const booksToShow =
+                  const blogsToShow =
                     frontpage.fremhaevede_blogindlaeg.split(",");
-                  return booksToShow.map((slug, index) => {
+                  return blogsToShow.map((slug, index) => {
                     if (slug === blog.slug && index < 4) {
                       return (
-                        <div className="blog-element">
-                          <div className="blog-background">
-                            <Link to={`/blog/details?titel=${blog.slug}`}>
-                              <div className="blog-content">
-                                <img
-                                  className="blogBillede"
-                                  src={blog.topbillede.guid}
-                                  alt="image"
-                                />
-                              </div>
-                            </Link>
-                            <div className="blog-info">
-                              <p>{blog.dato}</p>
-                              <Link to={`/blog/details?titel=${blog.slug}`}>
-                                <h2>{blog.title.rendered}</h2>
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
+                        <BlogDisplay
+                          key={blog.id}
+                          blog={blog}
+                          doNotShowTags={true}
+                        />
                       );
                     }
                     return null;

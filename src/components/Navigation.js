@@ -69,15 +69,19 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
           !props.navigationIsOpen ? "nav-closed" : ""
         } navigation-line`}
       >
- 
         <div
           className={`${
             props.navigationIsOpen && windowWidth < whenToChangeBurgerMenu
-              ? "content-mobile"
+              ? "content-mobile white"
               : "content-web contentMobil"
-          } content`}
+          } content ${
+            props.navigationIsOpen &&
+            window.location.pathname === "/" &&
+            windowWidth < whenToChangeBurgerMenu
+              ? "open"
+              : ""
+          }`}
         >
-
           {(props.navigationIsOpen || windowWidth > whenToChangeBurgerMenu) && (
             <div
               className={
@@ -94,7 +98,6 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
               >
                 <button>Webshop</button>
               </Link>
-
               <Link
                 to="/blog"
                 className={
@@ -103,7 +106,6 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
               >
                 <button>Blog</button>
               </Link>
-
               <div>
                 <div>
                   <Link
@@ -129,7 +131,6 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
                     </button>
                   ) : null}
                 </div>
-
                 {(windowWidth < whenToChangeBurgerMenu &&
                   subNavOpen.omForlag) ||
                 (windowWidth > whenToChangeBurgerMenu &&
@@ -162,17 +163,14 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
                             );
                           })
                         : null}
-
                     </div>
                   </div>
                 ) : null}
-
               </div>
               <Link to="/basket">
                 <button className="cta-contrast kurv-cta">
                   Gå til kurv{" "}
                   {amountInBasket !== 0 ? `(${amountInBasket})` : ""}
-
                   <svg
                     id="kurv-svg"
                     xmlns="http://www.w3.org/2000/svg"
@@ -184,10 +182,8 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
                       <path d="M51,40.34H17.43V52.07h6.75L29.5,76.5H71.62l5.15-24.43h7.68V40.34ZM40.73,72.2H36.5V55.5h4.23Zm8,0H44.5V55.5h4.23Zm8,0H52.5V55.5h4.23Zm8,0H60.5V55.5h4.23Z" />
                     </g>
                   </svg>
-
                 </button>
               </Link>
-
               <div className="search">
                 <Input
                   id="search"
@@ -200,7 +196,6 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
                       window.location.assign(`/search?s=${props.searchString}`);
                     }
                   }}
-
                   onChange={(e) => {
                     setSiteData((prev) => {
                       props.searchString = e.target.value;
@@ -208,12 +203,10 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
                     });
                   }}
                 />
-
                 <Link
                   className="search-button"
                   to={`/search?s=${props.searchString}`}
                 >
-
                   <svg
                     id="search-svg"
                     xmlns="http://www.w3.org/2000/svg"
@@ -223,12 +216,10 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
                       <path d="M59.5,54.5a25,25,0,1,0-6.14,5.81L77.61,84.56l6-6Zm-20,3a18,18,0,1,1,18-18A18,18,0,0,1,39.5,57.5Z" />
                     </g>
                   </svg>
-
                 </Link>
               </div>
             </div>
           )}
-
           <div className="nav-logo">
             <Link to="/">
               <svg
@@ -250,7 +241,6 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
               <button>Ulven og Uglen</button>
             </Link>
           </div>
-
           {windowWidth < whenToChangeBurgerMenu && (
             <button
               onClick={() => toggleNavigation(props.navigationIsOpen)}
@@ -259,7 +249,6 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
               {props.navigationIsOpen ? "X" : "☰"}
             </button>
           )}
-
         </div>
       </div>
     </div>

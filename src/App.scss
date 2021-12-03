@@ -8,7 +8,7 @@ $splash-overlay: #1c3326e7;
 $background-green: #2e5446;
 $cta-color: #f9ea9d;
 $price-color: rgb(52, 117, 52);
-$dropshadow: rgba(0, 0, 0, 0.2) 2px 4px 8px;
+$dropshadow: rgba(0, 0, 0, 0.26) 0px 2px 2px;
 $light-gray: rgb(241, 241, 241);
 
 body {
@@ -38,12 +38,17 @@ body {
 }
 
 .App {
+  text-align: center;
   * {
     transition: 0.2s all;
     font-family: "Source Sans Pro", sans-serif;
     box-sizing: border-box;
   }
-  text-align: center;
+  h2 {
+    font-size: 30px;
+    font-size: clamp(25px, 5vw, 50px);
+    font-weight: lighter;
+  }
   a:hover,
   button:hover {
     opacity: 0.8;
@@ -105,12 +110,13 @@ body {
     .navigation-line {
       z-index: 10;
       transition: all 5s;
+      background: $nav-and-footer;
+      transition: background-color 0s;
       &.nav-closed {
         height: $nav-height;
-        background-image: $nav-and-footer;
       }
       // Gør så logo er i den rigtige side på mobil
-      @media screen and (max-width: 800px) {
+      @media screen and (max-width: 749px) {
         .contentMobil {
           flex-direction: row !important;
         }
@@ -122,6 +128,15 @@ body {
         justify-content: space-between;
         color: $nav-text;
         margin: auto;
+        background-color: $nav-and-footer;
+        &.open {
+          transition: background-color 0s;
+          background-color: #16241b;
+        }
+        &.white:not(.open) {
+          transition: background-color 0s;
+          background-color: white;
+        }
         .nav-logo {
           position: absolute;
           left: 0;
@@ -181,10 +196,23 @@ body {
           justify-content: center;
           color: $nav-text;
           padding-top: $nav-height;
-          a,
-          div a {
-            padding: 5px 0;
+          text-align: left;
+          > *,
+          div label,
+          .kurv-cta {
+            width: 100%;
+            padding: 10px 40px;
           }
+          .kurv-cta {
+            justify-content: center;
+          }
+          div div {
+            padding: 10px 0;
+          }
+          // a,
+          // div a {
+          //   padding: 5px 0;
+          // }
           .nav-sub-arrow {
             &.closed {
               rotate: 180deg;
@@ -202,6 +230,10 @@ body {
             display: flex;
             flex-direction: row;
             justify-content: center;
+            padding: 0 30px;
+            input {
+              width: 98%;
+            }
           }
         }
         .search-button {
@@ -312,13 +344,15 @@ body {
       background-color: white;
       padding: 10px 0;
       a {
-        color: black;
+        color: gray;
         padding: 0 5px;
         text-decoration: none;
+        font-size: 12px;
+        text-transform: uppercase;
         &:after {
           content: ">";
           padding-left: 10px;
-          color: black;
+          color: gray;
         }
         &:last-of-type:after {
           content: "";
@@ -451,12 +485,23 @@ body {
       }
       .book-cta {
         background-color: $background-green;
+        color: white;
+      }
+      .book-cta,
+      .blog-cta {
         padding: 60px 0;
         div {
           display: flex;
           flex-direction: column;
-          color: white;
           padding: 20px 0;
+          @media screen and (min-width: 580px) {
+            &.bog-element,
+            &.blog-element,
+            &.blog-info {
+              padding: 10px;
+            }
+            padding: 20px;
+          }
           @media screen and (min-width: 1080px) {
             flex-direction: row;
             section {
@@ -464,47 +509,19 @@ body {
             }
           }
         }
-        .book-grid {
-          display: grid;
-          gap: 40px 15px;
-          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-          margin: 20px;
-        }
-        .text {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          margin: 40px;
-          h2 {
-            font-size: 30px;
-            font-size: clamp(25px, 5vw, 50px);
-          }
-        }
-      }
-      .blog-cta {
-        display: grid;
-        background-color: white;
-        color: black;
-        padding: 20px 0;
-        grid-template-columns: repeat(auto-fit, 100%);
-        @media screen and (min-width: 500px) {
-          grid-template-columns: repeat(auto-fit, 50%);
-        }
+        .book-grid,
         .blog-grid {
           display: grid;
-          gap: 40px 15px;
-          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-          margin: 20px;
+          grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+          margin: 20px auto;
+          width: 100%;
+          max-width: $max-width / 2;
         }
         .text {
           display: flex;
           flex-direction: column;
           justify-content: center;
           margin: 40px;
-          h2 {
-            font-size: 30px;
-            font-size: clamp(25px, 5vw, 50px);
-          }
         }
       }
       .newsletter-cta {
@@ -512,15 +529,11 @@ body {
         color: white;
         padding: 40px 0;
         .holder {
-          width: clamp(100px, 60%, 600px);
+          width: clamp(300px, 60%, 600px);
           margin: auto;
           padding: 40px;
           background-color: rgba(0, 0, 0, 0.3);
           border-radius: 5px;
-        }
-        h2 {
-          font-size: 30px;
-          font-size: clamp(25px, 5vw, 50px);
         }
         form {
           label {
@@ -548,10 +561,6 @@ body {
       .socials {
         padding: 40px;
         .holder {
-          h2 {
-            font-size: 30px;
-            font-size: clamp(25px, 5vw, 50px);
-          }
           div {
             display: flex;
             flex-direction: row;
@@ -754,7 +763,7 @@ body {
       align-items: center;
       flex-direction: column;
       > * {
-        max-width: 300px;
+        max-width: 400px;
         width: 100%;
       }
       h2 {
@@ -1042,7 +1051,7 @@ body {
         margin: 0;
       }
       > * {
-        max-width: 300px;
+        max-width: 400px;
         width: 100%;
       }
     }
@@ -1055,7 +1064,7 @@ body {
       background-color: rgba(128, 128, 128, 0.589);
       overflow: hidden;
       section {
-        width: 300px;
+        width: 400px;
         top: 20vh;
         left: 50%;
         position: fixed;
@@ -1067,6 +1076,10 @@ body {
     }
     .delivery,
     .payment {
+      div h2 {
+        font-size: 20px;
+        padding-bottom: 20px;
+      }
       form {
         display: flex;
         flex-direction: column;
@@ -1251,29 +1264,33 @@ body {
   }
 
   // BLOG DISPLAY
-  .Blogs {
+  .blog-page {
+    text-align: left;
+  }
+  .blogs {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    margin: 40px;
     gap: 40px;
+    padding: 40px 0;
   }
   .blog-titel {
     font-size: 40px;
   }
-  .blog-element {
+  .blog-element,
+  .blog-grid .blog-element {
     display: flex;
     .blog-background {
       background-color: white;
       display: flex;
       flex-direction: column;
-      padding: 20px;
+      padding: 10px;
       border-radius: 5px;
       box-shadow: $dropshadow;
       .blog-content {
         display: flex;
         flex-direction: column;
         padding: 0;
-        margin-top: -30px;
+        margin-top: -20px;
         .blogBillede {
           width: 50%;
           border-radius: 5px;
@@ -1286,17 +1303,20 @@ body {
         flex-direction: column;
         color: black;
         width: 100%;
-        padding: 30px 0 0 0;
+        text-align: left;
         a {
           color: black;
           margin: 0;
+          text-decoration: none;
         }
         p {
           opacity: 40%;
           margin: 0;
+          font-size: 12px;
         }
-        .AF {
-          margin: 5px 0 0 0;
+        h2 {
+          font-size: 18px;
+          font-weight: normal;
         }
       }
     }
@@ -1348,25 +1368,29 @@ body {
     }
   }
 
-  // ABOUT og ABOUTS
+  // ABOUT
   .aboutS {
-    margin: 100px 40px 40px 40px;
-    text-align: start;
-  }
-  .Fantasy {
-    margin: 0px 40px 40px 40px;
+    margin: 0 40px 40px 40px;
+    @media screen and (min-width: 750px) {
+      margin: $nav-height 40px 40px 40px;
+    }
+    text-align: left;
+    h2 {
+      font-size: 20px;
+      font-weight: normal;
+      padding: 20px 0 0 0;
+      margin: 0;
+      border-top: rgb(158, 158, 158) 1px solid;
+    }
     p {
-      text-align: start;
+      margin: 10px 0;
     }
   }
   .H1textForfatter {
-    div {
-      margin: 0 40px 40px 40px;
-    }
     .vForfattereP {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      margin: 0 40px 40px 40px;
+      margin: 40px 0;
       gap: 40px;
       .vForfattereC {
         align-self: center;
