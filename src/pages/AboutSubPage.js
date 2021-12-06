@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Breadcrumbs from "../components/Breadcrumbs";
 
 export default function AboutSubPage({ props, siteData }) {
-  console.log(window.location.href);
   return (
     <div className="max-width">
       <div className="aboutS">
@@ -31,7 +30,6 @@ export default function AboutSubPage({ props, siteData }) {
               ]}
             />
             <div className="H1textForfatter">
-              {parse(props[1].content.rendered)}
               <div className="vForfattereP">
                 {siteData.forfatter.map((forfatter) => {
                   return (

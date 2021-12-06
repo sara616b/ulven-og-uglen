@@ -81,19 +81,13 @@ export default function Frontpage({
           <div className="books">
             {books !== null
               ? books.map((bog) => {
-                  const booksToShow = frontpage.ids_pa_nyeste_boger.split(",");
-                  return booksToShow.map((isbn, index) => {
-                    if (isbn === bog.isbn) {
-                      return (
-                        <BookDisplay
-                          key={bog.id + index}
-                          book={bog}
-                          addToBasket={addToBasket}
-                        ></BookDisplay>
-                      );
-                    }
-                    return null;
-                  });
+                  return (
+                    <BookDisplay
+                      key={bog.id}
+                      book={bog}
+                      addToBasket={addToBasket}
+                    ></BookDisplay>
+                  );
                 })
               : "Bøger indlæses..."}
           </div>

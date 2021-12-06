@@ -18,7 +18,7 @@ import Forfatter from "./pages/Forfatter";
 function App() {
   const [siteData, setSiteData] = useState({
     title: "Ulven og Uglen",
-    basketContent: [],
+    basketContent: JSON.parse(localStorage.getItem("basket")),
     navigationIsOpen: false,
     bog: [],
     searchString: "",
@@ -50,6 +50,10 @@ function App() {
       return null;
     });
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("basket", JSON.stringify(siteData.basketContent));
+  }, [siteData.basketContent]);
 
   function findPageInfo(page) {
     let info;
@@ -127,7 +131,10 @@ function App() {
     });
   }
   function clearBasket() {
-    //   setBasket([]);
+    setSiteData((prev) => {
+      prev.basketContent = [];
+      return { ...prev };
+    });
   }
 
   return (
@@ -151,7 +158,7 @@ function App() {
                 <Frontpage
                   frontpage={
                     siteData.global_side !== undefined
-                      ? findPageInfo("Forside")
+                      ? findPageInfo("Sider")
                       : null
                   }
                   books={siteData.bog !== undefined ? siteData.bog : null}
@@ -203,12 +210,19 @@ function App() {
             />
 
             {/* About */}
-            <Route path="/about" exact render={() => 
-                  <About about={
+            <Route
+              path="/about"
+              exact
+              render={() => (
+                <About
+                  about={
                     siteData.global_side !== undefined
-                      ? findPageInfo("Om Forlaget")
+                      ? findPageInfo("Sider")
                       : null
-                  }/>} />
+                  }
+                />
+              )}
+            />
             {siteData.om_forlag_underside !== undefined
               ? siteData.om_forlag_underside.map((underside) => {
                   return (
@@ -243,7 +257,6 @@ function App() {
                   siteData={siteData}
                   removeFromBasket={removeFromBasket}
                   updateAmountInBasket={updateAmountInBasket}
-                  clearBasket={clearBasket}
                 />
               )}
             />
@@ -255,9 +268,8 @@ function App() {
               render={() => (
                 <Order
                   siteData={siteData}
-                  removeFromBasket={removeFromBasket}
-                  updateAmountInBasket={updateAmountInBasket}
                   clearBasket={clearBasket}
+                  setSiteData={setSiteData}
                 />
               )}
             />

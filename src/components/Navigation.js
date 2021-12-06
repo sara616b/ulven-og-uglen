@@ -26,10 +26,12 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
 
   useEffect(() => {
     let amountInBasketUpdated = 0;
-    props.basketContent.map((bog) => {
-      amountInBasketUpdated += bog.amount;
-      return null;
-    });
+    if (props.basketContent !== null) {
+      props.basketContent.map((bog) => {
+        amountInBasketUpdated += bog.amount;
+        return null;
+      });
+    }
     setAmountInBasket(amountInBasketUpdated);
   }, [props]);
 
@@ -72,15 +74,9 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
         <div
           className={`${
             props.navigationIsOpen && windowWidth < whenToChangeBurgerMenu
-              ? "content-mobile white"
+              ? "content-mobile"
               : "content-web contentMobil"
-          } content ${
-            props.navigationIsOpen &&
-            window.location.pathname === "/" &&
-            windowWidth < whenToChangeBurgerMenu
-              ? "open"
-              : ""
-          }`}
+          } content`}
         >
           {(props.navigationIsOpen || windowWidth > whenToChangeBurgerMenu) && (
             <div

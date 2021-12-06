@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import Breadcrumbs from "../components/Breadcrumbs";
+import BookDisplayShop from "../components/BookDisplayShop";
+import { Link, useLocation } from "react-router-dom";
 
 export default function BookDetails({ siteData, addToBasket }) {
   const [bog, setBog] = useState({});
+  const [otherBooks, setOtherBooks] = useState([]);
   useEffect(() => {
     const findBookSlugInURL = new URLSearchParams(window.location.search).get(
       "titel"
@@ -10,10 +13,22 @@ export default function BookDetails({ siteData, addToBasket }) {
     siteData.bog.map((bog) => {
       if (bog.slug === findBookSlugInURL) {
         setBog({ ...bog });
+        const bookSuggestions = [];
+        const sugISBNS = bog.relaterede_boger.split(",");
+        siteData.bog.map((book) => {
+          sugISBNS.map((number) => {
+            if (book.isbn === number) {
+              bookSuggestions.push({ ...book });
+            }
+            return null;
+          });
+          return null;
+        });
+        setOtherBooks(bookSuggestions);
       }
       return null;
     });
-  }, [siteData.bog]);
+  }, [siteData.bog, useLocation()]);
   return (
     <div className="max-width">
       <Breadcrumbs
@@ -42,9 +57,11 @@ export default function BookDetails({ siteData, addToBasket }) {
                 <h3 className="titel">
                   {bog.titel !== undefined ? bog.titel : ""}
                 </h3>
-                <p className="forfatter">
-                  af {bog.forfatter !== undefined ? bog.forfatter : ""}
-                </p>
+                <Link to={`/search?s=${bog.forfatter}`}>
+                  <p className="forfatter">
+                    af {bog.forfatter !== undefined ? bog.forfatter : ""}
+                  </p>
+                </Link>
                 <p className="pris">
                   {bog.pris !== undefined ? bog.pris : ""},- kr
                 </p>
@@ -74,6 +91,19 @@ export default function BookDetails({ siteData, addToBasket }) {
               <br />
               {bog.beskrivelse !== undefined ? bog.beskrivelse : ""}
             </p>
+          </div>
+          <div>
+            <h2>Lignende bøger...</h2>
+            <div className="other-books">
+              {otherBooks.map((suggestion) => {
+                return (
+                  <BookDisplayShop
+                    book={suggestion}
+                    addToBasket={addToBasket}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       ) : (

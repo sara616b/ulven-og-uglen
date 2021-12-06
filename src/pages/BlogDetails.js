@@ -36,7 +36,6 @@ export default function BlogDetails({ siteData }) {
                 <h1 className="blog-details-titel">
                   {blog.title !== undefined ? blog.title.rendered : ""}
                 </h1>
-
                 {parse(blog.content !== undefined ? blog.content.rendered : "")}
               </div>
             </div>

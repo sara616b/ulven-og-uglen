@@ -12,15 +12,13 @@ export default function BlogDisplay({ blog, doNotShowTags }) {
               alt={blog.title.rendered}
             />
           </div>
-        </Link>
-        <div className="blog-info">
-          <p>{blog.dato}</p>
-          <p className="AF">Af: {blog.af}</p>
-          <Link to={`/blog/details?titel=${blog.slug}`}>
+          <div className="blog-info">
+            <p>{blog.dato}</p>
+            <p className="AF">Af: {blog.af}</p>
             <h2>{blog.title.rendered}</h2>
-          </Link>
-          {doNotShowTags === true ? "" : <p>Tags: {blog.tags}</p>}
-        </div>
+            {doNotShowTags === true ? "" : <p>Tags: {blog.tags}</p>}
+          </div>
+        </Link>
       </div>
     </div>
   );

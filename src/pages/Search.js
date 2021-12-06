@@ -1,7 +1,9 @@
 import BookDisplayShop from "../components/BookDisplayShop";
 import BlogDisplay from "../components/BlogDisplay";
+import { useEffect, useState } from "react/cjs/react.development";
 
 export default function Search({ siteData, addToBasket }) {
+  const [noResults, setNoResults] = useState(false);
   const searchStringFromURL = new URLSearchParams(window.location.search).get(
     "s"
   );
@@ -35,10 +37,21 @@ export default function Search({ siteData, addToBasket }) {
       return whatToSearchThrough[category].filter(filterBySearchString);
     }),
   };
-
   const booksFoundThroughResults = locateBook();
   const blogsFoundThroughResults = locateBlog();
-
+  useEffect(() => {
+    const isThereResults = setTimeout(() => {
+      if (
+        blogsFoundThroughResults.length === 0 &&
+        booksFoundThroughResults.length === 0
+      ) {
+        setNoResults(true);
+      } else {
+        setNoResults(false);
+      }
+    }, 10000);
+    return clearTimeout(isThereResults);
+  }, [booksFoundThroughResults, blogsFoundThroughResults]);
   function locateBook() {
     let bookArray = [];
     siteData.bog.map((book) => {
@@ -65,7 +78,6 @@ export default function Search({ siteData, addToBasket }) {
     for (let i in isUnique) {
       filteredArray.push(isUnique[i]);
     }
-
     return filteredArray.reverse();
   }
 
@@ -95,7 +107,6 @@ export default function Search({ siteData, addToBasket }) {
     for (let i in isUnique) {
       filteredArray.push(isUnique[i]);
     }
-
     return filteredArray.reverse();
   }
 
@@ -117,7 +128,7 @@ export default function Search({ siteData, addToBasket }) {
         <h2>
           Du søgte på... <strong>{searchStringFromURL}</strong>
         </h2>
-        {booksFoundThroughResults.length > 0 && (
+        {booksFoundThroughResults.length > 0 ? (
           <div>
             <p className="seperators">Bøger der matchede din søgning:</p>
             <div className="search-grid">
@@ -132,8 +143,10 @@ export default function Search({ siteData, addToBasket }) {
               })}
             </div>
           </div>
+        ) : (
+          ""
         )}
-        {blogsFoundThroughResults.length > 0 && (
+        {blogsFoundThroughResults.length > 0 ? (
           <div>
             <p className="seperators">Blogindlæg der matchede din søgning:</p>
             <div className="search-grid">
@@ -144,7 +157,21 @@ export default function Search({ siteData, addToBasket }) {
               })}
             </div>
           </div>
+        ) : (
+          ""
         )}
+        {blogsFoundThroughResults.length === 0 &&
+        booksFoundThroughResults.length === 0 &&
+        noResults ? (
+          <p>Vi fandt desværre ingen resultater...</p>
+        ) : (
+          ""
+        )}
+        {blogsFoundThroughResults.length === 0 &&
+        booksFoundThroughResults.length === 0 &&
+        !noResults
+          ? "Indlæser bøger og blogindlæg..."
+          : ""}
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-$nav-and-footer: linear-gradient(#2e5446, #39705c);
+$nav-and-footer: #2e5446;
 $nav-text: #fff;
 $nav-height: 80px;
 $sub-nav: #a4c2b0;
@@ -8,7 +8,7 @@ $splash-overlay: #1c3326e7;
 $background-green: #2e5446;
 $cta-color: #f9ea9d;
 $price-color: rgb(52, 117, 52);
-$dropshadow: rgba(0, 0, 0, 0.26) 0px 2px 2px;
+$dropshadow: rgba(0, 0, 0, 0) 0px 2px 2px;
 $light-gray: rgb(241, 241, 241);
 
 body {
@@ -26,6 +26,12 @@ body {
   }
 }
 
+// Animation på buger menu
+.Buger {
+  animation-name: Buger;
+  animation-duration: 0.5s;
+  background-image: $nav-and-footer;
+}
 @keyframes Buger {
   0% {
     transform: translateY(-30px);
@@ -58,7 +64,6 @@ body {
   .cta-contrast {
     background-color: $cta-color !important;
     color: black !important;
-    box-shadow: $dropshadow;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 14px;
@@ -74,7 +79,7 @@ body {
     z-index: 10;
     // NAVIGATION
     .some-nav {
-      background-color: black;
+      background-color: white;
       padding: 5px;
       z-index: 1;
       position: relative;
@@ -91,16 +96,16 @@ body {
           svg,
           svg g path {
             height: inherit;
-            fill: white;
+            fill: black;
           }
           #Mail_sort {
             .cls-1 {
-              fill: black;
-              stroke: white;
+              fill: white;
+              stroke: black;
               stroke-width: 5px;
             }
             line {
-              stroke: white;
+              stroke: black;
               stroke-width: 5px;
             }
           }
@@ -128,15 +133,7 @@ body {
         justify-content: space-between;
         color: $nav-text;
         margin: auto;
-        background-color: $nav-and-footer;
-        &.open {
-          transition: background-color 0s;
-          background-color: #16241b;
-        }
-        &.white:not(.open) {
-          transition: background-color 0s;
-          background-color: white;
-        }
+        background: $nav-and-footer;
         .nav-logo {
           position: absolute;
           left: 0;
@@ -209,10 +206,6 @@ body {
           div div {
             padding: 10px 0;
           }
-          // a,
-          // div a {
-          //   padding: 5px 0;
-          // }
           .nav-sub-arrow {
             &.closed {
               rotate: 180deg;
@@ -224,6 +217,7 @@ body {
             background-color: $sub-nav;
             a button {
               color: $sub-nav-text;
+              background-color: $sub-nav;
             }
           }
           .search {
@@ -275,9 +269,19 @@ body {
               display: flex;
               flex-direction: row;
               max-width: $max-width;
+              background-color: $sub-nav;
             }
-            a button {
-              color: $sub-nav-text;
+            a {
+              background-color: $sub-nav;
+              border: $sub-nav;
+              border-radius: 0;
+              button {
+                color: $sub-nav-text;
+                background-color: $sub-nav;
+              }
+              &.chosen {
+                opacity: 0.9;
+              }
             }
             .nav-arrow {
               width: 15px;
@@ -294,7 +298,6 @@ body {
           padding: 5px 7px;
           border-radius: 5px;
           border: none;
-          box-shadow: inset rgba(0, 0, 0, 0.418) 2px 2px 5px;
           height: 40px;
           &:focus {
             background-color: white;
@@ -373,25 +376,29 @@ body {
           background-repeat: no-repeat;
           background-size: cover;
           background-position: 50% 50%;
+          opacity: 0.3;
+          filter: grayscale(1);
         }
         .overlay {
-          background-image: linear-gradient(#15221a, $splash-overlay 10%);
+          background-image: linear-gradient(#15221a1a, #2e5446a8 30%);
           height: 100%;
           width: 100%;
           position: relative;
           top: -100%;
           z-index: 2;
+          opacity: 0;
         }
         .white-wave {
-          background-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="1288.006" height="150" viewBox="0 0 1288.006 150"><path id="Path_57" fill="white" data-name="Path 57" class="cls-1" d="M-8241-10906.741h1288.006v-81.99s-97.034-99.546-327.593-110.035-290.152,105.348-562.449,110.035S-8241-11037.61-8241-11037.61Z" transform="translate(8241 11099.438)"/></svg>');
+          background-color: white;
+          mask-image: url('data:image/svg+xml,  <svg xmlns="http://www.w3.org/2000/svg" width="1288.006" height="150" viewBox="0 0 1288.006 150"><path id="Path_57" fill="white" data-name="Path 57" class="cls-1" d="M-8241-10906.741h1288.006v-81.99s-97.034-99.546-327.593-110.035-290.152,105.348-562.449,110.035S-8241-11037.61-8241-11037.61Z" transform="translate(8241 11099.438)"/></svg>');
           position: absolute;
           width: 102%;
           height: 300px;
           left: -1%;
           z-index: 3;
-          background-repeat: no-repeat;
-          background-size: contain;
-          background-position-y: bottom;
+          mask-repeat: no-repeat;
+          mask-size: contain;
+          mask-position: bottom;
           pointer-events: none;
           transform: translateY(-890px);
         }
@@ -400,11 +407,13 @@ body {
           text-align: center;
           top: -200%;
           color: white;
+          color: black;
           z-index: 4;
           .logo {
             svg {
               height: 100px;
               fill: white;
+              fill: black;
               padding-top: 40px;
             }
           }
@@ -428,7 +437,6 @@ body {
               display: none;
               img {
                 width: 100%;
-                box-shadow: $dropshadow;
                 border-radius: 5px;
               }
               &.book0 {
@@ -467,18 +475,34 @@ body {
         }
       }
       .newest-books {
+        margin: 40px 0 80px 0;
         padding: 40px;
         .max-width {
           overflow-x: scroll;
           overflow-y: hidden;
+          scrollbar-width: thin;
+          scrollbar-color: $background-green $light-gray;
+          &::-webkit-scrollbar {
+            height: 12px;
+          }
+          &::-webkit-scrollbar-track {
+            background: $light-gray;
+            border-radius: 20px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: $background-green;
+            border-radius: 20px;
+          }
           .books {
             display: flex;
             flex-direction: row;
             width: fit-content;
             .bog-element {
-              width: 250px;
+              width: 310px;
               flex-grow: 1;
-              margin: 20px;
+              margin: 10px 0;
+              border-right: $light-gray 2px solid;
+              padding: 0 20px;
             }
           }
         }
@@ -498,7 +522,7 @@ body {
             &.bog-element,
             &.blog-element,
             &.blog-info {
-              padding: 10px;
+              padding: 5px;
             }
             padding: 20px;
           }
@@ -516,6 +540,9 @@ body {
           margin: 20px auto;
           width: 100%;
           max-width: $max-width / 2;
+          a {
+            text-decoration: none;
+          }
         }
         .text {
           display: flex;
@@ -547,7 +574,6 @@ body {
               border-radius: 5px;
               border: none;
               height: 40px;
-              box-shadow: inset rgba(0, 0, 0, 0.329) 2px 2px 5px;
               padding: 10px;
               margin-top: 5px;
             }
@@ -579,9 +605,9 @@ body {
     .webshop {
       .books {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        margin: 40px 0;
-        gap: 40px 20px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        margin: 20px 0 40px 0;
+        gap: 40px;
         .bog-element {
           display: flex;
           a {
@@ -594,15 +620,13 @@ body {
             border-radius: 5px;
             justify-content: space-between;
             padding: 5px;
-            box-shadow: $dropshadow;
             width: 100%;
-            padding: 0 20px;
+            padding: 10px;
+            border: $light-gray 2px solid;
             .content {
               display: flex;
               flex-direction: column;
-              padding: 0;
               justify-content: space-between;
-              margin-top: -30px;
               height: 100%;
               width: 100%;
               .info {
@@ -638,18 +662,14 @@ body {
                 padding: 10px;
                 box-sizing: border-box;
                 border-radius: 5px;
-                box-shadow: $dropshadow;
                 .forsidebillede {
                   height: 100%;
                   border-radius: 5px;
                   object-fit: contain;
                   object-position: top;
-                  box-shadow: $dropshadow;
+                  max-width: 100%;
                 }
               }
-            }
-            button {
-              margin-bottom: 20px;
             }
           }
         }
@@ -667,11 +687,10 @@ body {
           font-size: 12px;
         }
         select {
-          background-color: white;
+          background-color: $light-gray;
           padding: 5px 7px;
           border-radius: 5px;
           border: none;
-          box-shadow: inset rgba(0, 0, 0, 0.2) 2px 2px 7px;
           cursor: pointer;
           option {
             text-transform: capitalize;
@@ -690,9 +709,12 @@ body {
     // BOOK DETAILS
     .book-details-holder {
       padding: 5px;
-      max-width: 700px;
-      margin: auto;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
       .content {
+        flex-grow: 2;
+        flex-basis: 600px;
         text-align: left;
         .image-holder {
           width: 100%;
@@ -706,7 +728,6 @@ body {
             height: 100%;
             border-radius: 5px;
             object-fit: contain;
-            box-shadow: $dropshadow;
           }
         }
         .titel {
@@ -716,8 +737,12 @@ body {
           margin: 0;
           padding-bottom: 5px;
         }
+        a {
+          text-decoration: none;
+        }
         .forfatter {
           font-style: italic;
+          color: black;
         }
         .pris {
           margin: 0;
@@ -750,8 +775,105 @@ body {
           }
         }
       }
+      .content + div {
+        flex-grow: 1;
+        flex-basis: 300px;
+        border-radius: 5px;
+        h2 {
+          font-size: 24px;
+          margin: 5px 0 20px 0;
+        }
+        .other-books {
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: row;
+          // .bog-element {gap
+          //   border-radius: 5px;
+          //   margin: 5px;
+          //   padding: 0 5px;
+          //   .background {
+          //     background-color: $light-gray;
+          //     .content {
+          //       img.forsidebillede {
+          //         width: 30%;
+          //       }
+          //       .beskrivelse {
+          //         margin: 0;
+          //       }
+          //     }
+          //   }
+          // }
+          .bog-element {
+            display: flex;
+            margin: 5px;
+            flex-grow: 1;
+            flex-basis: 100px;
+            a {
+              text-decoration: none;
+            }
+            .background {
+              background-color: rgb(255, 255, 255);
+              display: flex;
+              flex-direction: column;
+              border-radius: 5px;
+              justify-content: space-between;
+              padding: 5px;
+              width: 100%;
+              padding: 10px;
+              border: $light-gray 2px solid;
+              .content {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+                width: 100%;
+                .info {
+                  display: flex;
+                  flex-direction: column;
+                  color: black;
+                  text-align: left;
+                  padding: 20px 0;
+                  .titel {
+                    margin: 0;
+                    font-size: 16px;
+                    text-decoration: underline;
+                  }
+                  .forfatter {
+                    margin: 0;
+                    font-size: 12px;
+                  }
+                  .pris {
+                    margin: 0;
+                    background-color: $price-color;
+                    width: fit-content;
+                    padding: 5px;
+                    margin-top: 10px;
+                    color: white;
+                    border-radius: 5px;
+                    font-weight: bold;
+                  }
+                }
+                .image-holder {
+                  height: 200px;
+                  width: 100%;
+                  background-color: $light-gray;
+                  padding: 10px;
+                  box-sizing: border-box;
+                  border-radius: 5px;
+                  .forsidebillede {
+                    height: 100%;
+                    border-radius: 5px;
+                    object-fit: contain;
+                    object-position: top;
+                    max-width: 100%;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
-
     // BASKET
     .basket {
       text-align: left;
@@ -792,7 +914,6 @@ body {
             img {
               width: 100%;
               border-radius: 5px;
-              box-shadow: $dropshadow;
             }
           }
           .info {
@@ -833,7 +954,191 @@ body {
         }
       }
     }
+    // ABOUT
+    .aboutS {
+      margin: 0 40px 40px 40px;
+      @media screen and (min-width: 750px) {
+        margin: $nav-height 0px 40px 0px;
+      }
+      text-align: left;
+      h2 {
+        font-size: 24px;
+        padding: 20px 0 0 0;
+        margin: 0;
+        border-top: rgb(158, 158, 158) 1px solid;
+      }
+      p {
+        margin: 10px 0;
+      }
+      .H1textForfatter {
+        .vForfattereP {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          margin: 20px 0;
+          gap: 20px;
+          .vForfattereC {
+            img {
+              width: 100%;
+              height: 230px;
+              object-fit: cover;
+            }
+            a {
+              color: $sub-nav-text;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+    // Forfatter details
+    .ForfatterWidth {
+      margin: 0 40px 40px 40px;
+      h2 {
+        margin: 40px 0 40px 0;
+      }
+      .ForfatterInfo {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        p {
+          margin: 0px 80px;
+          text-align: start;
+        }
+      }
+    }
+    // ORDER / PAYMENT
+    .order {
+      text-align: left;
+      .overview {
+        div {
+          div {
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            margin: 10px 0;
+            align-items: center;
+            div {
+              flex-direction: column;
+              padding: 0 10px;
+              margin: 0;
+              border-bottom: none;
+              align-items: flex-start;
+              p {
+                padding: 0;
+                margin: 0;
+              }
+            }
+          }
+        }
+        img {
+          width: 30px;
+          height: 100%;
+        }
+      }
+      section {
+        background-color: rgb(243, 243, 243);
+        border-radius: 5px;
+        padding: 20px 20px;
+        margin: 10px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h2,
+        p {
+          margin: 0;
+        }
+        > * {
+          max-width: 400px;
+          width: 100%;
+        }
+      }
+      .thanks {
+        position: fixed;
+        top: 0;
+        height: 100%;
+        width: 100vw;
+        left: 0;
+        background-color: rgba(128, 128, 128, 0.589);
+        overflow: hidden;
+        section {
+          width: 400px;
+          top: 20vh;
+          left: 50%;
+          position: fixed;
+          transform: translateX(-50%);
+          p {
+            padding: 20px 0;
+          }
+        }
+      }
+      .delivery,
+      .payment {
+        div h2 {
+          font-size: 20px;
+          padding-bottom: 20px;
+        }
+        form {
+          display: flex;
+          flex-direction: column;
+          // inputs
+          .methode {
+            display: flex;
+          }
+          label {
+            display: grid;
+            gap: 5px;
+          }
+          input[type="text"],
+          input[type="number"] {
+            padding: 10px;
+            width: 100%;
+            height: 40px;
+            border: 2px solid #d7b191;
+            border-radius: 5px;
+            max-width: 300px;
+          }
+          input[name="cardNumber"] {
+            letter-spacing: 1px;
+          }
+          input[name="cvv"] {
+            width: 150px;
+            letter-spacing: 1px;
+          }
+          input[name="expirationDate"] {
+            width: 150px;
+          }
 
+          // errors
+          input[type="text"]:not(:placeholder-shown):valid,
+          input[type="number"]:not(:placeholder-shown):valid {
+            border-color: greenyellow;
+            background-position: right 16px center;
+            background-size: 20px 20px;
+            background-repeat: no-repeat;
+            background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><g fill='none' fill-rule='evenodd'><circle cx='10' cy='10' r='10' fill='greenyellow'/><path stroke='%23ffffff' stroke-width='2' stroke-miterlimit='10' fill='none'  d='M 16.5 5  l -8 10  l -5 -6'></path></g></svg>");
+          }
+          input[type="text"].interacted:invalid,
+          input[type="number"].interacted:invalid {
+            border-color: red;
+            background-position: right 16px center;
+            background-size: 20px 20px;
+            background-repeat: no-repeat;
+            background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><g fill='none' fill-rule='evenodd'><circle cx='10' cy='10' r='10' fill='red'/><path fill='%23FFFFFF' d='M9,6.84848485 C9,5.93939394 9.4,5.33333333 10,5.33333333 C10.6,5.33333333 11,5.93939394 11,6.84848485 L11,10.4848485 C11,11.3939394 10.6,12 10,12 C9.4,12 9,11.3939394 9,10.4848485 L9,6.84848485 Z M10,14.6666667 C9.41666667,14.6666667 9,14.25 9,13.6666667 C9,13.0833333 9.41666667,12.6666667 10,12.6666667 C10.5833333,12.6666667 11,13.0833333 11,13.6666667 C11,14.25 10.5833333,14.6666667 10,14.6666667 L10,14.6666667 Z'/></g></svg>");
+          }
+          input[type="text"]:invalid + .error,
+          input[type="number"]:invalid + .error {
+            max-height: 100%;
+          }
+          .error {
+            color: red;
+            max-height: 0;
+            overflow: hidden;
+          }
+        }
+      }
+    }
     // SEARCH PAGE
     .search-page {
       .seperators {
@@ -851,8 +1156,8 @@ body {
       .search-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        margin: 40px 0;
-        gap: 40px 20px;
+        margin: 20px 0;
+        gap: 20px;
         .bog-element {
           display: flex;
           a {
@@ -865,15 +1170,13 @@ body {
             border-radius: 5px;
             justify-content: space-between;
             padding: 5px;
-            box-shadow: $dropshadow;
             width: 100%;
-            padding: 0 20px;
+            padding: 10px;
+            border: $light-gray 2px solid;
             .content {
               display: flex;
               flex-direction: column;
-              padding: 0;
               justify-content: space-between;
-              margin-top: -30px;
               height: 100%;
               width: 100%;
               .info {
@@ -909,18 +1212,14 @@ body {
                 padding: 10px;
                 box-sizing: border-box;
                 border-radius: 5px;
-                box-shadow: $dropshadow;
                 .forsidebillede {
                   height: 100%;
                   border-radius: 5px;
                   object-fit: contain;
                   object-position: top;
-                  box-shadow: $dropshadow;
+                  max-width: 100%;
                 }
               }
-            }
-            button {
-              margin-bottom: 20px;
             }
           }
         }
@@ -942,7 +1241,6 @@ body {
             border-radius: 5px;
             justify-content: space-between;
             padding: 5px;
-            box-shadow: $dropshadow;
             width: 100%;
             padding: 0 20px;
             .content {
@@ -986,13 +1284,11 @@ body {
                 padding: 10px;
                 box-sizing: border-box;
                 border-radius: 5px;
-                box-shadow: $dropshadow;
                 .forsidebillede {
                   height: 100%;
                   border-radius: 5px;
                   object-fit: contain;
                   object-position: top;
-                  box-shadow: $dropshadow;
                 }
               }
             }
@@ -1005,146 +1301,9 @@ body {
     }
   }
 
-  // ORDER / PAYMENT
-  .order {
-    text-align: left;
-    .overview {
-      div {
-        div {
-          display: flex;
-          flex-direction: row;
-          padding: 10px;
-          background-color: white;
-          border-radius: 5px;
-          margin: 10px 0;
-          align-items: center;
-          box-shadow: $dropshadow;
-          div {
-            flex-direction: column;
-            padding: 0 10px;
-            margin: 0;
-            border-bottom: none;
-            align-items: flex-start;
-            box-shadow: none;
-            p {
-              padding: 0;
-              margin: 0;
-            }
-          }
-        }
-      }
-      img {
-        width: 30px;
-        height: 100%;
-      }
-    }
-    section {
-      background-color: rgb(243, 243, 243);
-      border-radius: 5px;
-      padding: 20px 20px;
-      margin: 10px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      h2,
-      p {
-        margin: 0;
-      }
-      > * {
-        max-width: 400px;
-        width: 100%;
-      }
-    }
-    .thanks {
-      position: fixed;
-      top: 0;
-      height: 100%;
-      width: 100vw;
-      left: 0;
-      background-color: rgba(128, 128, 128, 0.589);
-      overflow: hidden;
-      section {
-        width: 400px;
-        top: 20vh;
-        left: 50%;
-        position: fixed;
-        transform: translateX(-50%);
-        p {
-          padding: 20px 0;
-        }
-      }
-    }
-    .delivery,
-    .payment {
-      div h2 {
-        font-size: 20px;
-        padding-bottom: 20px;
-      }
-      form {
-        display: flex;
-        flex-direction: column;
-        // inputs
-        .methode {
-          display: flex;
-        }
-        label {
-          display: grid;
-          gap: 5px;
-        }
-        input[type="text"],
-        input[type="number"] {
-          padding: 10px;
-          width: 100%;
-          height: 40px;
-          border: 2px solid #d7b191;
-          border-radius: 5px;
-          max-width: 300px;
-          box-shadow: $dropshadow;
-        }
-        input[name="cardNumber"] {
-          letter-spacing: 1px;
-        }
-        input[name="cvv"] {
-          width: 150px;
-          letter-spacing: 1px;
-        }
-        input[name="expirationDate"] {
-          width: 150px;
-        }
-
-        // errors
-        input[type="text"]:not(:placeholder-shown):valid,
-        input[type="number"]:not(:placeholder-shown):valid {
-          border-color: greenyellow;
-          background-position: right 16px center;
-          background-size: 20px 20px;
-          background-repeat: no-repeat;
-          background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><g fill='none' fill-rule='evenodd'><circle cx='10' cy='10' r='10' fill='greenyellow'/><path stroke='%23ffffff' stroke-width='2' stroke-miterlimit='10' fill='none'  d='M 16.5 5  l -8 10  l -5 -6'></path></g></svg>");
-        }
-        input[type="text"].interacted:invalid,
-        input[type="number"].interacted:invalid {
-          border-color: red;
-          background-position: right 16px center;
-          background-size: 20px 20px;
-          background-repeat: no-repeat;
-          background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><g fill='none' fill-rule='evenodd'><circle cx='10' cy='10' r='10' fill='red'/><path fill='%23FFFFFF' d='M9,6.84848485 C9,5.93939394 9.4,5.33333333 10,5.33333333 C10.6,5.33333333 11,5.93939394 11,6.84848485 L11,10.4848485 C11,11.3939394 10.6,12 10,12 C9.4,12 9,11.3939394 9,10.4848485 L9,6.84848485 Z M10,14.6666667 C9.41666667,14.6666667 9,14.25 9,13.6666667 C9,13.0833333 9.41666667,12.6666667 10,12.6666667 C10.5833333,12.6666667 11,13.0833333 11,13.6666667 C11,14.25 10.5833333,14.6666667 10,14.6666667 L10,14.6666667 Z'/></g></svg>");
-        }
-        input[type="text"]:invalid + .error,
-        input[type="number"]:invalid + .error {
-          max-height: 100%;
-        }
-        .error {
-          color: red;
-          max-height: 0;
-          overflow: hidden;
-        }
-      }
-    }
-  }
-
   // FOOTER
   footer {
-    background-image: $nav-and-footer;
+    background: $nav-and-footer;
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -1211,10 +1370,9 @@ body {
       background-color: white;
       display: flex;
       flex-direction: column;
-      padding: 20px;
+      padding: 10px;
       border-radius: 5px;
       justify-content: space-between;
-      box-shadow: $dropshadow;
       a {
         text-decoration: none;
       }
@@ -1222,13 +1380,12 @@ body {
         display: flex;
         flex-direction: row;
         padding: 0;
-        margin-top: -30px;
         .info {
           display: flex;
           flex-direction: column;
           color: black;
           width: 60%;
-          padding: 20px 0 0 5px;
+          padding: 0 0 0 5px;
           text-align: left;
           .titel {
             margin: 0;
@@ -1257,7 +1414,6 @@ body {
           object-fit: contain;
           object-position: top;
           height: fit-content;
-          box-shadow: $dropshadow;
         }
       }
     }
@@ -1266,36 +1422,32 @@ body {
   // BLOG DISPLAY
   .blog-page {
     text-align: left;
+    .blogs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 10px;
+      padding: 40px 0;
+    }
   }
-  .blogs {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 40px;
-    padding: 40px 0;
-  }
-  .blog-titel {
-    font-size: 40px;
-  }
+
   .blog-element,
   .blog-grid .blog-element {
     display: flex;
     .blog-background {
       background-color: white;
+      border: $light-gray 2px solid;
       display: flex;
       flex-direction: column;
       padding: 10px;
       border-radius: 5px;
-      box-shadow: $dropshadow;
       .blog-content {
         display: flex;
         flex-direction: column;
         padding: 0;
-        margin-top: -20px;
         .blogBillede {
-          width: 50%;
+          width: 100%;
           border-radius: 5px;
           align-self: center;
-          box-shadow: $dropshadow;
         }
       }
       .blog-info {
@@ -1317,11 +1469,12 @@ body {
         h2 {
           font-size: 18px;
           font-weight: normal;
+          padding-top: 5px;
+          margin: 0;
         }
       }
     }
   }
-
   // BLOG DETAILS
   .blog-details-holder {
     margin: auto;
@@ -1366,63 +1519,5 @@ body {
         }
       }
     }
-  }
-
-  // ABOUT
-  .aboutS {
-    margin: 0 40px 40px 40px;
-    @media screen and (min-width: 750px) {
-      margin: $nav-height 40px 40px 40px;
-    }
-    text-align: left;
-    h2 {
-      font-size: 20px;
-      font-weight: normal;
-      padding: 20px 0 0 0;
-      margin: 0;
-      border-top: rgb(158, 158, 158) 1px solid;
-    }
-    p {
-      margin: 10px 0;
-    }
-  }
-  .H1textForfatter {
-    .vForfattereP {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      margin: 40px 0;
-      gap: 40px;
-      .vForfattereC {
-        align-self: center;
-        a {
-          color: $sub-nav-text;
-          text-decoration: none;
-        }
-      }
-    }
-  }
-
-  // Forfatter details
-  .ForfatterInfo {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    p {
-      margin: 0px 80px;
-      text-align: start;
-    }
-  }
-  .ForfatterWidth {
-    margin: 0 40px 40px 40px;
-    h2 {
-      margin: 40px 0 40px 0;
-    }
-  }
-
-  // Animation på buger menu
-  .Buger {
-    animation-name: Buger;
-    animation-duration: 0.5s;
-    background-image: $nav-and-footer;
   }
 }

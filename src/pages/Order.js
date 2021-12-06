@@ -2,7 +2,7 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import { useEffect, useState } from "react/cjs/react.development";
 import Input from "../components/Input";
 
-export default function Basket({ siteData }) {
+export default function Order({ siteData, clearBasket, setSiteData }) {
   const [paymentMethode, setPaymentMethode] = useState();
   const [deliveryMethode, setDeliveryMethode] = useState();
   const [inputEl, setInputEl] = useState();
@@ -97,7 +97,7 @@ export default function Basket({ siteData }) {
           { link: "/bestil", text: "Betaling" },
         ]}
       />
-      {siteData.basketContent.length !== 0 ? (
+      {siteData.basketContent.length !== 0 && orderPlaced === false ? (
         <div className="order">
           <section className="overview">
             <h2>Din bestilling</h2>
@@ -192,7 +192,8 @@ export default function Basket({ siteData }) {
           )}
         </div>
       ) : (
-        window.location.assign("/")
+        ""
+        // window.location.assign("/")
       )}
     </div>
   );

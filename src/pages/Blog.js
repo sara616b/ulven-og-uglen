@@ -17,7 +17,7 @@ export default function Blog({ props }) {
             {parse(props.hvad_er_fantasy[0].content.rendered)}
           </div>
         ) : (
-          "Indlæser tekst"
+          ""
         )}
         {props.blogindlg !== undefined ? (
           <div>
@@ -28,11 +28,11 @@ export default function Blog({ props }) {
                 })}
               </div>
             ) : (
-              <div>Blogindlæg indlæses...</div>
+              "Blogindlæg indlæses..."
             )}
           </div>
         ) : (
-          <p>Blogindlæg indlæses...</p>
+          ""
         )}
       </div>
     </div>

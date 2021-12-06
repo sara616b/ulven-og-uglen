@@ -11,15 +11,7 @@ export default function About({ about }) {
             { link: "/about", text: "Om forlaget" },
           ]}
         />
-        {about !== null ? (
-          <div>
-            <h1>{about.title.rendered}</h1>
-
-            <p>{parse(about.text)}</p>
-          </div>
-        ) : (
-          "Indlæser tekst"
-        )}
+        {about !== null ? <div>{parse(about.text)}</div> : "Indlæser tekst"}
       </div>
     </div>
   );

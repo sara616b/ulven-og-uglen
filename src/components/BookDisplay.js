@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
 export default function BookDisplay({ book: bog, addToBasket }) {
+  const authors =
+    bog.forfatter.length > 30
+      ? `${bog.forfatter.substring(0, 20)}...`
+      : bog.forfatter;
   return (
     <div className="bog-element">
       <div className="background">
@@ -13,7 +17,7 @@ export default function BookDisplay({ book: bog, addToBasket }) {
             />
             <div className="info">
               <h3 className="titel">{bog.titel}</h3>
-              <p className="forfatter">{bog.forfatter}</p>
+              <p className="forfatter">{authors}</p>
               <p className="pris">{bog.pris},- kr</p>
               <p className="beskrivelse">
                 {bog.beskrivelse.substring(0, 150)} ...
