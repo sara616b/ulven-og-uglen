@@ -3,6 +3,13 @@ import Input from "../components/Input";
 import BookDisplay from "../components/BookDisplay";
 import BlogDisplay from "../components/BlogDisplay";
 import parse from "html-react-parser";
+import { ReactComponent as ArtOne } from "../background-art/art-1.svg";
+import { ReactComponent as ArtTwo } from "../background-art/art-2.svg";
+import { ReactComponent as ArtThree } from "../background-art/art-2.svg";
+import { ReactComponent as ArtFour } from "../background-art/art-2.svg";
+import { ReactComponent as ArtFive } from "../background-art/art-2.svg";
+import { useRef } from "react";
+import { useEffect, useState } from "react/cjs/react.development";
 
 export default function Frontpage({
   frontpage,
@@ -11,6 +18,34 @@ export default function Frontpage({
   addToBasket,
   blog,
 }) {
+  const bookGrid = useRef();
+  const [bookGridLoc, setBookGridLoc] = useState();
+  const blogGrid = useRef();
+  const [blogGridLoc, setBlogGridLoc] = useState();
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    setTimeout(() => {
+      handleResize();
+    }, 4000);
+  }, []);
+  function handleResize() {
+    updatePosition(bookGrid, setBookGridLoc, "left");
+    updatePosition(blogGrid, setBlogGridLoc, "right");
+  }
+  function updatePosition(element, updater, side) {
+    if (element !== null) {
+      if (element.current !== undefined && element.current !== null) {
+        updater(
+          (side === "left"
+            ? element.current.offsetLeft
+            : element.current.offsetRight) +
+            element.current.clientWidth / 2
+        );
+      }
+    }
+  }
+
   return frontpage !== null ? (
     <section className="frontpage">
       <section className="splash">
@@ -21,6 +56,7 @@ export default function Frontpage({
           }}
         ></div>
         <div className="overlay"></div>
+        <ArtFive className="art-five art-green" />
         <div className="white-wave"></div>
         <div className="max-width">
           <div className="content">
@@ -95,7 +131,11 @@ export default function Frontpage({
       </section>
       <section className="book-cta">
         <div className="max-width">
-          <section className="book-grid">
+          <ArtOne
+            className="art-one art-black"
+            style={{ left: `${bookGridLoc}px` }}
+          />
+          <section className="book-grid" ref={bookGrid}>
             {books !== null
               ? books.map((bog) => {
                   const booksToShow = frontpage.fremhaevede_boger.split(",");
@@ -123,6 +163,10 @@ export default function Frontpage({
         </div>
       </section>
       <section className="blog-cta">
+        <ArtTwo
+          className="art-two art-green"
+          style={{ right: `${blogGridLoc}px` }}
+        />
         <div className="max-width">
           <section className="text">
             <h2>{frontpage.tekst_om_blog}</h2>
@@ -130,7 +174,7 @@ export default function Frontpage({
               <button className="cta-contrast">Gå til bloggen</button>
             </Link>
           </section>
-          <section className="blog-grid">
+          <section className="blog-grid" ref={blogGrid}>
             {blog !== null
               ? blog.map((blog) => {
                   const blogsToShow =
@@ -171,6 +215,8 @@ export default function Frontpage({
         </div>
       </section>
       <section className="socials">
+        <ArtThree className="art-three art-green" />
+        <ArtFour className="art-four art-green" />
         <div className="max-width">
           <div className="holder">
             <h2>Følg os på</h2>
