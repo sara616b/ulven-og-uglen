@@ -7,7 +7,6 @@ import { ReactComponent as ArtOne } from "../background-art/art-1.svg";
 import { ReactComponent as ArtTwo } from "../background-art/art-2.svg";
 import { ReactComponent as ArtThree } from "../background-art/art-2.svg";
 import { ReactComponent as ArtFour } from "../background-art/art-2.svg";
-import { ReactComponent as ArtFive } from "../background-art/art-2.svg";
 import { useRef } from "react";
 import { useEffect, useState } from "react/cjs/react.development";
 
@@ -30,22 +29,18 @@ export default function Frontpage({
     }, 4000);
   }, []);
   function handleResize() {
-    updatePosition(bookGrid, setBookGridLoc, "left");
-    updatePosition(blogGrid, setBlogGridLoc, "right");
+    updatePosition(bookGrid, setBookGridLoc);
+    updatePosition(blogGrid, setBlogGridLoc);
   }
-  function updatePosition(element, updater, side) {
+  function updatePosition(element, updater) {
     if (element !== null) {
       if (element.current !== undefined && element.current !== null) {
-        updater(
-          (side === "left"
-            ? element.current.offsetLeft
-            : element.current.offsetRight) +
-            element.current.clientWidth / 2
-        );
+        updater(element.current.offsetLeft + element.current.clientWidth / 2);
       }
     }
   }
 
+  console.log(blogGridLoc);
   return frontpage !== null ? (
     <section className="frontpage">
       <section className="splash">
@@ -56,7 +51,6 @@ export default function Frontpage({
           }}
         ></div>
         <div className="overlay"></div>
-        <ArtFive className="art-five art-green" />
         <div className="white-wave"></div>
         <div className="max-width">
           <div className="content">
@@ -165,7 +159,7 @@ export default function Frontpage({
       <section className="blog-cta">
         <ArtTwo
           className="art-two art-green"
-          style={{ right: `${blogGridLoc}px` }}
+          style={{ left: `${blogGridLoc}px` }}
         />
         <div className="max-width">
           <section className="text">

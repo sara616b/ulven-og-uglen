@@ -53,7 +53,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("basket", JSON.stringify(siteData.basketContent));
-  }, [siteData.basketContent]);
+  }, [siteData]);
 
   function findPageInfo(page) {
     let info;

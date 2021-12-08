@@ -4,7 +4,7 @@ import Breadcrumbs from "../components/Breadcrumbs";
 export default function About({ about }) {
   return (
     <div className="max-width">
-      <div className="aboutS">
+      <div className="aboutS aboutpage">
         <Breadcrumbs
           links={[
             { link: "/", text: "Forside" },
