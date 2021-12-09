@@ -1163,6 +1163,10 @@ body {
           font-size: 20px;
           padding-bottom: 20px;
         }
+        button:disabled {
+          opacity: 0.5;
+          cursor: auto;
+        }
         form {
           display: flex;
           flex-direction: column;

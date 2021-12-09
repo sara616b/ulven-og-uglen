@@ -26,7 +26,7 @@ export default function Frontpage({
     handleResize();
     setTimeout(() => {
       handleResize();
-    }, 4000);
+    }, 6000);
   }, []);
   function handleResize() {
     updatePosition(bookGrid, setBookGridLoc);
@@ -40,7 +40,6 @@ export default function Frontpage({
     }
   }
 
-  console.log(blogGridLoc);
   return frontpage !== null ? (
     <section className="frontpage">
       <section className="splash">

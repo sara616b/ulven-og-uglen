@@ -17,6 +17,7 @@ export default function Input({
   onkeypress,
   onChange,
   value,
+  reference,
 }) {
   const [hasBeenInteractedWith, setHasBeenInteractedWith] = useState(false);
 

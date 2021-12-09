@@ -1,5 +1,5 @@
 import Breadcrumbs from "../components/Breadcrumbs";
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect, useRef, useState } from "react/cjs/react.development";
 import Input from "../components/Input";
 
 export default function Order({ siteData, clearBasket, setSiteData }) {
@@ -7,6 +7,16 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
   const [deliveryMethode, setDeliveryMethode] = useState();
   const [inputEl, setInputEl] = useState();
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const cardForm = useRef();
+  const [isNotValid, setIsNotValid] = useState(true);
+  const cardValuesToCheck =
+    cardForm.current !== undefined
+      ? cardForm.current[0].validity.valid &&
+        cardForm.current[1].validity.valid &&
+        cardForm.current[2].validity.valid &&
+        cardForm.current[3].validity.valid
+      : null;
+  const [inputBeingEdited, setInputBeingEdited] = useState();
 
   useEffect(() => {
     if (inputEl !== undefined) {
@@ -14,6 +24,16 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
     } else return;
     setInputEl();
   }, [inputEl]);
+
+  useEffect(() => {
+    if (cardForm.current !== undefined && cardForm.current !== null) {
+      if (cardValuesToCheck) {
+        setIsNotValid(false);
+      } else {
+        setIsNotValid(true);
+      }
+    }
+  }, [cardValuesToCheck, inputBeingEdited]);
 
   function calculatePrice() {
     let totalPrice = 0;
@@ -29,7 +49,7 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
       case "VISA/Dankort":
         return (
           <div>
-            <form>
+            <form ref={cardForm}>
               <Input
                 id="cardNumber"
                 label="Kortnummer"
@@ -40,6 +60,7 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
                 error="Venligst indtast et kortnummer på 16 cifre"
                 setInputEl={setInputEl}
                 autoFocus={true}
+                onChange={(e) => setInputBeingEdited(e.target.value)}
               />
               <Input
                 id="nameOnCard"
@@ -50,6 +71,7 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
                 error="Venligt indtast navnet på dit kort - mere end to bogstaver og ingen numre."
                 placeholder="Fuldt navn på kort"
                 setInputEl={setInputEl}
+                onChange={(e) => setInputBeingEdited(e.target.value)}
               />
               <Input
                 id="expirationDate"
@@ -61,6 +83,7 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
                 pattern="(?:([0][1-9]|([1][0-2]))[/]?)([2-9][0-9])"
                 setInputEl={setInputEl}
                 error="Venligst indtast udløbsdatoen på dit kort på formen MM/ÅÅ. Måneden skal være mellem 01-12 og året efter '20."
+                onChange={(e) => setInputBeingEdited(e.target.value)}
               />
               <Input
                 id="cvv"
@@ -71,6 +94,7 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
                 setInputEl={setInputEl}
                 pattern="[0-9]{3}"
                 error="Venligst indtast de 3 numre fra bagsiden af dit kort."
+                onChange={(e) => setInputBeingEdited(e.target.value)}
               />
             </form>
           </div>
@@ -97,7 +121,7 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
           { link: "/bestil", text: "Betaling" },
         ]}
       />
-      {siteData.basketContent.length !== 0 && orderPlaced === false ? (
+      {siteData.basketContent.length !== 0 || orderPlaced === true ? (
         <div className="order">
           <section className="overview">
             <h2>Din bestilling</h2>
@@ -162,7 +186,13 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
                 <button
                   type="submit"
                   className="cta-contrast"
-                  onClick={() => setOrderPlaced(true)}
+                  onClick={() => {
+                    setOrderPlaced(true);
+                    clearBasket();
+                  }}
+                  disabled={
+                    paymentMethode === "VISA/Dankort" ? isNotValid : false
+                  }
                 >
                   Placér ordre på {calculatePrice()},- kr.
                   {deliveryMethode !== undefined
@@ -192,8 +222,7 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
           )}
         </div>
       ) : (
-        ""
-        // window.location.assign("/")
+        window.location.assign("/")
       )}
     </div>
   );
