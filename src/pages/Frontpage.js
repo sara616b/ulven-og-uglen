@@ -18,9 +18,9 @@ export default function Frontpage({
   blog,
 }) {
   const bookGrid = useRef();
-  const [bookGridLoc, setBookGridLoc] = useState();
+  const [bookGridLoc, setBookGridLoc] = useState(0);
   const blogGrid = useRef();
-  const [blogGridLoc, setBlogGridLoc] = useState();
+  const [blogGridLoc, setBlogGridLoc] = useState(0);
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     handleResize();
@@ -105,17 +105,18 @@ export default function Frontpage({
           </div>
         </div>
       </section>
-      <section className="newest-books">
+      <section className="blogs-top">
         <div className="max-width">
-          <div className="books">
-            {books !== null
-              ? books.map((bog) => {
+          <div className="blogposts">
+            {blog !== null
+              ? blog.map((blog) => {
                   return (
-                    <BookDisplay
-                      key={bog.id}
-                      book={bog}
-                      addToBasket={addToBasket}
-                    ></BookDisplay>
+                    <BlogDisplay
+                      key={blog.id}
+                      blog={blog}
+                      doNotShowTags={true}
+                      doShowCTA={true}
+                    />
                   );
                 })
               : "Bøger indlæses..."}
@@ -204,6 +205,23 @@ export default function Frontpage({
                 <button className="cta-contrast">Tilmeld</button>
               </form>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="newest-books">
+        <div className="max-width">
+          <div className="books">
+            {books !== null
+              ? books.map((bog) => {
+                  return (
+                    <BookDisplay
+                      key={bog.id}
+                      book={bog}
+                      addToBasket={addToBasket}
+                    ></BookDisplay>
+                  );
+                })
+              : "Bøger indlæses..."}
           </div>
         </div>
       </section>

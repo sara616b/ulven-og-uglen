@@ -33,7 +33,7 @@ export default function AboutSubPage({ props, siteData }) {
               <div className="vForfattereP">
                 {siteData.forfatter.map((forfatter) => {
                   return (
-                    <div className="vForfattereC">
+                    <div className="vForfattereC" key={forfatter.slug}>
                       <Link to={`/Forfatter?navn=${forfatter.slug}`}>
                         <img
                           className="forsidebillede"
@@ -60,7 +60,15 @@ export default function AboutSubPage({ props, siteData }) {
                 { link: `/${props[2].slug}`, text: `${props[2].titel}` },
               ]}
             />
-            <div>{parse(props[2].content.rendered)}</div>
+            <div
+              style={{
+                border: "2px solid #f1f1f1",
+                padding: "20px",
+                borderRadius: "5px",
+              }}
+            >
+              {parse(props[2].content.rendered)}
+            </div>
           </div>
         ) : (
           ""

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function BlogDisplay({ blog, doNotShowTags }) {
+export default function BlogDisplay({ blog, doNotShowTags, doShowCTA }) {
   return (
     <div className="blog-element">
       <div className="blog-background">
@@ -16,7 +16,12 @@ export default function BlogDisplay({ blog, doNotShowTags }) {
             <p>{blog.dato}</p>
             <p className="AF">Af: {blog.af}</p>
             <h2>{blog.title.rendered}</h2>
-            {doNotShowTags === true ? "" : <p className="tags">Tags: {blog.tags}</p>}
+            {doNotShowTags === true ? (
+              ""
+            ) : (
+              <p className="tags">Tags: {blog.tags}</p>
+            )}
+            {doShowCTA === true ? <p className="cta">... lær mere</p> : ""}
           </div>
         </Link>
       </div>

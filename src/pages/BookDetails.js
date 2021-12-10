@@ -100,6 +100,7 @@ export default function BookDetails({ siteData, addToBasket }) {
                   <BookDisplayShop
                     book={suggestion}
                     addToBasket={addToBasket}
+                    key={suggestion.isbn}
                   />
                 );
               })}
