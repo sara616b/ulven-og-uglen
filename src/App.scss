@@ -90,6 +90,7 @@ body {
       padding: 5px;
       z-index: 1;
       position: relative;
+      height: 30px;
       .max-width {
         max-width: $max-width;
         height: 100%;
@@ -405,7 +406,7 @@ body {
       width: 100%;
       max-width: $max-width;
       margin: auto;
-      height: 100%;
+      height: auto;
       * {
         animation: move-up 0.8s;
       }
@@ -436,6 +437,9 @@ body {
       .splash {
         height: 600px;
         width: 100%;
+        .max-width {
+          height: 100%;
+        }
         .image {
           height: 100%;
           width: 100%;
@@ -459,7 +463,7 @@ body {
         }
         .white-wave {
           background-color: white;
-          mask-image: url('data:image/svg+xml,  <svg xmlns="http://www.w3.org/2000/svg" width="1288.006" height="150" viewBox="0 0 1288.006 150"><path id="Path_57" fill="white" data-name="Path 57" class="cls-1" d="M-8241-10906.741h1288.006v-81.99s-97.034-99.546-327.593-110.035-290.152,105.348-562.449,110.035S-8241-11037.61-8241-11037.61Z" transform="translate(8241 11099.438)"/></svg>');
+          mask-image: url("./background-art/wave-illustrations.svg");
           position: absolute;
           width: 102%;
           height: 300px;
@@ -551,6 +555,7 @@ body {
         padding: 40px;
         z-index: 4;
         position: relative;
+        height: 420px;
         .max-width {
           overflow-x: scroll;
           overflow-y: hidden;

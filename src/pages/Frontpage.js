@@ -7,8 +7,7 @@ import { ReactComponent as ArtOne } from "../background-art/art-1.svg";
 import { ReactComponent as ArtTwo } from "../background-art/art-2.svg";
 import { ReactComponent as ArtThree } from "../background-art/art-2.svg";
 import { ReactComponent as ArtFour } from "../background-art/art-2.svg";
-import { useRef } from "react";
-import { useEffect, useState } from "react/cjs/react.development";
+import { useState, useEffect, useRef } from "react";
 
 export default function Frontpage({
   frontpage,
@@ -18,20 +17,20 @@ export default function Frontpage({
   blog,
 }) {
   const bookGrid = useRef();
-  const [bookGridLoc, setBookGridLoc] = useState(0);
   const blogGrid = useRef();
-  const [blogGridLoc, setBlogGridLoc] = useState(0);
+  const [bookGridLoc, setBookGridLoc] = useState();
+  const [blogGridLoc, setBlogGridLoc] = useState();
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     handleResize();
     setTimeout(() => {
       handleResize();
     }, 6000);
+    function handleResize() {
+      updatePosition(bookGrid, setBookGridLoc);
+      updatePosition(blogGrid, setBlogGridLoc);
+    }
   }, []);
-  function handleResize() {
-    updatePosition(bookGrid, setBookGridLoc);
-    updatePosition(blogGrid, setBlogGridLoc);
-  }
   function updatePosition(element, updater) {
     if (element !== null) {
       if (element.current !== undefined && element.current !== null) {
