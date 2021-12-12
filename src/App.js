@@ -18,7 +18,7 @@ import Forfatter from "./pages/Forfatter";
 function App() {
   const [siteData, setSiteData] = useState({
     title: "Ulven og Uglen",
-    basketContent: JSON.parse(localStorage.getItem("basket")),
+    basketContent: JSON.parse(localStorage.getItem("basketUlvenOgUglen")),
     navigationIsOpen: false,
     bog: [],
     searchString: "",
@@ -52,7 +52,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("basket", JSON.stringify(siteData.basketContent));
+    localStorage.setItem(
+      "basketUlvenOgUglen",
+      JSON.stringify(siteData.basketContent)
+    );
   }, [siteData]);
 
   function findPageInfo(page) {
@@ -83,12 +86,13 @@ function App() {
     }, 1000);
     // copy basket, if it isn't empty
     let newBasket = [];
-    if (siteData.basketContent !== []) {
+    let isInBasket = -1;
+    if (siteData.basketContent !== [] && siteData.basketContent !== null) {
       newBasket = [...siteData.basketContent];
+      isInBasket = siteData.basketContent.findIndex(
+        (bookToCheck) => bookToCheck.isbn === bog.isbn
+      );
     }
-    const isInBasket = siteData.basketContent.findIndex(
-      (bookToCheck) => bookToCheck.isbn === bog.isbn
-    );
     if (isInBasket === -1) {
       //if the book isn't already in the basket, add it
       newBasket.push({ ...bog, amount: 1 });

@@ -1,6 +1,6 @@
 import BookDisplayShop from "../components/BookDisplayShop";
 import BlogDisplay from "../components/BlogDisplay";
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 
 export default function Search({ siteData, addToBasket }) {
   const [noResults, setNoResults] = useState(false);

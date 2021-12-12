@@ -1,5 +1,5 @@
 import Breadcrumbs from "../components/Breadcrumbs";
-import { useEffect, useRef, useState } from "react/cjs/react.development";
+import { useEffect, useRef, useState } from "react";
 import Input from "../components/Input";
 
 export default function Order({ siteData, clearBasket, setSiteData }) {
@@ -9,13 +9,6 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
   const [orderPlaced, setOrderPlaced] = useState(false);
   const cardForm = useRef();
   const [isNotValid, setIsNotValid] = useState(true);
-  const cardValuesToCheck =
-    cardForm.current !== undefined
-      ? cardForm.current[0].validity.valid &&
-        cardForm.current[1].validity.valid &&
-        cardForm.current[2].validity.valid &&
-        cardForm.current[3].validity.valid
-      : null;
   const [inputBeingEdited, setInputBeingEdited] = useState();
 
   useEffect(() => {
@@ -26,14 +19,23 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
   }, [inputEl]);
 
   useEffect(() => {
-    if (cardForm.current !== undefined && cardForm.current !== null) {
-      if (cardValuesToCheck) {
-        setIsNotValid(false);
-      } else {
-        setIsNotValid(true);
+    const cardValuesToCheck =
+      cardForm.current !== undefined && paymentMethode === "VISA/Dankort"
+        ? cardForm.current[0].validity.valid &&
+          cardForm.current[1].validity.valid &&
+          cardForm.current[2].validity.valid &&
+          cardForm.current[3].validity.valid
+        : [];
+    if (paymentMethode === "VISA/Dankort") {
+      if (cardForm.current !== undefined && cardForm.current !== null) {
+        if (cardValuesToCheck) {
+          setIsNotValid(false);
+        } else {
+          setIsNotValid(true);
+        }
       }
     }
-  }, [cardValuesToCheck, inputBeingEdited]);
+  }, [inputBeingEdited, paymentMethode]);
 
   function calculatePrice() {
     let totalPrice = 0;

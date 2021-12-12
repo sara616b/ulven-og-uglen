@@ -25,28 +25,37 @@ export default function Basket({
           { link: "/bestil", text: "Betaling" },
         ]}
       />
-      {siteData.basketContent.length !== 0 ? (
-        <div className="basket">
-          <h2>Din kurv</h2>
-          <div>
-            {siteData.basketContent.map((bog) => {
-              return (
-                <BookDisplayBasket
-                  bog={bog}
-                  updateAmountInBasket={updateAmountInBasket}
-                  removeFromBasket={removeFromBasket}
-                  key={bog.titel}
-                />
-              );
-            })}
+      {siteData.basketContent !== null ? (
+        siteData.basketContent.length !== 0 ? (
+          <div className="basket">
+            <h2>Din kurv</h2>
+            <div>
+              {siteData.basketContent.map((bog) => {
+                return (
+                  <BookDisplayBasket
+                    bog={bog}
+                    updateAmountInBasket={updateAmountInBasket}
+                    removeFromBasket={removeFromBasket}
+                    key={bog.titel}
+                  />
+                );
+              })}
+            </div>
+            <div>
+              <p>I alt: {calculatePrice()},- kr.</p>
+            </div>
+            <Link to="/bestil">
+              <button className="cta-contrast">Gå til betaling</button>
+            </Link>
           </div>
-          <div>
-            <p>I alt: {calculatePrice()},- kr.</p>
+        ) : (
+          <div className="empty-basket basket">
+            <p>Din kurv er tom. Besøg webshoppen og tilføj bøger her:</p>
+            <Link to="/webshop">
+              <button className="cta-contrast">Gå til webshop</button>
+            </Link>
           </div>
-          <Link to="/bestil">
-            <button className="cta-contrast">Gå til betaling</button>
-          </Link>
-        </div>
+        )
       ) : (
         <div className="empty-basket basket">
           <p>Din kurv er tom. Besøg webshoppen og tilføj bøger her:</p>
