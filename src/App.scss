@@ -614,9 +614,9 @@ body {
                     p {
                       font-weight: normal;
                       color: white;
+                      color: rgb(37, 37, 37);
                       &.cta {
                         font-size: 15px;
-                        opacity: 0.8;
                         font-weight: bold;
                         text-align: right;
                       }
@@ -1673,9 +1673,9 @@ body {
           text-decoration: none;
         }
         p {
-          opacity: 80%;
           margin: 0;
           font-size: 12px;
+          color: rgb(37, 37, 37);
         }
         h2 {
           font-size: 18px;
