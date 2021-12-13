@@ -209,6 +209,7 @@ export default function Frontpage({
       </section>
       <section className="newest-books">
         <div className="max-width">
+          <h2>Udforsk flere bøger her...</h2>
           <div className="books">
             {books !== null
               ? books.map((bog) => {

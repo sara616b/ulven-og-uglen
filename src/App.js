@@ -74,6 +74,9 @@ function App() {
       siteData.searchString = searchFor;
       return { ...prev };
     });
+    // window.location.assign(
+    //   `/kea/ulvenoguglen/search?s=${siteData.searchString}`
+    // );
     window.location.assign(`/search?s=${siteData.searchString}`);
   }
   function addToBasket(e, bog) {
@@ -142,9 +145,8 @@ function App() {
   }
 
   return (
-    <Router
-    // basename="/kea/ulvenoguglen"
-    >
+    <Router>
+      {/* <Router basename="/kea/ulvenoguglen"> */}
       <div className="App">
         {/* Generel content set up: HEADER + MAIN CONTENT pr ROUTE + FOOTER */}
         <Header

@@ -380,6 +380,7 @@ body {
       }
     }
     .socials {
+      overflow: hidden;
       .art-three,
       .art-four {
         display: inline-block;
@@ -390,6 +391,7 @@ body {
         position: absolute;
         z-index: 0;
         opacity: 0.4;
+        overflow: hidden;
       }
       .art-four {
         left: 0;
@@ -1316,6 +1318,7 @@ body {
           input[type="text"]:invalid + .error,
           input[type="number"]:invalid + .error {
             max-height: 100%;
+            height: auto;
           }
           .error {
             color: red;
@@ -1552,6 +1555,7 @@ body {
     display: flex;
     justify-content: stretch;
     flex-direction: row;
+    height: auto;
     .background {
       background-color: white;
       display: flex;
@@ -1559,6 +1563,7 @@ body {
       padding: 10px;
       border-radius: 5px;
       justify-content: space-between;
+      height: auto;
       a {
         text-decoration: none;
       }
@@ -1566,6 +1571,7 @@ body {
         display: flex;
         flex-direction: row;
         padding: 0;
+        height: 100%;
         .info {
           display: flex;
           flex-direction: column;
@@ -1601,6 +1607,7 @@ body {
           object-fit: contain;
           object-position: top;
           height: fit-content;
+          height: auto;
         }
       }
     }

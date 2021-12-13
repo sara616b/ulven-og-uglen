@@ -215,6 +215,7 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
                 <button
                   type="submit"
                   className="cta-contrast"
+                  // onClick={() => window.location.assign("/kea/ulvenoguglen/")}
                   onClick={() => window.location.assign("/")}
                 >
                   Tilbage til forsiden
@@ -225,6 +226,7 @@ export default function Order({ siteData, clearBasket, setSiteData }) {
         </div>
       ) : (
         window.location.assign("/")
+        // window.location.assign("/kea/ulvenoguglen/")
       )}
     </div>
   );

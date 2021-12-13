@@ -190,6 +190,9 @@ export default function Navigation({ props, setSiteData, loadSearch }) {
                   onkeypress={(e) => {
                     if (e.code === "Enter") {
                       window.location.assign(`/search?s=${props.searchString}`);
+                      // window.location.assign(
+                      //   `/kea/ulvenoguglen/search?s=${props.searchString}`
+                      // );
                     }
                   }}
                   onChange={(e) => {
