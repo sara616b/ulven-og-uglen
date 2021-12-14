@@ -145,8 +145,8 @@ function App() {
   }
 
   return (
-    // <Router>
-    <Router basename="/kea/ulvenoguglen">
+    <Router>
+      {/* <Router basename="/kea/ulvenoguglen"> */}
       <div className="App">
         {/* Generel content set up: HEADER + MAIN CONTENT pr ROUTE + FOOTER */}
         <Header
